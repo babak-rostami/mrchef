@@ -15,6 +15,17 @@
                     <li class="nav-item"><a href="{{ url('/about') }}" class="nav-link">درباره ما</a></li>
                     <li class="nav-item"><a href="{{ url('/contact') }}" class="nav-link">تماس با ما</a></li>
                     <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">بلاگ</a></li>
+                    @auth('user')
+                        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">داشبورد</a></li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="nav-link" type="submit">خروج از حساب</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">ورود</a></li>
+                    @endauth
                 </ul>
             </div>
         </div>
