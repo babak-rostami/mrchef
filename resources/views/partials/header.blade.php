@@ -13,7 +13,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">صفحه اصلی</a></li>
                     @auth('user')
-                        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">داشبورد</a></li>
+                        <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">داشبورد</a></li>
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf

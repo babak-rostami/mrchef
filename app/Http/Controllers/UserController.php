@@ -73,4 +73,9 @@ class UserController extends Controller
 
         return redirect()->route('home')->with('success', 'از حساب کاربری خود خارج شدید.');
     }
+
+    public function dashboard()
+    {
+        return view('user.dashboard');
+    }
 }
