@@ -11,10 +11,7 @@
 
             <div id="mainNav" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">صفحه اصلی</a></li>
-                    <li class="nav-item"><a href="{{ url('/about') }}" class="nav-link">درباره ما</a></li>
-                    <li class="nav-item"><a href="{{ url('/contact') }}" class="nav-link">تماس با ما</a></li>
-                    <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">بلاگ</a></li>
+                    <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">صفحه اصلی</a></li>
                     @auth('user')
                         <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">داشبورد</a></li>
                         <li class="nav-item">
@@ -24,7 +21,7 @@
                             </form>
                         </li>
                     @else
-                        <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">ورود</a></li>
+                        <li class="nav-item"><a href="{{ route('login.show') }}" class="nav-link">ورود</a></li>
                     @endauth
                 </ul>
             </div>
