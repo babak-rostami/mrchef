@@ -107,21 +107,48 @@
                                     <!-- Actions -->
                                     <div class="d-flex justify-content-center mt-3">
 
-                                        {{-- <a href="{{ route('category.show', $category->id) }}" --}}
-                                        <a href="" class="btn btn-sm btn-primary">
+                                        {{-- <a href="" class="btn btn-sm btn-primary">
                                             مشاهده
-                                        </a>
+                                        </a> --}}
 
-                                        <a class="btn btn-sm btn-warning mx-2" href="{{ route('category.edit', $category->slug) }}">
+                                        <a class="btn btn-sm btn-warning mx-2"
+                                            href="{{ route('category.edit', $category->slug) }}">
                                             ویرایش
                                         </a>
 
-                                        {{-- <form action="{{ route('category.destroy', $category->id) }}" method="POST" --}}
-                                        <form action="" method="POST" onsubmit="return confirm('حذف شود؟')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">حذف</button>
-                                        </form>
+                                        {{-- <a class="btn btn-sm btn-danger" href="" data-bs-toggle="modal"
+                                            data-bs-target="#deleteCategoryModal-{{ $category->id }}">حذف</a>
+
+
+                                        <!-- Modal Create -->
+                                        <div class="modal fade" id="deleteCategoryModal-{{ $category->id }}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content rounded-4 shadow">
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title fw-bold">حذف دسته‌بندی</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <p>مطمئنید میخواهید دسته بندی {{ $category->name }} حذف شود؟</p>
+                                                        <form action="{{ route('category.destroy', $category->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-sm btn-dark w-50"
+                                                                data-bs-dismiss="modal">بعدا</button>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-danger">حذف</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div> --}}
 
                                     </div>
 

@@ -8,17 +8,23 @@ use App\Models\Category;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CategoryController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
+        $this->authorize('viewAny', Category::class);
         $categories = Category::all();
         return view('category.index', compact('categories'));
     }
 
     public function store(StoreRequest $request, ImageService $imageService)
     {
+        $this->authorize('create', Category::class);
+
         $request->validated();
         $slug = preg_replace('~[^\pL\d]+~u', '-', $request->name_en);
 
@@ -41,6 +47,9 @@ class CategoryController extends Controller
     public function edit($slug)
     {
         $category = Category::where('slug', $slug)->first();
+
+        $this->authorize('update', $category);
+
         if (!isset($category)) {
             return redirect()->route('category.index')->with('error', 'دسته بندی وجود ندارد');
         }
@@ -51,6 +60,7 @@ class CategoryController extends Controller
     public function update(UpdateRequest $request, ImageService $imageService, $slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
+        $this->authorize('update', $category);
 
         $category->name        = $request->name;
         $category->name_en     = $request->name_en;
@@ -75,8 +85,27 @@ class CategoryController extends Controller
             $category->image = $imagePath;
         }
 
-        $category->update();
+        $category->save();
 
         return redirect()->route('category.index')->with('message', 'دسته‌بندی با موفقیت ویرایش شد');
+    }
+
+    public function destroy(ImageService $imageService, $id)
+    {
+        $category = Category::find($id);
+        $this->authorize('delete', $category);
+
+        if (!isset($category)) {
+            return back()->with('error', 'دسته بندی وجود ندارد');
+        }
+
+        // حذف تصویر
+        if ($category->image) {
+            $imageService->delete($category->image);
+        }
+
+        $category->delete();
+
+        return redirect()->route('category.index')->with('message', 'دسته‌بندی با موفقیت حذف شد');
     }
 }
