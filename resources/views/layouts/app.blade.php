@@ -20,6 +20,7 @@
     @include('partials.header')
 
     <main class="container my-4">
+        @include('partials.alerts')
         @yield('content')
     </main>
 

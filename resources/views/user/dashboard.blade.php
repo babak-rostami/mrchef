@@ -8,7 +8,7 @@
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body p-4">
                     <h4 class="mb-4 text-center">داشبورد</h4>
-                    <a class="btn btn-primary" href="">دسته بندی ها</a>
+                    <a class="btn btn-primary" href="{{ route('category.index') }}">دسته بندی ها</a>
                 </div>
             </div>
         </div>
