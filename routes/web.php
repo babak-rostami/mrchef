@@ -13,5 +13,4 @@ Route::post('login', [UserController::class, 'login'])->name('login');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('is_admin');
 
-Route::get('category', [CategoryController::class, 'index'])->name('category.index');
-Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+Route::resource('category', CategoryController::class);

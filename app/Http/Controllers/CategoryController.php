@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
@@ -35,5 +36,47 @@ class CategoryController extends Controller
         }
         $category->save();
         return back()->with('message', 'دسته بندی با موفقیت ایجاد شد');
+    }
+
+    public function edit($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        if (!isset($category)) {
+            return redirect()->route('category.index')->with('error', 'دسته بندی وجود ندارد');
+        }
+        $categories = Category::where('id', '!=', $category->id)->get();
+        return view('category.edit', compact('categories', 'category'));
+    }
+
+    public function update(UpdateRequest $request, ImageService $imageService, $slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $category->name        = $request->name;
+        $category->name_en     = $request->name_en;
+        $category->description = $request->description;
+        $category->parent_id   = $request->parent_id;
+
+        // اگر تصویر جدید آپلود شده
+        if ($request->hasFile('image')) {
+
+            // حذف تصویر قبلی (اختیاری)
+            if ($category->image) {
+                $imageService->delete($category->image);
+            }
+
+            $imagePath = $imageService->upload(
+                $request->file('image'),
+                $category->slug,
+                'category',
+                1
+            );
+
+            $category->image = $imagePath;
+        }
+
+        $category->update();
+
+        return redirect()->route('category.index')->with('message', 'دسته‌بندی با موفقیت ویرایش شد');
     }
 }

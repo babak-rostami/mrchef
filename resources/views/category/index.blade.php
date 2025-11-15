@@ -44,7 +44,7 @@
 
                                 <div class="col-12">
                                     <label class="form-label">توضیحات</label>
-                                    <textarea name="description" class="form-control" rows="3" required>{{ old('name') }}</textarea>
+                                    <textarea name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
                                 </div>
 
                                 <div class="col-md-6">
@@ -52,7 +52,7 @@
                                     <select name="parent_id" class="form-select">
                                         <option value="">بدون دسته پدر</option>
                                         @foreach ($categories as $cat)
-                                            <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -112,8 +112,7 @@
                                             مشاهده
                                         </a>
 
-                                        {{-- <a href="{{ route('category.edit', $category->id) }}" --}}
-                                        <a href="" class="btn btn-sm btn-warning mx-2">
+                                        <a class="btn btn-sm btn-warning mx-2" href="{{ route('category.edit', $category->slug) }}">
                                             ویرایش
                                         </a>
 
