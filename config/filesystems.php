@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -60,6 +60,22 @@ return [
             'report' => false,
         ],
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT', 21),
+
+            // مسیر روت در سرور
+            'root' => env('FTP_ROOT', '/'),
+
+            'passive' => true,
+            'ssl'     => false,
+            'timeout' => 30,
+        ],
+
+
     ],
 
     /*
@@ -74,7 +90,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('files') => storage_path('app/public'),
     ],
 
 ];

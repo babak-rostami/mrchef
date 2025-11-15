@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -11,4 +12,5 @@ class IndexController extends Controller
     {
         return view('home');
     }
+
 }
