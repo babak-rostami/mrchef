@@ -29,7 +29,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('success', 'ثبت نام با موفقیت انجام شد');
+        return redirect()->route('dashboard')->with('success', 'ثبت نام با موفقیت انجام شد');
     }
 
     public function loginShow()

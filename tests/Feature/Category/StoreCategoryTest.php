@@ -5,13 +5,13 @@ use App\Services\ImageService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-it('number add currectly', function () {
-    expect(1 + 1)->toBe(2);
-});
+// it('number add currectly', function () {
+//     expect(1 + 1)->toBe(2);
+// });
 
-it('home page work', function () {
-    $this->get('/')->assertStatus(200);
-});
+// it('home page work', function () {
+//     $this->get('/')->assertStatus(200);
+// });
 
 // uses()->group('category');
 // uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);

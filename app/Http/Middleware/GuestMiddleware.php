@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class isAdmin
+class GuestMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || Auth::user()->role != 'admin') {
-            return back()->with('message', 'اجازه دسترسی ندارید');
+        if (auth('user')->check()) {
+            return redirect()->route('dashboard');
         }
         return $next($request);
     }
