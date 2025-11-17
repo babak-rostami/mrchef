@@ -14,3 +14,7 @@ Route::post('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('is_admin');
 
 Route::resource('category', CategoryController::class);
+
+Route::get('test', function () {
+    return view('test');
+});

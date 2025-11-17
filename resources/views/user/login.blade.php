@@ -2,55 +2,70 @@
 
 @section('title', 'ورود')
 
+@push('styles')
+    @vite('resources/css/user/login.css')
+@endpush
+
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-                    <h4 class="mb-4 text-center">ورود به حساب کاربری</h4>
 
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="flex justify-center">
+        <div class="w-full max-w-md">
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">ایمیل</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                                name="email" value="{{ old('email') }}" required autofocus>
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+            <div class="bg-white shadow rounded-2xl p-6">
+                <h4 class="text-center mb-6 font-semibold text-lg">ورود به حساب کاربری</h4>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">رمز عبور</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="password" name="password" required>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
 
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                    value="1">
-                                <label class="form-check-label" for="remember">
-                                    من را به خاطر بسپار
-                                </label>
-                            </div>
-                            <a href="" class="text-decoration-none">فراموشی رمز؟</a>
-                        </div>
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <label for="email" class="block mb-1 font-medium">ایمیل</label>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300 @error('email') border-red-500 @enderror">
+                        @error('email')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <button type="submit" class="btn btn-success w-100">
-                            ورود
-                        </button>
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <label for="password" class="block mb-1 font-medium">رمز عبور</label>
+                        <input id="password" type="password" name="password" required
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300 @error('password') border-red-500 @enderror">
+                        @error('password')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <div class="text-center mt-3">
-                            <small>حسابی ندارید؟ <a href="{{ route('register.show') }}">ثبت‌نام کنید</a></small>
-                        </div>
-                    </form>
-                </div>
+                    <!-- Remember + Forgot -->
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="remember" value="1" class="w-4 h-4 rounded">
+                            <span>من را به خاطر بسپار</span>
+                        </label>
+                        <a href="#" class="text-indigo-600 hover:underline text-sm">فراموشی رمز؟</a>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition cursor-pointer">
+                        ورود
+                    </button>
+
+                    <!-- Register -->
+                    <div class="text-center mt-3">
+                        <small>
+                            حسابی ندارید؟
+                            <a href="{{ route('register.show') }}" class="text-indigo-600 hover:underline">
+                                ثبت‌نام کنید
+                            </a>
+                        </small>
+                    </div>
+                </form>
+
             </div>
+
         </div>
     </div>
+
 @endsection

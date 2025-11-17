@@ -2,58 +2,73 @@
 
 @section('title', 'ثبت نام')
 
+@push('styles')
+    @vite('resources/css/user/register.css')
+@endpush
+
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-                    <h4 class="mb-4 text-center">ثبت نام در سایت</h4>
+    <div class="flex justify-center mt-10">
+        <div class="w-full max-w-md">
+            <div class="bg-white shadow-md rounded-xl p-6">
 
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                <h2 class="text-center text-xl font-semibold mb-6">ثبت نام در سایت</h2>
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">نام کامل</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" value="{{ old('name') }}" required autofocus>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">ایمیل</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                                name="email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    {{-- نام --}}
+                    <div class="mb-4">
+                        <label for="name" class="block mb-1 text-sm font-medium">نام کامل</label>
+                        <input type="text" id="name" name="name"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-200 outline-none @error('name') border-red-500 @enderror"
+                            value="{{ old('name') }}" required autofocus>
+                        @error('name')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">رمز عبور</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="password" name="password" required>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    {{-- ایمیل --}}
+                    <div class="mb-4">
+                        <label for="email" class="block mb-1 text-sm font-medium">ایمیل</label>
+                        <input type="email" id="email" name="email"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-200 outline-none @error('email') border-red-500 @enderror"
+                            value="{{ old('email') }}" required>
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <div class="mb-4">
-                            <label for="password_confirmation" class="form-label">تکرار رمز عبور</label>
-                            <input type="password" class="form-control" id="password_confirmation"
-                                name="password_confirmation" required>
-                        </div>
+                    {{-- پسورد --}}
+                    <div class="mb-4">
+                        <label for="password" class="block mb-1 text-sm font-medium">رمز عبور</label>
+                        <input type="password" id="password" name="password"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-200 outline-none @error('password') border-red-500 @enderror"
+                            required>
+                        @error('password')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <button type="submit" class="btn btn-primary w-100">
-                            ثبت نام
-                        </button>
+                    {{-- تکرار پسورد --}}
+                    <div class="mb-6">
+                        <label for="password_confirmation" class="block mb-1 text-sm font-medium">تکرار رمز عبور</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-200 outline-none" required>
+                    </div>
 
-                        <div class="text-center mt-3">
-                            <small>قبلاً ثبت نام کرده‌اید؟ <a href="">وارد شوید</a></small>
-                        </div>
-                    </form>
-                </div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition cursor-pointer">
+                        ثبت نام
+                    </button>
+
+                    <div class="text-center mt-4">
+                        <small class="text-sm">
+                            قبلاً ثبت‌نام کرده‌اید؟
+                            <a href="{{ route('login') }}" class="text-blue-600 hover:underline">وارد شوید</a>
+                        </small>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

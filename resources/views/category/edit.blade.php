@@ -2,79 +2,93 @@
 
 @section('title', 'ویرایش دسته بندی')
 
+@push('styles')
+    @vite('resources/css/category/edit.css')
+@endpush
+
 @section('content')
 
-    <div class="container">
+    <div class="mx-auto px-4">
+        @include('partials.breadcrumb', ['breadcrumb_title' => 'ویرایش دسته بندی'])
 
-        <!-- Title + Create Button -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-bold">ویرایش دسته‌بندی {{ $category->name }}</h3>
+        <!-- Title -->
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold">ویرایش دسته‌بندی {{ $category->name }}</h3>
         </div>
 
+        <!-- Card -->
+        <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
-        <!-- Categories List -->
-        <div class="card rounded-4 shadow-sm mt-4">
-            <div class="card-body">
+            <div class="flex justify-center">
+                <form action="{{ route('category.update', $category->slug) }}" method="POST" enctype="multipart/form-data"
+                    class="w-full md:w-3/4">
 
-                <div class="row justify-content-center">
-                    <div class="col-md-10 col-12">
-                        <form action="{{ route('category.update', $category->slug) }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+                    @csrf
+                    @method('PUT')
 
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                            <div class="row g-3">
-                                <div class="col-12 text-center">
-                                    <img src="{{ $category->thumb_url }}" alt="{{ $category->name }}"
-                                        style="width: 100px; max-height: 100px;border-radius: 8px">
-                                </div>
+                        <!-- Image -->
+                        <div class="col-span-1 md:col-span-2 text-center">
+                            <img src="{{ $category->thumb_url }}" alt="{{ $category->name }}"
+                                class="w-24 h-24 object-cover rounded-lg mx-auto">
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">نام دسته‌بندی</label>
-                                    <input type="text" name="name" class="form-control" value="{{ $category->name }}"
-                                        required>
-                                </div>
+                        <!-- Name -->
+                        <div>
+                            <label class="block mb-2 font-medium">نام دسته‌بندی</label>
+                            <input type="text" name="name" value="{{ $category->name }}"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300" required>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">نام انگلیسی دسته‌بندی</label>
-                                    <input type="text" name="name_en" class="form-control"
-                                        value="{{ $category->name_en }}" required>
-                                </div>
+                        <!-- English Name -->
+                        <div>
+                            <label class="block mb-2 font-medium">نام انگلیسی دسته‌بندی</label>
+                            <input type="text" name="name_en" value="{{ $category->name_en }}"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300" required>
+                        </div>
 
-                                <div class="col-12">
-                                    <label class="form-label">توضیحات</label>
-                                    <textarea name="description" class="form-control" rows="3" required>{{ $category->description }}</textarea>
-                                </div>
+                        <!-- Description -->
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block mb-2 font-medium">توضیحات</label>
+                            <textarea name="description" rows="3" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300"
+                                required>{{ $category->description }}</textarea>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">دسته‌بندی پدر</label>
-                                    <select name="parent_id" class="form-select">
-                                        <option value="">بدون دسته پدر</option>
-                                        @foreach ($categories as $cat)
-                                            <option value="{{ $cat->id }}"
-                                                {{ $category->parent_id == $cat->id ? 'selected' : '' }}>
-                                                {{ $cat->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <!-- Parent -->
+                        <div>
+                            <label class="block mb-2 font-medium">دسته‌بندی پدر</label>
+                            <select name="parent_id"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300">
+                                <option value="">بدون دسته پدر</option>
+                                @foreach ($categories as $cat)
+                                    <option value="{{ $cat->id }}"
+                                        {{ $category->parent_id == $cat->id ? 'selected' : '' }}>
+                                        {{ $cat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">تصویر</label>
-                                    <input type="file" name="image" class="form-control">
-                                </div>
+                        <!-- Image Upload -->
+                        <div>
+                            <label class="block mb-2 font-medium">تصویر</label>
+                            <input type="file" name="image"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300">
+                        </div>
 
-                                <div class="col-12 mt-3 text-end">
-                                    <button type="submit" class="btn btn-success mt-4 w-100">ثبت تغییرات</button>
-                                </div>
+                        <!-- Submit Button -->
+                        <div class="col-span-1 md:col-span-2 mt-4">
+                            <button type="submit"
+                                class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition cursor-pointer">
+                                ثبت تغییرات
+                            </button>
+                        </div>
 
-                            </div>
-                        </form>
                     </div>
-                </div>
-
+                </form>
             </div>
+
         </div>
 
     </div>

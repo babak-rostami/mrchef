@@ -1,0 +1,25 @@
+@import "../app.css";
+
+.dashboard-card {
+    transition: 0.25s;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: #eef1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #4c6ef5;
+    margin-bottom: 15px;
+}

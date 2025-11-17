@@ -2,14 +2,16 @@
 
 @section('title', 'خانه')
 
+@push('styles')
+    @vite('resources/css/page/home.css')
+@endpush
+
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-                    <h4 class="mb-4 text-center">صفحه اصلی</h4>
-                    <p>خوش آمدید</p>
-                </div>
+    <div class="flex justify-center mt-10">
+        <div class="w-full max-w-md">
+            <div class="bg-white shadow-md rounded-xl p-6 text-center">
+                <h2 class="text-xl font-semibold mb-4">صفحه اصلی</h2>
+                <p>خوش آمدید</p>
             </div>
         </div>
     </div>
