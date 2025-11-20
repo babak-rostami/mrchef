@@ -19,6 +19,10 @@ export default defineConfig({
 
                 'resources/css/test.css',
                 'resources/js/test.js',
+
+                'resources/css/recipe/index.css',
+                'resources/css/recipe/create.css',
+                'resources/js/recipe/create.js',
             ],
             refresh: true,
         }),

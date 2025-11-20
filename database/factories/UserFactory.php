@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'role' => $this->faker->randomElement(['admin', 'user']),
             'phone' => $this->faker->phoneNumber(),
-            'image' => 'default.png',
+            'image' => 'files/category/car.webp',
             'status' => $this->faker->randomElement([0, 1]),
             'password' => Hash::make('password'),
             'email_verified_at' => now(),

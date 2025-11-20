@@ -25,13 +25,13 @@
             </a>
 
             <!-- پست‌ها -->
-            <a href="" class="block">
+            <a href="{{ route('recipes.index') }}" class="block">
                 <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg transition cursor-pointer text-center">
                     <div class="text-4xl text-blue-600 mb-3">
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
-                    <h5 class="font-bold">پست‌ها</h5>
-                    <p class="text-gray-500 text-sm mt-2">مدیریت پست‌ها</p>
+                    <h5 class="font-bold">رسپی‌ها</h5>
+                    <p class="text-gray-500 text-sm mt-2">مدیریت رسپی ها</p>
                 </div>
             </a>
 
