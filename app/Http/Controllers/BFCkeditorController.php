@@ -60,6 +60,9 @@ class BFCkeditorController extends Controller
             case 'recipe_create':
                 return Recipe::EDITOR_PATH;
                 break;
+            case 'recipe_edit':
+                return Recipe::EDITOR_PATH;
+                break;
             default:
                 throw new \Exception("Invalid upload page: {$page}");
         }

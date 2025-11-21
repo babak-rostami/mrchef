@@ -23,6 +23,8 @@ export default defineConfig({
                 'resources/css/recipe/index.css',
                 'resources/css/recipe/create.css',
                 'resources/js/recipe/create.js',
+                'resources/css/recipe/edit.css',
+                'resources/js/recipe/edit.js',
             ],
             refresh: true,
         }),

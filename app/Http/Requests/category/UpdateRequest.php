@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
         return [
             'name'       => 'required|string|max:40',
             'name_en'    => 'required|string|max:40',
-            'description' => 'required|string',
+            'description'=> 'required|string',
             'parent_id'  => 'nullable|exists:categories,id',
             'image'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];

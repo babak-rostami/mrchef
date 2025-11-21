@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\recipe\StoreRequest;
+use App\Http\Requests\recipe\UpdateRequest;
 use App\Models\Category;
 use App\Models\Recipe;
 use App\Services\ckeditor\CkeditorService;
@@ -34,7 +35,7 @@ class RecipeController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $imageService->upload($request->file('image'), Str::limit($request->slug, 20), 'recipe', 1);
+            $imagePath = $imageService->upload($request->file('image'), Str::limit($request->slug, 20), Recipe::STORE_IMAGE_PATH, 1);
             $data['image'] = $imagePath;
         }
 
@@ -44,6 +45,37 @@ class RecipeController extends Controller
 
         $editorService->store(Recipe::EDITOR_KEY, $recipe);
 
-        return redirect()->route('recipes.index');
+        return redirect()->route('recipes.index')->with('success', 'رسپی با موفقیت ثبت شد');
+    }
+
+    public function edit($slug)
+    {
+        $recipe = Recipe::where('slug', $slug)->first();
+        $this->authorize('update', $recipe);
+
+        $categories = Category::all();
+        return view('recipes.edit', compact('categories', 'recipe'));
+    }
+
+    public function update(UpdateRequest $request, $slug, ImageService $imageService, CkeditorService $editorService)
+    {
+        $data = $request->validated();
+        $recipe = Recipe::where('slug', $slug)->first();
+        if (!$recipe) {
+            return back()->with('error', 'رسپی پیدا نشد');
+        }
+        $this->authorize('update', $recipe);
+
+        if ($request->hasFile('image')) {
+            $imageService->delete($recipe->image);
+            $imagePath = $imageService->upload($request->file('image'), $recipe->imageName(), Recipe::STORE_IMAGE_PATH, 1);
+            $data['image'] = $imagePath;
+        }
+
+        $recipe->update($data);
+
+        $editorService->update(Recipe::EDITOR_KEY, $recipe);
+
+        return redirect()->route('recipes.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
 }
