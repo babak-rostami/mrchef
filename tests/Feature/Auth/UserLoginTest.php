@@ -2,26 +2,35 @@
 
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertAuthenticatedAs;
+use function Pest\Laravel\assertGuest;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+use function Pest\Laravel\withSession;
+
 // ----------------------------------------------------------
 // ----------------------------------------------------------
 // ----------------------Login Access Test-------------------
 // ----------------------------------------------------------
 // ----------------------------------------------------------
+describe('access tests', function () {
 
-test('guest can access login page', function () {
-    $this->get(route('login'))->assertStatus(200);
-});
+    test('guest can access login page', function () {
+        get(route('login'))->assertStatus(200);
+    });
 
-test('authenticated user cannot access login page', function () {
-    $user = User::factory()->create();
-    $this->actingAs($user)->get(route('login'))->assertRedirect(route('dashboard'));
-});
+    test('authenticated user cannot access login page', function () {
+        $user = User::factory()->create();
+        actingAs($user)->get(route('login'))->assertRedirect(route('dashboard'));
+    });
 
-test('authenticated user can see dashboard', function () {
-    $user = User::factory()->create();
-    $this->actingAs($user)
-        ->get(route('dashboard'))
-        ->assertStatus(200);
+    test('authenticated user can see dashboard', function () {
+        $user = User::factory()->create();
+        actingAs($user)
+            ->get(route('dashboard'))
+            ->assertStatus(200);
+    });
 });
 
 // ----------------------------------------------------------
@@ -30,32 +39,34 @@ test('authenticated user can see dashboard', function () {
 // ----------------------------------------------------------
 // ----------------------------------------------------------
 
-test('email is required', function () {
-    $this->post(route('login'), [
-        'email' => '',
-        'password' => '123456',
-    ])->assertSessionHasErrors(['email']);
-});
+describe('validations tests', function () {
+    test('email is required', function () {
+        post(route('login'), [
+            'email' => '',
+            'password' => '123456',
+        ])->assertSessionHasErrors(['email']);
+    });
 
-test('email must be valid format', function () {
-    $this->post(route('login'), [
-        'email' => 'invalid-email',
-        'password' => '123456',
-    ])->assertSessionHasErrors(['email']);
-});
+    test('email must be valid format', function () {
+        post(route('login'), [
+            'email' => 'invalid-email',
+            'password' => '123456',
+        ])->assertSessionHasErrors(['email']);
+    });
 
-test('email must exist in database', function () {
-    $this->post(route('login'), [
-        'email' => 'notfound@mail.com',
-        'password' => '123456',
-    ])->assertSessionHasErrors(['email']);
-});
+    test('email must exist in database', function () {
+        post(route('login'), [
+            'email' => 'notfound@mail.com',
+            'password' => '123456',
+        ])->assertSessionHasErrors(['email']);
+    });
 
-test('password is required', function () {
-    $this->post(route('login'), [
-        'email' => 'user@example.com',
-        'password' => '',
-    ])->assertSessionHasErrors(['password']);
+    test('password is required', function () {
+        post(route('login'), [
+            'email' => 'user@example.com',
+            'password' => '',
+        ])->assertSessionHasErrors(['password']);
+    });
 });
 
 
@@ -65,31 +76,32 @@ test('password is required', function () {
 // ----------------------------------------------------------
 // ----------------------------------------------------------
 
-test('user can login with correct credentials', function () {
-    $user = User::factory()->create([
-        'password' => bcrypt('123456'),
-    ]);
-    $this->post(route('login'), [
-        'email' => $user->email,
-        'password' => '123456',
-    ])->assertRedirect(route('home'));
+describe('attemt to login', function () {
+    test('user can login with correct credentials', function () {
+        $user = User::factory()->create([
+            'password' => bcrypt('123456'),
+        ]);
+        post(route('login'), [
+            'email' => $user->email,
+            'password' => '123456',
+        ])->assertRedirect(route('home'));
 
-    $this->assertAuthenticatedAs($user);
+        assertAuthenticatedAs($user);
+    });
+
+    test('user cannot login with wrong password', function () {
+        $user = User::factory()->create([
+            'password' => bcrypt('123456'),
+        ]);
+
+        post(route('login'), [
+            'email' => $user->email,
+            'password' => 'wrongpass',
+        ])->assertSessionHasErrors(['email']);
+
+        assertGuest();
+    });
 });
-
-test('user cannot login with wrong password', function () {
-    $user = User::factory()->create([
-        'password' => bcrypt('123456'),
-    ]);
-
-    $this->post(route('login'), [
-        'email' => $user->email,
-        'password' => 'wrongpass',
-    ])->assertSessionHasErrors(['email']);
-
-    $this->assertGuest();
-});
-
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
@@ -102,7 +114,7 @@ test('remember me sets remember_token in database', function () {
         'password' => bcrypt('123456'),
     ]);
 
-    $this->post(route('login'), [
+    post(route('login'), [
         'email' => $user->email,
         'password' => '123456',
         'remember' => true,
@@ -125,14 +137,13 @@ test('user is redirected to intended page after login', function () {
         'password' => bcrypt('123456'),
     ]);
 
-    $this->withSession(['url.intended' => '/profile']);
+    withSession(['url.intended' => '/profile']);
 
-    $this->post(route('login'), [
+    post(route('login'), [
         'email' => $user->email,
         'password' => '123456',
     ])->assertRedirect('/profile');
 });
-
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
@@ -143,9 +154,9 @@ test('user is redirected to intended page after login', function () {
 test('authenticated user can logout', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user)
+    actingAs($user)
         ->post(route('logout'))
         ->assertRedirect(route('home'));
 
-    $this->assertGuest();
+    assertGuest();
 });

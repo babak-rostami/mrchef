@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
-uses(RefreshDatabase::class);
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
@@ -13,26 +15,26 @@ uses(RefreshDatabase::class);
 // ----------------------------------------------------------
 
 test('can access register page', function () {
-    $this->get(route('register'))->assertStatus(200);
+    get(route('register'))->assertStatus(200);
 });
 
 test('register a new user and redirect to dashboard', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'babak',
         'email' => 'babak@gmail.com',
         'password' => '12345678',
         'password_confirmation' => '12345678',
     ]);
 
-    $this->assertAuthenticated();
+    assertAuthenticated();
     $response->assertRedirect('/dashboard');
 });
 
 test('authenticated user cannot access register page', function () {
     $user = User::factory()->create();
-    $this->actingAs($user);
+    actingAs($user);
 
-    $response = $this->get(route('register.show'));
+    $response = get(route('register.show'));
     $response->assertRedirect(route('dashboard'));
 });
 
@@ -43,7 +45,7 @@ test('authenticated user cannot access register page', function () {
 // ----------------------------------------------------------
 
 test('name is required', function () {
-    $response = $this->post(route('register'), [
+    $response = post(route('register'), [
         'name' => '',
         'email' => 'test@example.com',
         'password' => '12345678',
@@ -54,7 +56,7 @@ test('name is required', function () {
 });
 
 test('name must be string', function () {
-    $response = $this->post(route('register'), [
+    $response = post(route('register'), [
         'name' => 123123213,
         'email' => 'test@example.com',
         'password' => '12345678',
@@ -64,7 +66,7 @@ test('name must be string', function () {
 });
 
 test('name must be at least 3 characters', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'ab',
         'email' => 'test@example.com',
         'password' => '12345678',
@@ -76,7 +78,7 @@ test('name must be at least 3 characters', function () {
 
 test('name cannot be longer than 50 characters', function () {
     $longName = str_repeat('a', 51);
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => $longName,
         'email' => 'test@example.com',
         'password' => '12345678',
@@ -87,7 +89,7 @@ test('name cannot be longer than 50 characters', function () {
 });
 
 test('email is required', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => '',
         'password' => '12345678',
@@ -98,7 +100,7 @@ test('email is required', function () {
 });
 
 test('email must be a valid format', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => 'invalid-email',
         'password' => '12345678',
@@ -111,7 +113,7 @@ test('email must be a valid format', function () {
 test('cannot register with existing email', function () {
     User::factory()->create(['email' => 'babak@gmail.com']);
 
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => 'babak@gmail.com',
         'password' => '12345678',
@@ -122,7 +124,7 @@ test('cannot register with existing email', function () {
 });
 
 test('password is required', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => 'test@example.com',
         'password' => '',
@@ -133,7 +135,7 @@ test('password is required', function () {
 });
 
 test('password must be string', function () {
-    $response = $this->post(route('register'), [
+    $response = post(route('register'), [
         'name' => '',
         'email' => 'test@example.com',
         'password' => 232321323,
@@ -144,7 +146,7 @@ test('password must be string', function () {
 });
 
 test('password must be at least 6 characters', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => 'test@example.com',
         'password' => '12345',
@@ -155,7 +157,7 @@ test('password must be at least 6 characters', function () {
 });
 
 test('password must be confirmed', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Babak',
         'email' => 'test@example.com',
         'password' => '12345678',
@@ -173,7 +175,7 @@ test('password must be confirmed', function () {
 
 
 test('password is hashed in database', function () {
-    $this->post('/register', [
+    post('/register', [
         'name' => 'Babak',
         'email' => 'test@example.com',
         'password' => '12345678',
