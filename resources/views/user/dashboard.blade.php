@@ -24,7 +24,7 @@
                 </div>
             </a>
 
-            <!-- پست‌ها -->
+            <!-- رسپی ها -->
             <a href="{{ route('recipes.index') }}" class="block">
                 <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg transition cursor-pointer text-center">
                     <div class="text-4xl text-blue-600 mb-3">
@@ -35,14 +35,14 @@
                 </div>
             </a>
 
-            <!-- سوالات -->
-            <a href="" class="block">
+            <!-- مواد اولیه -->
+            <a href="{{ route('ingredient.index') }}" class="block">
                 <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg transition cursor-pointer text-center">
                     <div class="text-4xl text-yellow-600 mb-3">
                         <i class="fa-solid fa-circle-question"></i>
                     </div>
-                    <h5 class="font-bold">سوالات</h5>
-                    <p class="text-gray-500 text-sm mt-2">مدیریت پرسش‌ها</p>
+                    <h5 class="font-bold">مواد اولیه</h5>
+                    <p class="text-gray-500 text-sm mt-2">مدیریت مواد اولیه</p>
                 </div>
             </a>
 

@@ -11,7 +11,7 @@
         {{ isset($bf_is_required) ? 'bf-is-required' : '' }}
         @if (isset($binput_role) && isset($binput_role['slug'])) bf-input-slug @endif
         @if (isset($binput_role) && isset($binput_role['min-length'])) bf-min-length @endif bf-input"
-        id="{{ $binput_name }}" placeholder="{{ $binput_place }}" value="{{ $binput_value ?? null }}">
+        id="{{ $binput_name }}" placeholder="{{ $binput_place ?? null }}" value="{{ $binput_value ?? null }}">
     @isset($binput_msg)
         <p id="{{ $binput_name }}-msg" class="text-gray-500 text-sm">{{ $binput_msg }}</p>
     @endisset

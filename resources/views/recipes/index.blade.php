@@ -58,12 +58,12 @@
                                     'title' => 'تایید نشده',
                                     'class' => 'danger',
                                 ])
-                            @elseif($recipe->status == 2)
+                            @elseif($recipe->status == 1)
                                 @include('component.helper.badge', [
                                     'title' => 'تایید شده',
                                     'class' => 'success',
                                 ])
-                            @elseif($recipe->status == 1)
+                            @elseif($recipe->status == 2)
                                 @include('component.helper.badge', [
                                     'title' => 'در انتظار',
                                     'class' => 'warning',

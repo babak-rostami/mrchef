@@ -13,12 +13,14 @@ export function removeErrorSectionOn(action) {
     });
 }
 function removeErrorSection(id) {
+    const field_error = document.getElementById(id + '-error');
+    if (field_error) {
+        field_error.innerText = '';
+        field_error.classList.add('hidden');
+    }
+
     const field = document.getElementById(id);
     field.classList.remove('border-red-400');
-
-    const field_error = document.getElementById(id + '-error');
-    field_error.innerText = '';
-    field_error.classList.add('hidden');
 }
 
 //-----------------------------------------------------------------------------------------------//
@@ -28,14 +30,21 @@ function removeErrorSection(id) {
 export function requireValidation(form_id) {
     const form = document.getElementById(form_id);
     const inputs = form.querySelectorAll('.bf-is-required');
-    addRequireErrorSection('input', inputs);
+    addRequireErrorSection(inputs);
 }
 //-----------------------------------------------------------------------------------------------//
 //فیلدهای ورودی رو چک میکنه اگه تکمیل نشده باشن خطا میده که این فیلد ضروری هستش 
 //-----------------------------------------------------------------------------------------------//
-function addRequireErrorSection(type, fields) {
+function addRequireErrorSection(fields) {
     fields.forEach(field => {
         const field_id = field.id;
+
+        let type = 'input';
+
+        if (field.type == 'file') {
+            type = 'image';
+        }
+
 
         const field_title_el = document.getElementById(field_id + '-label');
         const field_error = document.getElementById(field_id + '-error');

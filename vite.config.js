@@ -12,10 +12,9 @@ export default defineConfig({
 
                 'resources/css/category/index.css',
                 'resources/css/category/edit.css',
+                'resources/js/category/index.js',
 
                 'resources/css/page/home.css',
-
-                'resources/js/category/index.js',
 
                 'resources/css/test.css',
                 'resources/js/test.js',
@@ -25,6 +24,10 @@ export default defineConfig({
                 'resources/js/recipe/create.js',
                 'resources/css/recipe/edit.css',
                 'resources/js/recipe/edit.js',
+
+                'resources/css/ingredient/index.css',
+                'resources/css/ingredient/create.css',
+                'resources/js/ingredient/create.js',
             ],
             refresh: true,
         }),

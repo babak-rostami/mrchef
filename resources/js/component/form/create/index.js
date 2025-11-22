@@ -18,6 +18,11 @@ export function handleForm(form_id, onSubmitCallback) {
 
         const is_error = isErrorInForm(form_id);
 
+        if (!is_error) {
+            document.getElementById('bf-submit-btn').disabled = true;
+            document.getElementById('bf-submit-btn').innerText = 'در حال ثبت ...';
+        }
+
         if (typeof onSubmitCallback === 'function') {
             onSubmitCallback({
                 is_error

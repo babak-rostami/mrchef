@@ -34,8 +34,10 @@
 
                     @method('PUT')
 
-                    <img id="bf-main-image-show" class="w-48 border border-gray-300 rounded-2xl p-2 bg-gray-50"
-                        src="{{ $recipe->image_url }}">
+                    {{-- MAIN IMAGE SHOW --}}
+                    @include('component.form.edit.main-image', [
+                        'bimage_src' => $recipe->image_url,
+                    ])
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -70,7 +72,7 @@
 
                         {{-- SLUG --}}
                         @include('component.form.edit.readonly', [
-                            'binput_title' => 'اسلاگ',                        
+                            'binput_title' => 'اسلاگ',
                             'binput_name' => 'slug',
                             'binput_msg' => 'اسلاگ نباید تغییر کند',
                             'binput_value' => $recipe->slug,

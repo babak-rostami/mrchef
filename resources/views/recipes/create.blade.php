@@ -34,7 +34,6 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-
                         {{-- CATEGORY --}}
                         @include('component.form.create.select', [
                             'bselect_title' => 'دسته بندی',
@@ -130,13 +129,9 @@
                     ])
 
                     {{-- SUBMIT --}}
-                    <div class="pt-4">
-                        <button type="submit"
-                            class="bg-blue-600 w-full text-white px-6 py-2 rounded-lg hover:bg-blue-700
-                            transition cursor-pointer">
-                            ثبت رسپی
-                        </button>
-                    </div>
+                    @include('component.form.create.submit', [
+                        'submit_title' => 'ثبت رسپی',
+                    ])
                 </form>
             </div>
 
