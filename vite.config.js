@@ -28,6 +28,8 @@ export default defineConfig({
                 'resources/css/ingredient/index.css',
                 'resources/css/ingredient/create.css',
                 'resources/js/ingredient/create.js',
+                'resources/css/ingredient/edit.css',
+                'resources/js/ingredient/edit.js',
             ],
             refresh: true,
         }),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ingredient\StoreRequest;
+use App\Http\Requests\ingredient\UpdateRequest;
 use App\Models\Ingredient;
 use App\Services\ImageService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -39,5 +40,34 @@ class IngredientController extends Controller
         Ingredient::create($data);
 
         return redirect()->route('ingredient.index')->with('success', 'ماده اولیه با موفقیت ثبت شد');
+    }
+
+
+    public function edit($slug)
+    {
+        $ingredient = Ingredient::where('slug', $slug)->first();
+        $this->authorize('update', $ingredient);
+
+        return view('ingredient.edit', compact('ingredient'));
+    }
+
+    public function update(UpdateRequest $request, $slug, ImageService $imageService)
+    {
+        $data = $request->validated();
+        $ingredient = Ingredient::where('slug', $slug)->first();
+        if (!$ingredient) {
+            return back()->with('error', 'ماده اولیه پیدا نشد');
+        }
+        $this->authorize('update', $ingredient);
+
+        if ($request->hasFile('image')) {
+            $imageService->delete($ingredient->image);
+            $imagePath = $imageService->upload($request->file('image'), $ingredient->image_name, Ingredient::STORE_IMAGE_PATH, 1);
+            $data['image'] = $imagePath;
+        }
+
+        $ingredient->update($data);
+
+        return redirect()->route('ingredient.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
 }

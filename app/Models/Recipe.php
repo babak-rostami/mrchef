@@ -22,11 +22,4 @@ class Recipe extends Model
     {
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
-
-    public function imageName()
-    {
-        $info = pathinfo($this->image);
-        $name = $info['filename'];
-        return $name;
-    }
 }

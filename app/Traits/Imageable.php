@@ -21,4 +21,11 @@ trait Imageable
 
         return Storage::url($thumb);
     }
+
+    public function getImageNameAttribute()
+    {
+        $info = pathinfo($this->image);
+        $name = $info['filename'];
+        return $name;
+    }
 }

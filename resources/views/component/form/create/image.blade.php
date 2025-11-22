@@ -7,10 +7,10 @@
     </label>
 
     <input type="file" name="{{ $bimage_name }}" id="bf-main-image" accept="{{ $bimage_accept ?? 'image/*' }}"
-        class="hidden {{ isset($bimage_required) ? 'bf-is-required' : '' }}">
+        class="hidden bf-input {{ isset($bimage_required) ? 'bf-is-required' : '' }}">
 
     <div id="bf-image-picker"
-        class="w-full h-48 border-2 mt-2 border-dashed border-gray-300 rounded-lg 
+        class="relative w-full h-48 border-2 mt-2 border-dashed border-gray-300 rounded-lg 
                 flex flex-col items-center justify-center cursor-pointer
                 hover:bg-gray-50 transition">
 
@@ -23,6 +23,14 @@
                     d="M3 7h18M5 7V5a2 2 0 012-2h10a2 2 0 012 2v2M3 7v12a2 2 0 002 2h14a2 2 0 002-2V7M8 14l2 2 4-4 4 4" />
             </svg>
             <p>برای انتخاب عکس کلیک کنید</p>
+        </div>
+
+        <!-- دکمه hover برای ویرایش عکس -->
+        <div id="bf-image-overlay"
+            class="absolute inset-0 bg-black/20 text-white text-2xl font-bold 
+                    flex items-center justify-center hidden
+                    transition-opacity duration-200 pointer-events-none">
+            تغییر عکس
         </div>
     </div>
 

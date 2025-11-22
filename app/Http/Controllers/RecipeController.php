@@ -68,7 +68,7 @@ class RecipeController extends Controller
 
         if ($request->hasFile('image')) {
             $imageService->delete($recipe->image);
-            $imagePath = $imageService->upload($request->file('image'), $recipe->imageName(), Recipe::STORE_IMAGE_PATH, 1);
+            $imagePath = $imageService->upload($request->file('image'), $recipe->image_name, Recipe::STORE_IMAGE_PATH, 1);
             $data['image'] = $imagePath;
         }
 
