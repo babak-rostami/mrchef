@@ -70,4 +70,18 @@ class IngredientController extends Controller
 
         return redirect()->route('ingredient.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
+
+    public function destroy($id)
+    {
+        $ingredient = Ingredient::find($id);
+        $this->authorize('delete', $ingredient);
+
+        if (!isset($ingredient)) {
+            return back()->with('error', 'ماده اولیه وجود ندارد');
+        }
+
+        $ingredient->delete();
+
+        return redirect()->route('ingredient.index')->with('success', 'ماده اولیه با موفقیت حذف شد');
+    }
 }

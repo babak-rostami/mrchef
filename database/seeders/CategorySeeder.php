@@ -15,9 +15,8 @@ class CategorySeeder extends Seeder
     {
         if (Category::count() == 0) {
             Category::factory()->withParent()->create();
-            
             $parent = Category::factory()->create();
-            Category::factory(10)->create([
+            Category::factory(5)->create([
                 'parent_id' => $parent->id
             ]);
         }

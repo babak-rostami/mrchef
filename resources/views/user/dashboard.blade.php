@@ -46,8 +46,20 @@
                 </div>
             </a>
 
+
+            <!-- واحد ها -->
+            <a href="{{ route('unit.index') }}" class="block">
+                <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg transition cursor-pointer text-center">
+                    <div class="text-4xl text-yellow-600 mb-3">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+                    <h5 class="font-bold">واحد های اندازه گیری</h5>
+                    <p class="text-gray-500 text-sm mt-2">مدیریت واحد ها</p>
+                </div>
+            </a>
+
             <!-- کاربران -->
-            <a href="" class="block">
+            {{-- <a href="" class="block">
                 <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg transition cursor-pointer text-center">
                     <div class="text-4xl text-green-600 mb-3">
                         <i class="fa-solid fa-users"></i>
@@ -55,7 +67,7 @@
                     <h5 class="font-bold">کاربران</h5>
                     <p class="text-gray-500 text-sm mt-2">مدیریت کاربران</p>
                 </div>
-            </a>
+            </a> --}}
 
         </div>
     </div>

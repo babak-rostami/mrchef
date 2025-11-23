@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\CkeditorImage;
 use App\Models\Recipe;
 use App\Services\ImageService;
@@ -62,6 +63,12 @@ class BFCkeditorController extends Controller
                 break;
             case 'recipe_edit':
                 return Recipe::EDITOR_PATH;
+                break;
+            case 'category_create':
+                return Category::EDITOR_PATH;
+                break;
+            case 'category_edit':
+                return Category::EDITOR_PATH;
                 break;
             default:
                 throw new \Exception("Invalid upload page: {$page}");

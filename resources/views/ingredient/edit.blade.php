@@ -36,7 +36,7 @@
 
                     <div class="grid grid-cols-1 gap-4">
                         {{-- IMAGE --}}
-                        @include('component.form.edit.image', [
+                        @include('components.form.edit.image', [
                             'bimage_title' => 'عکس ماده اولیه',
                             'bimage_accept' => 'image/*',
                             'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
@@ -48,7 +48,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {{-- NAME --}}
-                        @include('component.form.edit.input', [
+                        @include('components.form.edit.input', [
                             'binput_title' => 'نام',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: شکر',
@@ -59,7 +59,7 @@
                         ])
 
                         {{-- NAME EN --}}
-                        @include('component.form.edit.input', [
+                        @include('components.form.edit.input', [
                             'binput_title' => 'نام انگلیسی',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: sugar',
@@ -70,7 +70,7 @@
                         ])
 
                         {{-- SLUG --}}
-                        @include('component.form.edit.readonly', [
+                        @include('components.form.edit.readonly', [
                             'binput_title' => 'اسلاگ',
                             'binput_name' => 'slug',
                             'binput_msg' => 'اسلاگ نباید تغییر کند',
@@ -78,7 +78,7 @@
                         ])
 
                         {{-- SHOW IN SEARCH --}}
-                        @include('component.form.edit.select', [
+                        @include('components.form.edit.select', [
                             'bselect_title' => 'در فیلتر جستجوی غذا باشد؟',
                             'bselect_name' => 'show_in_search',
                             'bselect_array_items' => ['خیر', 'بله'],
@@ -88,7 +88,7 @@
                     </div>
 
                     {{-- SUBMIT --}}
-                    @include('component.form.edit.submit', [
+                    @include('components.form.edit.submit', [
                         'submit_title' => 'ثبت تغییرات ماده اولیه',
                     ])
                 </form>

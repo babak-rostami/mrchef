@@ -21,10 +21,10 @@ class CategoryFactory extends Factory
         $name = $this->faker->words(2, true);
         return [
             'name' => $name,
-            'name_en' => Str::slug($name),
+            'name_en' => $name,
             'slug' => Str::slug($name) . uniqid(),
             'description' => $this->faker->sentence(10),
-            'description_editor' => $this->faker->paragraph(),
+            'body' => $this->faker->paragraph(),
             'image' => 'files/category/car.webp',
             'parent_id' => null
         ];

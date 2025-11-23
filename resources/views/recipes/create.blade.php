@@ -32,10 +32,21 @@
                     class="w-full space-y-6">
                     @csrf
 
+                    <div class="grid grid-cols-1 gap-4">
+                        {{-- IMAGE --}}
+                        @include('components.form.create.image', [
+                            'bimage_title' => 'عکس اصلی رسپی',
+                            'bimage_required' => true,
+                            'bimage_accept' => 'image/*',
+                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
+                            'bimage_name' => 'image',
+                        ])
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {{-- CATEGORY --}}
-                        @include('component.form.create.select', [
+                        @include('components.form.create.select', [
                             'bselect_title' => 'دسته بندی',
                             'bselect_required' => true,
                             'bselect_default_option' => 'یک دسته‌بندی انتخاب کنید...',
@@ -44,18 +55,8 @@
                             'bselect_items_name' => 'name',
                         ])
 
-
-                        {{-- IMAGE --}}
-                        @include('component.form.create.image', [
-                            'bimage_title' => 'عکس اصلی رسپی',
-                            'bimage_required' => true,
-                            'bimage_accept' => 'image/*',
-                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
-                            'bimage_name' => 'image',
-                        ])
-
                         {{-- TITLE --}}
-                        @include('component.form.create.input', [
+                        @include('components.form.create.input', [
                             'binput_title' => 'عنوان',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: طرز تهیه پاستا مخصوص',
@@ -65,7 +66,7 @@
                         ])
 
                         {{-- SLUG --}}
-                        @include('component.form.create.input', [
+                        @include('components.form.create.input', [
                             'binput_title' => 'اسلاگ',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: pasta-special',
@@ -75,43 +76,43 @@
                         ])
 
                         {{-- STATUS --}}
-                        @include('component.form.create.select', [
+                        @include('components.form.create.select', [
                             'bselect_title' => 'وضعیت',
                             'bselect_name' => 'status',
                             'bselect_array_items' => ['تایید نشده', 'تایید شده', 'در انتظار بررسی'],
                         ])
 
                         {{-- TIME PREPARE --}}
-                        @include('component.form.create.number', [
+                        @include('components.form.create.number', [
                             'bnumber_title' => 'زمان آماده‌سازی',
                             'bnumber_place' => 'مثال: 20',
                             'bnumber_msg' => 'چند دقیقه طول میکشه وسایل آماده بشه',
                             'bnumber_name' => 'time_prepare',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
                         ])
 
                         {{-- TIME COOK --}}
-                        @include('component.form.create.number', [
+                        @include('components.form.create.number', [
                             'bnumber_title' => 'زمان پخت',
                             'bnumber_place' => 'مثال: 45',
                             'bnumber_msg' => 'چند دقیقه طول میکشه که غذا بپزه؟',
                             'bnumber_name' => 'time_cook',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
                         ])
 
                         {{-- SERVINGS --}}
-                        @include('component.form.create.number', [
+                        @include('components.form.create.number', [
                             'bnumber_title' => 'تعداد سرو',
                             'bnumber_place' => 'مثال: 4',
                             'bnumber_msg' => 'این دستور پخت برای چند نفر تهیه شده؟',
                             'bnumber_name' => 'servings',
-                            'bnumber_role' => ['min-number' => 2, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 2, 'max-number' => 500],
                         ])
 
                     </div>
 
                     {{-- DESCRIPTION --}}
-                    @include('component.form.create.textarea', [
+                    @include('components.form.create.textarea', [
                         'btextarea_title' => 'توضیحات کوتاه',
                         'btextarea_required' => true,
                         'btextarea_place' => 'توضیح کوتاه درباره رسپی ...',
@@ -121,7 +122,7 @@
                     ])
 
                     {{-- body CKEDITOR --}}
-                    @include('component.form.create.ckeditor', [
+                    @include('components.form.create.ckeditor', [
                         'bckeditor_title' => 'طرز پخت',
                         'bckeditor_required' => true,
                         'bckeditor_place' => 'در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس',
@@ -129,7 +130,7 @@
                     ])
 
                     {{-- SUBMIT --}}
-                    @include('component.form.create.submit', [
+                    @include('components.form.create.submit', [
                         'submit_title' => 'ثبت رسپی',
                     ])
                 </form>

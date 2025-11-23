@@ -16,6 +16,11 @@
         <ul id="mainNav" class="hidden md:flex flex-col md:flex-row gap-4 mt-4 md:mt-0 text-sm">
 
             <li>
+                <button id="theme-toggle" class="hover:text-indigo-400 cursor-pointer">
+                </button>
+            </li>
+
+            <li>
                 <a href="{{ route('home') }}" class="hover:text-indigo-400">صفحه اصلی</a>
             </li>
 

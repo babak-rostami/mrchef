@@ -34,15 +34,21 @@
 
                     @method('PUT')
 
-                    {{-- MAIN IMAGE SHOW --}}
-                    @include('component.form.edit.main-image', [
-                        'bimage_src' => $recipe->image_url,
-                    ])
+                    <div class="grid grid-cols-1 gap-4">
+                        {{-- IMAGE --}}
+                        @include('components.form.edit.image', [
+                            'bimage_title' => 'عکس اصلی رسپی',
+                            'bimage_accept' => 'image/*',
+                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
+                            'bimage_name' => 'image',
+                            'bimage_src' => $recipe->image_url,
+                        ])
+                    </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {{-- CATEGORY --}}
-                        @include('component.form.edit.select', [
+                        @include('components.form.edit.select', [
                             'bselect_title' => 'دسته بندی',
                             'bselect_required' => true,
                             'bselect_name' => 'category_id',
@@ -51,16 +57,8 @@
                             'bselect_value' => $recipe->category_id,
                         ])
 
-                        {{-- IMAGE --}}
-                        @include('component.form.edit.image', [
-                            'bimage_title' => 'عکس اصلی رسپی',
-                            'bimage_accept' => 'image/*',
-                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
-                            'bimage_name' => 'image',
-                        ])
-
                         {{-- TITLE --}}
-                        @include('component.form.edit.input', [
+                        @include('components.form.edit.input', [
                             'binput_title' => 'عنوان',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: طرز تهیه پاستا مخصوص',
@@ -71,7 +69,7 @@
                         ])
 
                         {{-- SLUG --}}
-                        @include('component.form.edit.readonly', [
+                        @include('components.form.edit.readonly', [
                             'binput_title' => 'اسلاگ',
                             'binput_name' => 'slug',
                             'binput_msg' => 'اسلاگ نباید تغییر کند',
@@ -79,7 +77,7 @@
                         ])
 
                         {{-- STATUS --}}
-                        @include('component.form.edit.select', [
+                        @include('components.form.edit.select', [
                             'bselect_title' => 'وضعیت',
                             'bselect_name' => 'status',
                             'bselect_array_items' => ['تایید نشده', 'تایید شده', 'در انتظار بررسی'],
@@ -87,39 +85,39 @@
                         ])
 
                         {{-- TIME PREPARE --}}
-                        @include('component.form.edit.number', [
+                        @include('components.form.edit.number', [
                             'bnumber_title' => 'زمان آماده‌سازی',
                             'bnumber_place' => 'مثال: 20',
                             'bnumber_msg' => 'چند دقیقه طول میکشه وسایل آماده بشه',
                             'bnumber_name' => 'time_prepare',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
                             'bnumber_value' => $recipe->time_prepare,
                         ])
 
                         {{-- TIME COOK --}}
-                        @include('component.form.edit.number', [
+                        @include('components.form.edit.number', [
                             'bnumber_title' => 'زمان پخت',
                             'bnumber_place' => 'مثال: 45',
                             'bnumber_msg' => 'چند دقیقه طول میکشه که غذا بپزه؟',
                             'bnumber_name' => 'time_cook',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
                             'bnumber_value' => $recipe->time_cook,
                         ])
 
                         {{-- SERVINGS --}}
-                        @include('component.form.edit.number', [
+                        @include('components.form.edit.number', [
                             'bnumber_title' => 'تعداد سرو',
                             'bnumber_place' => 'مثال: 4',
                             'bnumber_msg' => 'این دستور پخت برای چند نفر تهیه شده؟',
                             'bnumber_name' => 'servings',
-                            'bnumber_role' => ['min-number' => 2, 'max-number' => 300],
+                            'bnumber_role' => ['min-number' => 2, 'max-number' => 500],
                             'bnumber_value' => $recipe->servings,
                         ])
 
                     </div>
 
                     {{-- DESCRIPTION --}}
-                    @include('component.form.edit.textarea', [
+                    @include('components.form.edit.textarea', [
                         'btextarea_title' => 'توضیحات کوتاه',
                         'btextarea_required' => true,
                         'btextarea_place' => 'توضیح کوتاه درباره رسپی ...',
@@ -130,7 +128,7 @@
                     ])
 
                     {{-- body CKEDITOR --}}
-                    @include('component.form.edit.ckeditor', [
+                    @include('components.form.edit.ckeditor', [
                         'bckeditor_title' => 'طرز پخت',
                         'bckeditor_required' => true,
                         'bckeditor_place' => 'در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس',
@@ -139,13 +137,9 @@
                     ])
 
                     {{-- SUBMIT --}}
-                    <div class="pt-4">
-                        <button type="submit"
-                            class="bg-blue-600 w-full text-white px-6 py-2 rounded-lg hover:bg-blue-700
-                            transition cursor-pointer">
-                            ثبت تغییرات رسپی
-                        </button>
-                    </div>
+                    @include('components.form.edit.submit', [
+                        'submit_title' => 'ثبت تغییرات رسپی',
+                    ])
                 </form>
             </div>
 

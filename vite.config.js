@@ -20,16 +20,26 @@ export default defineConfig({
                 'resources/js/test.js',
 
                 'resources/css/recipe/index.css',
+                'resources/js/recipe/index.js',
                 'resources/css/recipe/create.css',
                 'resources/js/recipe/create.js',
                 'resources/css/recipe/edit.css',
                 'resources/js/recipe/edit.js',
 
                 'resources/css/ingredient/index.css',
+                'resources/js/ingredient/index.js',
                 'resources/css/ingredient/create.css',
                 'resources/js/ingredient/create.js',
                 'resources/css/ingredient/edit.css',
                 'resources/js/ingredient/edit.js',
+
+                'resources/css/unit/index.css',
+                'resources/js/unit/index.js',
+                'resources/css/unit/create.css',
+                'resources/js/unit/create.js',
+                'resources/css/unit/edit.css',
+                'resources/js/unit/edit.js',
+
             ],
             refresh: true,
         }),

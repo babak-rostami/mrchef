@@ -35,7 +35,7 @@
                     <div class="grid grid-cols-1 gap-4">
 
                         {{-- IMAGE --}}
-                        @include('component.form.create.image', [
+                        @include('components.form.create.image', [
                             'bimage_title' => 'عکس ماده اولیه',
                             'bimage_required' => true,
                             'bimage_accept' => 'image/*',
@@ -46,7 +46,7 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {{-- NAME --}}
-                        @include('component.form.create.input', [
+                        @include('components.form.create.input', [
                             'binput_title' => 'نام',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: شکر',
@@ -56,7 +56,7 @@
                         ])
 
                         {{-- NAME EN --}}
-                        @include('component.form.create.input', [
+                        @include('components.form.create.input', [
                             'binput_title' => 'نام انگلیسی',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: sugar',
@@ -66,7 +66,7 @@
                         ])
 
                         {{-- SLUG --}}
-                        @include('component.form.create.input', [
+                        @include('components.form.create.input', [
                             'binput_title' => 'اسلاگ',
                             'bf_is_required' => true,
                             'binput_place' => 'مثال: olive-oil',
@@ -76,7 +76,7 @@
                         ])
 
                         {{-- SHOW IN SEARCH --}}
-                        @include('component.form.create.select', [
+                        @include('components.form.create.select', [
                             'bselect_title' => 'در فیلتر جستجوی غذا باشد؟',
                             'bselect_name' => 'show_in_search',
                             'bselect_array_items' => ['خیر', 'بله'],
@@ -85,7 +85,7 @@
                     </div>
 
                     {{-- SUBMIT --}}
-                    @include('component.form.create.submit', [
+                    @include('components.form.create.submit', [
                         'submit_title' => 'ثبت ماده اولیه',
                     ])
 

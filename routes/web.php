@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +28,5 @@ Route::middleware('admin')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('recipes', RecipeController::class);
     Route::resource('ingredient', IngredientController::class);
-});
-
-
-Route::get('test', function () {
-    return view('test');
+    Route::resource('unit', UnitController::class);
 });

@@ -47,24 +47,24 @@
                         <!-- Image + Title -->
                         <div class="flex items-center mb-3">
                             <img src="{{ $recipe->thumb_url }}" class="w-16 h-16 rounded-lg object-cover">
-                            <div class="mr-3">
+                            <div class="mr-3 break-all">
                                 <h6 class="font-bold">{{ $recipe->title }}</h6>
                             </div>
                         </div>
 
                         <div class="flex">
                             @if ($recipe->status == 0)
-                                @include('component.helper.badge', [
+                                @include('components.helper.badge', [
                                     'title' => 'تایید نشده',
                                     'class' => 'danger',
                                 ])
                             @elseif($recipe->status == 1)
-                                @include('component.helper.badge', [
+                                @include('components.helper.badge', [
                                     'title' => 'تایید شده',
                                     'class' => 'success',
                                 ])
                             @elseif($recipe->status == 2)
-                                @include('component.helper.badge', [
+                                @include('components.helper.badge', [
                                     'title' => 'در انتظار',
                                     'class' => 'warning',
                                 ])
@@ -79,6 +79,40 @@
                                 ویرایش
                             </a>
 
+
+                            {{-- <button onclick="openModal('deleteRecipe-{{ $recipe->id }}')"
+                                class="px-4 py-1.5 cursor-pointer bg-red-500 mr-2 text-white rounded-xl shadow hover:bg-red-600">
+                                حذف رسپی
+                            </button>
+
+                            <x-modal id="deleteRecipe-{{ $recipe->id }}">
+                                <h2 class="text-xl font-bold mb-3">حذف رسپی</h2>
+
+                                <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <div class="flex flex-col mt-2 mb-4">
+                                        <span>{{ $recipe->title }}</span>
+                                        <span class="text-red-600 font-bold">هشدار</span>
+                                        <span>مطمئنید میخواهید رسپی حذف شود؟</span>
+                                    </div>
+
+                                    <div class="flex">
+                                        <button type="button" onclick="closeModal('deleteRecipe-{{ $recipe->id }}')"
+                                            class="bg-gray-400 hover:bg-gray-500 cursor-pointer text-white px-4 py-2 rounded">
+                                            نمیخواهم حذف شود
+                                        </button>
+
+                                        <button type="submit" onclick="submitForm(this,'در حال حذف...')"
+                                            class="bg-red-600 hover:bg-red-400 cursor-pointer mr-2 text-white px-4 py-2 rounded">
+                                            حذف شود
+                                        </button>
+                                    </div>
+                                </form>
+                            </x-modal> --}}
+
+
                         </div>
 
                     </div>
@@ -91,3 +125,8 @@
     </div>
 
 @endsection
+
+
+@push('scripts')
+    @vite('resources/js/recipe/index.js')
+@endpush

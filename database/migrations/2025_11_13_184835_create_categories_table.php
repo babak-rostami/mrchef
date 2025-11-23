@@ -17,15 +17,11 @@ return new class extends Migration
             $table->string('name_en');
             $table->string('slug');
             $table->text('description');
-            $table->text('description_editor')->nullable();
+            $table->text('body')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
 
-
-            $table->foreign('parent_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');
 
             $table->timestamps();
         });

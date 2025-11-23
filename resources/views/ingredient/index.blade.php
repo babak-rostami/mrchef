@@ -48,11 +48,11 @@
                         <!-- Image + Title -->
                         <div class="flex items-center mb-3">
                             <img src="{{ $ingredient->thumb_url }}" class="w-16 h-16 rounded-lg object-cover">
-                            <div class="mr-3">
+                            <div class="mr-3 flex flex-col items-start gap-2">
                                 <h6 class="font-bold">{{ $ingredient->name }}</h6>
                                 <span class="font-bold">{{ $ingredient->slug }}</span>
                                 @if ($ingredient->show_in_search == 1)
-                                    @include('component.helper.badge', [
+                                    @include('components.helper.badge', [
                                         'title' => 'نمایش در فیلتر جستجو',
                                         'class' => 'success',
                                     ])
@@ -68,6 +68,39 @@
                                 ویرایش
                             </a>
 
+                            {{-- <button onclick="openModal('deleteIngredient-{{ $ingredient->id }}')"
+                                class="px-4 py-1.5 cursor-pointer bg-red-500 mr-2 text-white rounded-xl shadow hover:bg-red-600">
+                                حذف ماده اولیه
+                            </button>
+
+                            <x-modal id="deleteIngredient-{{ $ingredient->id }}">
+                                <h2 class="text-xl font-bold mb-3">حذف ماده اولیه</h2>
+
+                                <form action="{{ route('ingredient.destroy', $ingredient->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <div class="flex flex-col mt-2 mb-4">
+                                        <span>{{ $ingredient->name }}</span>
+                                        <span class="text-red-600 font-bold">هشدار</span>
+                                        <span>مطمئنید میخواهید ماده اولیه حذف شود؟</span>
+                                    </div>
+
+                                    <div class="flex">
+                                        <button type="button"
+                                            onclick="closeModal('deleteIngredient-{{ $ingredient->id }}')"
+                                            class="bg-gray-400 hover:bg-gray-500 cursor-pointer text-white px-4 py-2 rounded">
+                                            نمیخواهم حذف شود
+                                        </button>
+
+                                        <button type="submit" onclick="submitForm(this,'در حال حذف...')"
+                                            class="bg-red-600 hover:bg-red-400 cursor-pointer mr-2 text-white px-4 py-2 rounded">
+                                            حذف شود
+                                        </button>
+                                    </div>
+                                </form>
+                            </x-modal> --}}
+
                         </div>
 
                     </div>
@@ -80,3 +113,7 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    @vite('resources/js/ingredient/index.js')
+@endpush

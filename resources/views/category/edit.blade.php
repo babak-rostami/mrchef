@@ -20,71 +20,91 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form action="{{ route('category.update', $category->slug) }}" method="POST" enctype="multipart/form-data"
-                    class="w-full md:w-3/4">
-
+                <form id="category-update-form" action="{{ route('category.update', $category->slug) }}" method="POST"
+                    enctype="multipart/form-data" class="w-full md:w-3/4">
                     @csrf
+
                     @method('PUT')
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                        <!-- Image -->
-                        <div class="col-span-1 md:col-span-2 text-center">
-                            <img src="{{ $category->thumb_url }}" alt="{{ $category->name }}"
-                                class="w-24 h-24 object-cover rounded-lg mx-auto">
+                        {{-- IMAGE --}}
+                        <div class="md:col-span-2 gap-4">
+                            @include('components.form.edit.image', [
+                                'bimage_title' => 'عکس دسته بندی',
+                                'bimage_accept' => 'image/*',
+                                'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
+                                'bimage_name' => 'image',
+                                'bimage_src' => $category->image_url,
+                            ])
                         </div>
 
-                        <!-- Name -->
-                        <div>
-                            <label class="block mb-2 font-medium">نام دسته‌بندی</label>
-                            <input type="text" name="name" value="{{ $category->name }}"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300" required>
-                        </div>
+                        {{-- NAME --}}
+                        @include('components.form.edit.input', [
+                            'binput_title' => 'نام',
+                            'bf_is_required' => true,
+                            'binput_place' => 'مثلا: سوخاری',
+                            'binput_msg' => 'حداکثر 40 کاراکتر',
+                            'binput_name' => 'name',
+                            'binput_role' => ['max-length' => 40],
+                            'binput_value' => $category->name,
+                        ])
 
-                        <!-- English Name -->
-                        <div>
-                            <label class="block mb-2 font-medium">نام انگلیسی دسته‌بندی</label>
-                            <input type="text" name="name_en" value="{{ $category->name_en }}"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300" required>
-                        </div>
+                        {{-- NAME EN --}}
+                        @include('components.form.edit.input', [
+                            'binput_title' => 'نام انگلیسی',
+                            'bf_is_required' => true,
+                            'binput_place' => 'مثال: cake',
+                            'binput_msg' => 'حداکثر 40 کاراکتر',
+                            'binput_name' => 'name_en',
+                            'binput_role' => ['max-length' => 40],
+                            'binput_value' => $category->name_en,
+                        ])
 
-                        <!-- Description -->
-                        <div class="col-span-1 md:col-span-2">
-                            <label class="block mb-2 font-medium">توضیحات</label>
-                            <textarea name="description" rows="3" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300"
-                                required>{{ $category->description }}</textarea>
-                        </div>
+                        {{-- SLUG --}}
+                        @include('components.form.edit.readonly', [
+                            'binput_title' => 'اسلاگ',
+                            'binput_name' => 'slug',
+                            'binput_msg' => 'اسلاگ نباید تغییر کند',
+                            'binput_value' => $category->slug,
+                        ])
 
-                        <!-- Parent -->
-                        <div>
-                            <label class="block mb-2 font-medium">دسته‌بندی پدر</label>
-                            <select name="parent_id"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300">
-                                <option value="">بدون دسته پدر</option>
-                                @foreach ($categories as $cat)
-                                    <option value="{{ $cat->id }}"
-                                        {{ $category->parent_id == $cat->id ? 'selected' : '' }}>
-                                        {{ $cat->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        {{-- PARENT CATEGORY --}}
+                        @include('components.form.edit.select', [
+                            'bselect_title' => 'دسته بندی پدر',
+                            'bselect_name' => 'parent_id',
+                            'bselect_default_option' => 'بدون دسته بندی پدر',
+                            'bselect_items' => $categories,
+                            'bselect_items_name' => 'name',
+                            'bselect_value' => $category->parent_id,
+                        ])
 
-                        <!-- Image Upload -->
-                        <div>
-                            <label class="block mb-2 font-medium">تصویر</label>
-                            <input type="file" name="image"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-indigo-300">
-                        </div>
+                        <div class="md:col-span-2 gap-4 mt-2">
+                            {{-- DESCRIPTION --}}
+                            @include('components.form.edit.textarea', [
+                                'btextarea_title' => 'توضیحات',
+                                'btextarea_required' => true,
+                                'btextarea_place' => 'توضیح درباره دسته بندی ...',
+                                'btextarea_msg' => 'یک توضیح برای دسته بندی بنویسید',
+                                'btextarea_name' => 'description',
+                                'btextarea_role' => ['min-length' => 25],
+                                'btextarea_value' => $category->description,
+                            ])
 
-                        <!-- Submit Button -->
-                        <div class="col-span-1 md:col-span-2 mt-4">
-                            <button type="submit"
-                                class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition cursor-pointer">
-                                ثبت تغییرات
-                            </button>
-                        </div>
+                            {{-- body CKEDITOR --}}
+                            @include('components.form.edit.ckeditor', [
+                                'bckeditor_title' => 'متن سئو شده صفحه دسته بندی',
+                                'bckeditor_place' => 'در این قسمت متن سئو شده برای صفحه دسته بندی رو بنویس',
+                                'bckeditor_name' => 'body',
+                                'bckeditor_value' => $category->body,
+                            ])
 
+
+                            {{-- SUBMIT --}}
+                            @include('components.form.edit.submit', [
+                                'submit_title' => 'ثبت تغییرات',
+                            ])
+                        </div>
                     </div>
                 </form>
             </div>
@@ -94,3 +114,8 @@
     </div>
 
 @endsection
+
+
+@push('scripts')
+    @vite('resources/js/category/edit.js')
+@endpush

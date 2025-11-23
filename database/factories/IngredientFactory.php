@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Ingredient>
+ */
+class IngredientFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $name = $this->faker->words(2, true);
+        return [
+            'name' => $name,
+            'name_en' => $name,
+            'slug' => Str::slug($name) . uniqid(),
+            'image' => 'files\icon\empty-list.png',
+            'show_in_search' => $this->faker->randomElement([0, 1])
+        ];
+    }
+}

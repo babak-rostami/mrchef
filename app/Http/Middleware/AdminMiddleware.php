@@ -17,7 +17,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth('user')->check() || auth('user')->user()->role != 'admin') {
-            return redirect()->route('home')->with('message', 'اجازه دسترسی ندارید');
+            return redirect()->route('home')->with('success', 'اجازه دسترسی ندارید');
         }
         return $next($request);
     }

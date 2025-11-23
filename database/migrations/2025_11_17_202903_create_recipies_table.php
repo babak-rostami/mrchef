@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->index();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('category_id')->nullable()->index();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique()->index();
             $table->text('description');
@@ -24,16 +24,10 @@ return new class extends Migration
             $table->unsignedBigInteger('views')->nullable();
             $table->unsignedSmallInteger('time_prepare')->nullable();
             $table->unsignedSmallInteger('time_cook')->nullable();
-            $table->unsignedTinyInteger('servings')->nullable();
+            $table->unsignedSmallInteger('servings')->nullable();
 
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

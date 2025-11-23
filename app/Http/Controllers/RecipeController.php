@@ -78,4 +78,18 @@ class RecipeController extends Controller
 
         return redirect()->route('recipes.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
+
+    public function destroy(ImageService $imageService, $id)
+    {
+        $recipe = Recipe::find($id);
+        $this->authorize('delete', $recipe);
+
+        if (!isset($recipe)) {
+            return back()->with('error', 'رسپی وجود ندارد');
+        }
+
+        $recipe->delete();
+
+        return redirect()->route('recipes.index')->with('success', 'رسپی با موفقیت حذف شد');
+    }
 }

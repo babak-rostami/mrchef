@@ -9,34 +9,36 @@ const overlay = document.getElementById('bf-image-overlay');
 const bf_img_error_msg = document.getElementById('bf-main-image-error');
 let lastFile = null;
 
-// کلیک روی باکس = باز شدن input
-picker.addEventListener('click', () => realInput.click());
+if (realInput) {
+    // کلیک روی باکس = باز شدن input
+    picker.addEventListener('click', () => realInput.click());
 
-// انتخاب عکس جدید
-realInput.addEventListener('change', function (e) {
-    const file = e.target.files[0];
+    // انتخاب عکس جدید
+    realInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
 
-    // اگر هیچ فایلی انتخاب نشد = کاربر Cancel زده
-    if (!file) {
-        // بازگرداندن value قبلی
-        if (lastFile) {
-            realInput.files = lastFile;
+        // اگر هیچ فایلی انتخاب نشد = کاربر Cancel زده
+        if (!file) {
+            // بازگرداندن value قبلی
+            if (lastFile) {
+                realInput.files = lastFile;
+            }
+            return;
         }
-        return;
-    }
 
-    // فایل جدید انتخاب شده: ذخیره فایل فعلی برای دفعات بعد
-    lastFile = e.target.files;
+        // فایل جدید انتخاب شده: ذخیره فایل فعلی برای دفعات بعد
+        lastFile = e.target.files;
 
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        previewImg.src = event.target.result;
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            previewImg.src = event.target.result;
 
-        previewImg.classList.remove('hidden');
-        placeholder.classList.add('hidden');
-        overlay.classList.remove('hidden');
-        bf_img_error_msg.classList.add('hidden');
-    };
+            previewImg.classList.remove('hidden');
+            placeholder.classList.add('hidden');
+            overlay.classList.remove('hidden');
+            bf_img_error_msg.classList.add('hidden');
+        };
 
-    reader.readAsDataURL(file);
-});
+        reader.readAsDataURL(file);
+    });
+}
