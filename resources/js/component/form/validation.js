@@ -4,7 +4,7 @@ import { checkTextareasIsCorrect } from './field/textarea'
 import { checkImagesIsCorrect } from './field/image'
 import { checkNumbersIsCorrect } from './field/number'
 import { checkCkeditorIsCorrect } from './field/ckeditor'
-import { requireValidation, removeErrorSectionOn } from '../action'
+import { requireValidation, removeErrorSectionOn } from './action'
 
 //-----------------------------------------------------------------------------------------------//
 // بعد از سابمیت فرم این متد ها باید چک بشه 
@@ -22,7 +22,7 @@ export function validateForm(form_id) {
 }
 
 //-----------------------------------------------------------------------------------------------//
-// برای فیلد های مختلف اگه جزئیات بیشتری لازم بود در بخش خودشون انجام بشه 
+// بعد از سابمیت اگه برای فیلد های مختلف جزئیات بیشتری لازم داری در بخش خودشون انجام بشه 
 //-----------------------------------------------------------------------------------------------//
 function fieldValidation(form_id) {
     //select validate

@@ -1,22 +1,27 @@
+@props(['title', 'name', 'id', 'required' => false, 'accept' => 'image/*', 'msg' => null])
+
 <div>
-    <label class="font-semibold" id="bf-main-image-label">
-        {{ $bimage_title }}
-        @isset($bimage_required)
+    <label class="font-semibold" id="{{ $id }}-bf-label">
+        {{ $title }}
+        @if ($required)
             <span class="text-red-600">*</span>
-        @endisset
+        @endif
     </label>
+ 
+    {{-- input اصلی --}}
+    <input type="file" name="{{ $name }}" id="{{ $id }}" accept="{{ $accept }}"
+        class="hidden bf-input {{ $required ? 'bf-is-required' : '' }}">
 
-    <input type="file" name="{{ $bimage_name }}" id="bf-main-image" accept="{{ $bimage_accept ?? 'image/*' }}"
-        class="hidden bf-input {{ isset($bimage_required) ? 'bf-is-required' : '' }}">
+    <div id="{{ $id }}-bf-img-picker"
+        class="relative w-full h-48 border-2 mt-2 border-dashed border-gray-300 rounded-lg
+               flex flex-col items-center justify-center cursor-pointer
+               hover:bg-gray-50 transition">
 
-    <div id="bf-image-picker"
-        class="relative w-full h-48 border-2 mt-2 border-dashed border-gray-300 rounded-lg 
-                flex flex-col items-center justify-center cursor-pointer
-                hover:bg-gray-50 transition">
+        {{-- عکس --}}
+        <img id="{{ $id }}-bf-img-show" class="hidden h-full rounded-lg" />
 
-        <img id="bf-main-image-show" class="hidden h-full rounded-lg" />
-
-        <div id="bf-image-placeholder" class="flex flex-col items-center text-gray-500">
+        {{-- placeholder --}}
+        <div id="{{ $id }}-bf-img-place" class="flex flex-col items-center text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -25,19 +30,24 @@
             <p>برای انتخاب عکس کلیک کنید</p>
         </div>
 
-        <!-- دکمه hover برای ویرایش عکس -->
-        <div id="bf-image-overlay"
-            class="absolute inset-0 bg-black/20 text-white text-2xl font-bold 
-                    flex items-center justify-center hidden
-                    transition-opacity duration-200 pointer-events-none">
+        {{-- overlay روی عکس هنگام hover --}}
+        <div id="{{ $id }}-bf-img-over"
+            class="absolute inset-0 bg-black/20 text-white text-xl font-semibold
+                   flex items-center justify-center hidden pointer-events-none
+                   transition-opacity duration-200">
             تغییر عکس
         </div>
     </div>
 
-    <p id="bf-main-image-msg" class="text-gray-500 text-sm">{{ $bimage_msg }}</p>
-    <p id="bf-main-image-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
-
-    @error('{{ $bimage_name }}')
-        <p class="text-red-600 text-sm">{{ $message }}</p>
+    {{-- پیام --}}
+    @if ($msg)
+        <p id="{{ $id }}-bf-msg" class="text-gray-500 text-sm mt-1">{{ $msg }}</p>
+    @endif
+    {{-- خطای js --}}
+    <p id="{{ $id }}-bf-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
+    {{-- خطای سرور --}}
+    @error($name)
+        <p class="text-danger text-sm">{{ $message }}</p>
     @enderror
+
 </div>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\IngredientUnit;
 use App\Models\Recipe;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,6 +24,8 @@ class DatabaseSeeder extends Seeder
             RecipeSeeder::class,
             IngredientSeeder::class,
             UnitSeeder::class,
+            IngredientUnitSeeder::class,
+            RecipeIngredientSeeder::class
         ]);
     }
 }

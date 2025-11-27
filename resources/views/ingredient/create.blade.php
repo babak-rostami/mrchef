@@ -32,62 +32,32 @@
                     enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 
-                    <div class="grid grid-cols-1 gap-4">
-
-                        {{-- IMAGE --}}
-                        @include('components.form.create.image', [
-                            'bimage_title' => 'عکس ماده اولیه',
-                            'bimage_required' => true,
-                            'bimage_accept' => 'image/*',
-                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
-                            'bimage_name' => 'image',
-                        ])
-                        
-                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="col-span-1 md:col-span-2 gap-4">
+                            {{-- IMAGE --}}
+                            <x-form.create.image title="عکس ماده اولیه" name="image" id="image" :required="true"
+                                accept="image/*" msg="برای نمایش بهتر سایز عکس 1*1 انتخاب کنید" />
+                        </div>
                         {{-- NAME --}}
-                        @include('components.form.create.input', [
-                            'binput_title' => 'نام',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: شکر',
-                            'binput_msg' => 'حداکثر 55 کاراکتر',
-                            'binput_name' => 'name',
-                            'binput_role' => ['max-length' => 55],
-                        ])
+                        <x-form.create.input name="name" id="name" title="نام" placeholder="مثال: شکر"
+                            :required="true" msg="حداکثر 55 کاراکتر" :roles="['max-len' => 55]" />
 
                         {{-- NAME EN --}}
-                        @include('components.form.create.input', [
-                            'binput_title' => 'نام انگلیسی',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: sugar',
-                            'binput_msg' => 'حداکثر 55 کاراکتر',
-                            'binput_name' => 'name_en',
-                            'binput_role' => ['max-length' => 55],
-                        ])
+                        <x-form.create.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: sugar"
+                            :required="true" msg="حداکثر 55 کاراکتر" :roles="['max-len' => 55]" />
 
                         {{-- SLUG --}}
-                        @include('components.form.create.input', [
-                            'binput_title' => 'اسلاگ',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: olive-oil',
-                            'binput_msg' => 'فقط حروف انگلیسی، عدد و خط تیره مجاز است، فاصله مجاز نیست.',
-                            'binput_name' => 'slug',
-                            'binput_role' => ['slug' => true, 'min-length' => 2, 'max-length' => 55],
-                        ])
+                        <x-form.create.input name="slug" id="slug" title="اسلاگ" placeholder="مثال: olive-oil"
+                            :required="true" msg="فقط حروف انگلیسی، عدد و خط تیره مجاز است، فاصله مجاز نیست."
+                            :roles="['slug' => true, 'min-len' => 2, 'max-len' => 55]" />
 
                         {{-- SHOW IN SEARCH --}}
-                        @include('components.form.create.select', [
-                            'bselect_title' => 'در فیلتر جستجوی غذا باشد؟',
-                            'bselect_name' => 'show_in_search',
-                            'bselect_array_items' => ['خیر', 'بله'],
-                        ])
-
+                        <x-form.create.select title="در فیلتر جستجو باشد؟" name="show_in_search" id="show_in_search"
+                            :arrayItems="$show_select_options" />
                     </div>
 
                     {{-- SUBMIT --}}
-                    @include('components.form.create.submit', [
-                        'submit_title' => 'ثبت ماده اولیه',
-                    ])
+                    <x-form.create.submit title="ثبت ماده اولیه" />
 
                 </form>
             </div>

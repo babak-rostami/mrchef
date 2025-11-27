@@ -68,6 +68,11 @@
                                 ویرایش
                             </a>
 
+                            <a href="{{ route('ingredient.units.index', $ingredient->slug) }}"
+                                class="px-4 py-1.5 mx-2 bg-blue-500 text-white rounded-xl shadow hover:bg-blue-600">
+                                واحد های اندازه گیری
+                            </a>
+
                             {{-- <button onclick="openModal('deleteIngredient-{{ $ingredient->id }}')"
                                 class="px-4 py-1.5 cursor-pointer bg-red-500 mr-2 text-white rounded-xl shadow hover:bg-red-600">
                                 حذف ماده اولیه

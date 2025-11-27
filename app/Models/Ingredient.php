@@ -28,5 +28,10 @@ class Ingredient extends Model
         });
     }
 
-    protected $fillable = ['name', 'name_en', 'slug', 'image', 'show_in_search'];
+    protected $fillable = ['name', 'name_en', 'slug', 'image', 'show_in_search', 'calories_per_100g', 'fat_per_100g', 'carbs_per_100g', 'protein_per_100g'];
+
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class, 'ingredient_units', 'ingredient_id', 'unit_id')->withPivot(['unit_weight_in_gram']);
+    }
 }

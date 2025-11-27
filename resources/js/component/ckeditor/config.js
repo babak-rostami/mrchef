@@ -1,8 +1,8 @@
 export const CKEDITOR_CONFIG = {
     class: ".bf-ckeditor",
-    errorField: "-error",
-    msgField: "-msg",
-    lblField: "-label",
+    errorField: "-bf-error",
+    msgField: "-bf-msg",
+    lblField: "-bf-label",
     language: "fa",
     minHeight: "150px",
     pluginsToRemove: ["MediaEmbed", "CKFinder"],

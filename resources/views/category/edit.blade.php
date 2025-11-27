@@ -28,82 +28,40 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                        {{-- IMAGE --}}
                         <div class="md:col-span-2 gap-4">
-                            @include('components.form.edit.image', [
-                                'bimage_title' => 'عکس دسته بندی',
-                                'bimage_accept' => 'image/*',
-                                'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
-                                'bimage_name' => 'image',
-                                'bimage_src' => $category->image_url,
-                            ])
+                            {{-- IMAGE --}}
+                            <x-form.edit.image title="عکس دسته بندی" name="image" id="image" accept="image/*"
+                                msg="برای نمایش بهتر سایز عکس 1*1 انتخاب کنید" :src="$category->image_url" />
                         </div>
 
                         {{-- NAME --}}
-                        @include('components.form.edit.input', [
-                            'binput_title' => 'نام',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثلا: سوخاری',
-                            'binput_msg' => 'حداکثر 40 کاراکتر',
-                            'binput_name' => 'name',
-                            'binput_role' => ['max-length' => 40],
-                            'binput_value' => $category->name,
-                        ])
+                        <x-form.edit.input name="name" id="name" title="نام" placeholder="مثال: سوخاری"
+                            :required="true" msg="حداکثر 40 کاراکتر برای سئو بهتر" :roles="['max-len' => 40]" :value="$category->name" />
 
                         {{-- NAME EN --}}
-                        @include('components.form.edit.input', [
-                            'binput_title' => 'نام انگلیسی',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: cake',
-                            'binput_msg' => 'حداکثر 40 کاراکتر',
-                            'binput_name' => 'name_en',
-                            'binput_role' => ['max-length' => 40],
-                            'binput_value' => $category->name_en,
-                        ])
+                        <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: cake"
+                            :required="true" msg="حداکثر 40 کاراکتر برای سئو بهتر" :roles="['max-len' => 40]" :value="$category->name_en" />
 
                         {{-- SLUG --}}
-                        @include('components.form.edit.readonly', [
-                            'binput_title' => 'اسلاگ',
-                            'binput_name' => 'slug',
-                            'binput_msg' => 'اسلاگ نباید تغییر کند',
-                            'binput_value' => $category->slug,
-                        ])
+                        <x-form.edit.readonly id="slug" title="اسلاگ" msg="اسلاگ نباید تغییر کند" :value="$category->slug" />
 
                         {{-- PARENT CATEGORY --}}
-                        @include('components.form.edit.select', [
-                            'bselect_title' => 'دسته بندی پدر',
-                            'bselect_name' => 'parent_id',
-                            'bselect_default_option' => 'بدون دسته بندی پدر',
-                            'bselect_items' => $categories,
-                            'bselect_items_name' => 'name',
-                            'bselect_value' => $category->parent_id,
-                        ])
+                        <x-form.edit.select title="دسته بندی پدر" name="parent_id" id="parent_id" :items="$categories"
+                            itemsName="name" :value="$category->parent_id" />
 
                         <div class="md:col-span-2 gap-4 mt-2">
                             {{-- DESCRIPTION --}}
-                            @include('components.form.edit.textarea', [
-                                'btextarea_title' => 'توضیحات',
-                                'btextarea_required' => true,
-                                'btextarea_place' => 'توضیح درباره دسته بندی ...',
-                                'btextarea_msg' => 'یک توضیح برای دسته بندی بنویسید',
-                                'btextarea_name' => 'description',
-                                'btextarea_role' => ['min-length' => 25],
-                                'btextarea_value' => $category->description,
-                            ])
+                            <x-form.edit.textarea title="توضیحات" name="description" id="description"
+                                placeholder="توضیح درباره دسته بندی ..." msg="یک توضیح برای دسته بندی بنویسید"
+                                :required="true" :roles="['min-len' => 25]" :value="$category->description" />
 
                             {{-- body CKEDITOR --}}
-                            @include('components.form.edit.ckeditor', [
-                                'bckeditor_title' => 'متن سئو شده صفحه دسته بندی',
-                                'bckeditor_place' => 'در این قسمت متن سئو شده برای صفحه دسته بندی رو بنویس',
-                                'bckeditor_name' => 'body',
-                                'bckeditor_value' => $category->body,
-                            ])
-
+                            <x-form.edit.ckeditor title="متن سئو شده" name="body" id="body"
+                                placeholder="در این قسمت متن سئو شده برای صفحه دسته بندی رو بنویس" :value="$category->body" />
 
                             {{-- SUBMIT --}}
-                            @include('components.form.edit.submit', [
-                                'submit_title' => 'ثبت تغییرات',
-                            ])
+                            <x-form.edit.submit title="ثبت تغییرات" />
+
                         </div>
                     </div>
                 </form>

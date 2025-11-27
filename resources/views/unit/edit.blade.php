@@ -19,7 +19,6 @@
             ],
         ])
 
-
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-xl font-bold">ویرایش واحد اندازه گیری</h3>
@@ -37,44 +36,22 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {{-- NAME --}}
-                        @include('components.form.edit.input', [
-                            'binput_title' => 'نام',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: گرم',
-                            'binput_msg' => 'حداکثر 20 کاراکتر',
-                            'binput_name' => 'name',
-                            'binput_role' => ['max-length' => 20],
-                            'binput_value' => $unit->name,
-                        ])
+                        <x-form.edit.input name="name" id="name" title="نام" placeholder="مثال: گرم"
+                            :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name" />
 
                         {{-- NAME EN --}}
-                        @include('components.form.edit.input', [
-                            'binput_title' => 'نام انگلیسی',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: gram',
-                            'binput_msg' => 'حداکثر 20 کاراکتر',
-                            'binput_name' => 'name_en',
-                            'binput_role' => ['max-length' => 20],
-                            'binput_value' => $unit->name_en,
-                        ])
+                        <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: gram"
+                            :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name_en" />
 
-                        {{-- NAME EN --}}
-                        @include('components.form.edit.input', [
-                            'binput_title' => 'نام نمایشی',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: ق چ',
-                            'binput_msg' => 'حداکثر 10 کاراکتر',
-                            'binput_name' => 'label',
-                            'binput_role' => ['max-length' => 10],
-                            'binput_value' => $unit->label,
-                        ])
+                        {{-- LABEL --}}
+                        <x-form.edit.input name="label" id="label" title="نام نمایشی" placeholder="مثال: ق چ"
+                            :required="true" msg="حداکثر 10 کاراکتر" :roles="['max-len' => 10]" :value="$unit->label" />
 
                     </div>
 
                     {{-- SUBMIT --}}
-                    @include('components.form.edit.submit', [
-                        'submit_title' => 'ثبت تغییرات واحد اندازه گیری',
-                    ])
+                    <x-form.edit.submit title="ثبت تغییرات واحد اندازه گیری" />
+
                 </form>
             </div>
 

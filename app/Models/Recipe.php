@@ -48,4 +48,9 @@ class Recipe extends Model
     {
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')->withPivot(['amount']);;
+    }
 }

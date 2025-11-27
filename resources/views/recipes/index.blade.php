@@ -79,6 +79,11 @@
                                 ویرایش
                             </a>
 
+                            <a href="{{ route('recipe.ingredients.index', $recipe->slug) }}"
+                                class="px-4 py-1.5 mr-2 bg-sky-500 text-white rounded-xl shadow hover:bg-sky-600">
+                                مواد اولیه
+                            </a>
+
 
                             {{-- <button onclick="openModal('deleteRecipe-{{ $recipe->id }}')"
                                 class="px-4 py-1.5 cursor-pointer bg-red-500 mr-2 text-white rounded-xl shadow hover:bg-red-600">

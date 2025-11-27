@@ -27,6 +27,10 @@ class StoreRequest extends FormRequest
             'slug'           => ['required', 'string', 'min:2', 'max:55', 'unique:ingredients,slug'],
             'image'          => ['required', 'image', 'mimes:jpg,jpeg,png,webp'],
             'show_in_search' => ['nullable', 'integer'],
+            'calories_per_100g' => ['nullable', 'integer'],
+            'fat_per_100g' => ['nullable', 'integer'],
+            'carbs_per_100g' => ['nullable', 'integer'],
+            'protein_per_100g' => ['nullable', 'integer'],
         ];
     }
 }

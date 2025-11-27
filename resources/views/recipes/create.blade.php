@@ -34,105 +34,56 @@
 
                     <div class="grid grid-cols-1 gap-4">
                         {{-- IMAGE --}}
-                        @include('components.form.create.image', [
-                            'bimage_title' => 'عکس اصلی رسپی',
-                            'bimage_required' => true,
-                            'bimage_accept' => 'image/*',
-                            'bimage_msg' => 'برای نمایش بهتر سایز عکس 1*1 انتخاب کنید',
-                            'bimage_name' => 'image',
-                        ])
+                        <x-form.create.image title="عکس رسپی" name="image" id="image" :required="true"
+                            accept="image/*" msg="برای نمایش بهتر سایز عکس 1*1 انتخاب کنید" />
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         {{-- CATEGORY --}}
-                        @include('components.form.create.select', [
-                            'bselect_title' => 'دسته بندی',
-                            'bselect_required' => true,
-                            'bselect_default_option' => 'یک دسته‌بندی انتخاب کنید...',
-                            'bselect_name' => 'category_id',
-                            'bselect_items' => $categories,
-                            'bselect_items_name' => 'name',
-                        ])
+                        <x-form.create.select title="دسته بندی" name="category_id" id="category_id" :required="true"
+                            default="یک دسته‌بندی انتخاب کنید..." :items="$categories" itemsName="name" />
 
                         {{-- TITLE --}}
-                        @include('components.form.create.input', [
-                            'binput_title' => 'عنوان',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: طرز تهیه پاستا مخصوص',
-                            'binput_msg' => 'حداکثر 55 کاراکتر برای سئو بهتر.',
-                            'binput_name' => 'title',
-                            'binput_role' => ['min-length' => 15, 'max-length' => 55],
-                        ])
+                        <x-form.create.input name="title" id="title" title="عنوان"
+                            placeholder="مثال: طرز تهیه پاستا مخصوص" :required="true" msg="حداکثر 55 کاراکتر برای سئو بهتر"
+                            :roles="['min-len' => 15, 'max-len' => 55]" />
 
                         {{-- SLUG --}}
-                        @include('components.form.create.input', [
-                            'binput_title' => 'اسلاگ',
-                            'bf_is_required' => true,
-                            'binput_place' => 'مثال: pasta-special',
-                            'binput_msg' => 'فقط حروف انگلیسی، عدد و خط تیره مجاز است، فاصله مجاز نیست.',
-                            'binput_name' => 'slug',
-                            'binput_role' => ['slug' => true, 'min-length' => 15, 'max-length' => 55],
-                        ])
+                        <x-form.create.input name="slug" id="slug" title="اسلاگ" placeholder="مثال: olive-oil"
+                            :required="true" msg="فقط حروف انگلیسی، عدد و خط تیره مجاز است، فاصله مجاز نیست."
+                            :roles="['slug' => true, 'min-len' => 15, 'max-len' => 55]" />
 
                         {{-- STATUS --}}
-                        @include('components.form.create.select', [
-                            'bselect_title' => 'وضعیت',
-                            'bselect_name' => 'status',
-                            'bselect_array_items' => ['تایید نشده', 'تایید شده', 'در انتظار بررسی'],
-                        ])
+                        <x-form.create.select title="وضعیت" name="status" id="status" :arrayItems="$status_select_options" />
 
                         {{-- TIME PREPARE --}}
-                        @include('components.form.create.number', [
-                            'bnumber_title' => 'زمان آماده‌سازی',
-                            'bnumber_place' => 'مثال: 20',
-                            'bnumber_msg' => 'چند دقیقه طول میکشه وسایل آماده بشه',
-                            'bnumber_name' => 'time_prepare',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
-                        ])
+                        <x-form.create.number name="time_prepare" id="time_prepare" title="زمان آماده سازی"
+                            placeholder="مثال: 20" msg="چند دقیقه طول میکشه وسایل آماده بشه؟" :roles="['min-number' => 5, 'max-number' => 1000]" />
 
                         {{-- TIME COOK --}}
-                        @include('components.form.create.number', [
-                            'bnumber_title' => 'زمان پخت',
-                            'bnumber_place' => 'مثال: 45',
-                            'bnumber_msg' => 'چند دقیقه طول میکشه که غذا بپزه؟',
-                            'bnumber_name' => 'time_cook',
-                            'bnumber_role' => ['min-number' => 5, 'max-number' => 1000],
-                        ])
+                        <x-form.create.number name="time_cook" id="time_cook" title="زمان پخت" placeholder="مثال: 45"
+                            msg="چند دقیقه طول میکشه که غذا بپزه؟" :roles="['min-number' => 5, 'max-number' => 1000]" />
 
                         {{-- SERVINGS --}}
-                        @include('components.form.create.number', [
-                            'bnumber_title' => 'تعداد سرو',
-                            'bnumber_place' => 'مثال: 4',
-                            'bnumber_msg' => 'این دستور پخت برای چند نفر تهیه شده؟',
-                            'bnumber_name' => 'servings',
-                            'bnumber_role' => ['min-number' => 2, 'max-number' => 500],
-                        ])
+                        <x-form.create.number name="servings" id="servings" title="تعداد سرو" placeholder="مثال: 4"
+                            msg="این دستور پخت برای چند نفر تهیه شده؟" :roles="['min-number' => 2, 'max-number' => 500]" />
 
                     </div>
 
                     {{-- DESCRIPTION --}}
-                    @include('components.form.create.textarea', [
-                        'btextarea_title' => 'توضیحات کوتاه',
-                        'btextarea_required' => true,
-                        'btextarea_place' => 'توضیح کوتاه درباره رسپی ...',
-                        'btextarea_msg' => 'یک توضیح کوتاه جذاب برای ابتدای مقاله بنویس',
-                        'btextarea_name' => 'description',
-                        'btextarea_role' => ['min-length' => 25],
-                    ])
+                    <x-form.create.textarea title="توضیحات کوتاه" name="description" id="description"
+                        placeholder="توضیح کوتاه درباره رسپی ..." msg="یک توضیح کوتاه جذاب برای ابتدای مقاله بنویس"
+                        :required="true" :roles="['min-len' => 25]" />
 
                     {{-- body CKEDITOR --}}
-                    @include('components.form.create.ckeditor', [
-                        'bckeditor_title' => 'طرز پخت',
-                        'bckeditor_required' => true,
-                        'bckeditor_place' => 'در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس',
-                        'bckeditor_name' => 'body',
-                    ])
+                    <x-form.create.ckeditor title="طرز پخت" name="body" id="body"
+                        placeholder="طرز پخت رو کامل‌ و با جزئیات بنویس"
+                        msg="در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس" :required="true" />
 
                     {{-- SUBMIT --}}
-                    @include('components.form.create.submit', [
-                        'submit_title' => 'ثبت رسپی',
-                    ])
+                    <x-form.create.submit title="ثبت رسپی" />
+
                 </form>
             </div>
 

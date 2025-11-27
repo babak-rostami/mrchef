@@ -1,4 +1,4 @@
-import { handleForm, createCkeditors } from '../component/form/create/index';
+import { handleForm, createCkeditors, createImages } from '../component/form/index';
 
 const form_id = 'category-update-form';
 const page = 'category_edit';
@@ -9,6 +9,7 @@ ck_up_url += document.getElementById(form_id).querySelector('input[name="_token"
 const ckeditors = [{ id: 'body', url: ck_up_url }];
 
 createCkeditors(ckeditors);
+createImages(['image']);
 
 handleForm(form_id, ({ is_error }) => {
     if (!is_error) {

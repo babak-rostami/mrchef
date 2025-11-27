@@ -26,7 +26,11 @@ class RecipeController extends Controller
     {
         $this->authorize('create', Recipe::class);
         $categories = Category::all();
-        return view('recipes.create', compact('categories'));
+        $status_select_options = [
+            ['value' => 0, 'label' => 'تایید نشده'],
+            ['value' => 1, 'label' => 'تایید شده']
+        ];
+        return view('recipes.create', compact('categories', 'status_select_options'));
     }
 
     public function store(StoreRequest $request, ImageService $imageService, CkeditorService $editorService)
@@ -54,7 +58,11 @@ class RecipeController extends Controller
         $this->authorize('update', $recipe);
 
         $categories = Category::all();
-        return view('recipes.edit', compact('categories', 'recipe'));
+        $status_select_options = [
+            ['value' => 0, 'label' => 'تایید نشده'],
+            ['value' => 1, 'label' => 'تایید شده']
+        ];
+        return view('recipes.edit', compact('categories', 'recipe', 'status_select_options'));
     }
 
     public function update(UpdateRequest $request, $slug, ImageService $imageService, CkeditorService $editorService)

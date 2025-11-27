@@ -1,10 +1,18 @@
 import { validateForm } from './validation';
-import { initEditor } from '../../ckeditor/index';
-import { isErrorInForm } from '../action';
+import { initEditor } from '../ckeditor/index';
+import { initImage } from './field/image';
+import { isErrorInForm } from './action';
+import '../../utils/button';
 
 export function createCkeditors(ckeditors) {
     ckeditors.forEach(editor => {
         initEditor(editor.id, editor.url);
+    });
+}
+
+export function createImages(images) {
+    images.forEach(image => {
+        initImage(image);
     });
 }
 
@@ -26,8 +34,8 @@ export function handleForm(form_id, onSubmitCallback) {
         const is_error = isErrorInForm(form_id);
 
         if (!is_error) {
-            document.getElementById('bf-submit-btn').disabled = true;
-            document.getElementById('bf-submit-btn').innerText = 'در حال ثبت ...';
+            const submitBtn = form.querySelector('[type="submit"]');
+            submitForm(submitBtn, 'در حال ثبت...')
         }
 
         if (typeof onSubmitCallback === 'function') {

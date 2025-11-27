@@ -26,6 +26,10 @@ class UpdateRequest extends FormRequest
             'name_en'        => ['required', 'string', 'min:1', 'max:55'],
             'image'          => ['image', 'mimes:jpg,jpeg,png,webp'],
             'show_in_search' => ['nullable', 'integer'],
+            'calories_per_100g' => ['nullable', 'integer'],
+            'fat_per_100g' => ['nullable', 'integer'],
+            'carbs_per_100g' => ['nullable', 'integer'],
+            'protein_per_100g' => ['nullable', 'integer'],
         ];
     }
 }

@@ -40,6 +40,11 @@ export default defineConfig({
                 'resources/css/unit/edit.css',
                 'resources/js/unit/edit.js',
 
+                'resources/css/recipe-ingredient/index.css',
+                'resources/js/recipe-ingredient/index.js',
+
+                'resources/css/ingredient-unit/index.css',
+                'resources/js/ingredient-unit/index.js',
             ],
             refresh: true,
         }),

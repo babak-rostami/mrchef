@@ -17,7 +17,6 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', Category::class);
         $categories = Category::all();
         return view('category.index', compact('categories'));
     }
@@ -30,7 +29,6 @@ class CategoryController extends Controller
 
     public function store(StoreRequest $request, ImageService $imageService, CkeditorService $editorService)
     {
-        $this->authorize('create', Category::class);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -49,8 +47,6 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $slug)->first();
 
-        $this->authorize('update', $category);
-
         if (!isset($category)) {
             return redirect()->route('category.index')->with('error', 'دسته بندی وجود ندارد');
         }
@@ -64,7 +60,6 @@ class CategoryController extends Controller
         if (!isset($category)) {
             return redirect()->route('category.index', 'دسته بندی یافت نشد');
         }
-        $this->authorize('update', $category);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -83,7 +78,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $this->authorize('delete', $category);
 
         if (!isset($category)) {
             return back()->with('error', 'دسته بندی وجود ندارد');

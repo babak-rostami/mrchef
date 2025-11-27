@@ -1,3 +1,8 @@
+import { addImageRequire } from "./field/image";
+import { addInputRequire } from "./field/input";
+import { addNumberRequire } from "./field/number";
+import { addSelectRequire } from "./field/select";
+import { addTextareaRequire } from "./field/textarea";
 // feild منظورم input, select, ... اجزای یک فرم هستش
 
 //-----------------------------------------------------------------------------------------------//
@@ -13,7 +18,7 @@ export function removeErrorSectionOn(action) {
     });
 }
 function removeErrorSection(id) {
-    const field_error = document.getElementById(id + '-error');
+    const field_error = document.getElementById(id + '-bf-error');
     if (field_error) {
         field_error.innerText = '';
         field_error.classList.add('hidden');
@@ -37,41 +42,16 @@ export function requireValidation(form_id) {
 //-----------------------------------------------------------------------------------------------//
 function addRequireErrorSection(fields) {
     fields.forEach(field => {
-        const field_id = field.id;
-
-        let type = 'input';
-
         if (field.type == 'file') {
-            type = 'image';
-        }
-
-
-        const field_title_el = document.getElementById(field_id + '-label');
-        const field_error = document.getElementById(field_id + '-error');
-        const field_msg = document.getElementById(field_id + '-msg');
-        const field_title = field_title_el ? field_title_el.innerText : '';
-
-        if (field.value === '') {
-            field_error?.classList.remove('hidden');
-            field_error?.classList.add('block');
-            field_msg?.classList.add('hidden');
-            field.classList.add('border-red-400');
-
-            if (field_error) {
-                if (type === 'input') {
-                    field_error.innerText = `${field_title} را تکمیل کنید`;
-                } else if (type === 'select') {
-                    field_error.innerText = `${field_title} را انتخاب کنید`;
-                } else if (type === 'image') {
-                    field_error.innerText = `${field_title} را انتخاب کنید`;
-                } else if (type === 'number') {
-                    field_error.innerText = `${field_title} را وارد کنید`;
-                }
-                else {
-                    field_error.innerText = `${field_title} را تکمیل کنید`;
-                }
-            }
-
+            addImageRequire(field.id);
+        } else if (field.classList.contains('bf-input-text')) {
+            addInputRequire(field.id);
+        } else if (field.classList.contains('bf-textarea')) {
+            addTextareaRequire(field.id);
+        } else if (field.classList.contains('bf-select')) {
+            addSelectRequire(field.id);
+        } else if (field.classList.contains('bf-number-input')) {
+            addNumberRequire(field.id);
         }
     });
 }
@@ -92,9 +72,9 @@ function addLengthErrorSection(fields) {
     fields.forEach(field => {
         const field_id = field.id;
 
-        const field_title_el = document.getElementById(field_id + '-label');
-        const field_error = document.getElementById(field_id + '-error');
-        const field_msg = document.getElementById(field_id + '-msg');
+        const field_title_el = document.getElementById(field_id + '-bf-label');
+        const field_error = document.getElementById(field_id + '-bf-error');
+        const field_msg = document.getElementById(field_id + '-bf-msg');
         const field_title = field_title_el ? field_title_el.innerText : '';
 
         const input_min_len = Number(field.dataset.minlength);
@@ -126,10 +106,10 @@ export function isErrorInForm(form_id) {
 
     if (firstVisibleError) {
         // گرفتن نام فیلد
-        let fieldName = firstVisibleError.id.replace('-error', '');
+        let fieldName = firstVisibleError.id.replace('-bf-error', '');
 
         // اسکرول به لیبل فیلد
-        document.getElementById(fieldName + "-label").scrollIntoView({
+        document.getElementById(fieldName + "-bf-label").scrollIntoView({
             behavior: "smooth"
         });
         return 1;

@@ -1,20 +1,35 @@
+@props([
+    'name',
+    'id',
+    'title',
+    'placeholder' => '',
+    'msg' => null,
+    'required' => false,
+    'roles' => [],
+    'value' => null,
+])
+
+
 <div>
-    <label class="mb-1 font-semibold" id="{{ $bnumber_name }}-label">{{ $bnumber_title }}
+    <label for="{{ $id }}" id="{{ $id }}-bf-label" class="mb-1 font-semibold">
+        {{ $title }}
+        @if ($required)
+            <span class="text-red-600">*</span>
+        @endif
     </label>
-    @isset($bf_is_required)
-        <span class="text-red-600">*</span>
+
+    <input type="text" id="{{ $id }}" name="{{ $name }}"
+        class="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-primary bf-number-input bf-input
+        {{ $required ? 'bf-is-required' : '' }}"
+        placeholder="{{ $placeholder }}" value="{{ $value }}"
+        @isset($roles['min-number']) data-minnumber="{{ $roles['min-number'] }}" @endisset
+        @isset($roles['max-number']) data-maxnumber="{{ $roles['max-number'] }}" @endisset>
+
+    @isset($msg)
+        <p id="{{ $id }}-bf-msg" class="text-gray-500 text-sm">{{ $msg }}</p>
     @endisset
-    <input type="text" name="{{ $bnumber_name }}"
-        @if (isset($bnumber_role) && isset($bnumber_role['max-number'])) data-maxnumber="{{ $bnumber_role['max-number'] }}" @endif
-        @if (isset($bnumber_role) && isset($bnumber_role['min-number'])) data-minnumber="{{ $bnumber_role['min-number'] }}" @endif
-        class="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-400
-        {{ isset($bf_is_required) ? 'bf-is-required' : '' }} bf-number-input bf-input"
-        id="{{ $bnumber_name }}" placeholder="{{ $bnumber_place }}" value="{{ $bnumber_value ?? null }}">
-    @isset($bnumber_msg)
-        <p id="{{ $bnumber_name }}-msg" class="text-gray-500 text-sm">{{ $bnumber_msg }}</p>
-    @endisset
-    <p id="{{ $bnumber_name }}-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
-    @error('{{ $bnumber_name }}')
+    <p id="{{ $id }}-bf-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
+    @error('{{ $name }}')
         <p class="text-red-600 text-sm">{{ $message }}</p>
     @enderror
 </div>

@@ -1,33 +1,57 @@
+@props([
+    'title',
+    'name',
+    'id',
+    'msg' => null,
+    'items' => null, // if collection
+    'itemsName' => null, // if collection => field name
+    'arrayItems' => null, // if array => simple array
+    'default' => null, // default option text
+    'required' => false,
+    'value' => null,
+])
+
 <div>
-    <label class="mb-1 font-semibold" id="{{ $bselect_name }}-label">{{ $bselect_title }}
+    <label for="{{ $name }}" id="{{ $id }}-bf-label" class="mb-1 font-semibold">
+        {{ $title }}
+        @if ($required)
+            <span class="text-danger">*</span>
+        @endif
     </label>
-    @isset($bselect_required)
-        <span class="text-red-600">*</span>
-    @endisset
-    <select name="{{ $bselect_name }}" id="{{ $bselect_name }}"
-        class="{{ isset($bselect_required) ? 'bf-is-required' : '' }} w-full border rounded-lg bf-input
-        px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-400">
-        @isset($bselect_default_option)
-            <option value="">{{ $bselect_default_option }}</option>
-        @endisset
-        @if (isset($bselect_items))
-            @foreach ($bselect_items as $bselect_item)
-                <option value="{{ $bselect_item->id }}"
-                    {{ isset($bselect_value) && $bselect_value == $bselect_item->id ? 'selected' : '' }}>
-                    {{ $bselect_item->$bselect_items_name }}
+
+    <select name="{{ $name }}" id="{{ $name }}"
+        class="bf-input bf-select w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-primary
+        {{ $required ? 'bf-is-required' : '' }}">
+        {{-- default option --}}
+        @if ($default)
+            <option value="">{{ $default }}</option>
+        @endif
+
+        {{-- اگر کالکشن داده شده باشد --}}
+        @if ($items && $itemsName)
+            @foreach ($items as $item)
+                <option value="{{ $item->id }}" {{ $value == $item->id ? 'selected' : '' }}>
+                    {{ $item->$itemsName }}
                 </option>
             @endforeach
-        @elseif(isset($bselect_array_items))
-            @foreach ($bselect_array_items as $key => $bselect_item)
-                <option value="{{ $key }}"
-                    {{ isset($bselect_value) && $bselect_value == $key ? 'selected' : '' }}>
-                    {{ $bselect_item }}
+        @endif
+
+        {{-- اگر آرایه داده شده باشد --}}
+        @if ($arrayItems)
+            @foreach ($arrayItems as $item)
+                <option value="{{ $item['value'] }}" {{ $value == $item['value'] ? 'selected' : '' }}>
+                    {{ $item['label'] }}
                 </option>
             @endforeach
         @endif
     </select>
-    <p id="{{ $bselect_name }}-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
-    @error("{{ $bselect_name }}")
+
+
+    @isset($msg)
+        <p id="{{ $id }}-bf-msg" class="text-gray-500 text-sm">{{ $msg }}</p>
+    @endisset
+    <p id="{{ $id }}-bf-error" class="text-red-500 text-sm hidden bf-error-msg"></p>
+    @error('{{ $name }}')
         <p class="text-red-600 text-sm">{{ $message }}</p>
     @enderror
 </div>

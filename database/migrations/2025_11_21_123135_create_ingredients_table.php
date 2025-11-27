@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('slug');
             $table->string('image');
             $table->boolean('show_in_search');
+
+            $table->decimal('calories_per_100g', 8, 2)->nullable();
+            $table->decimal('fat_per_100g', 8, 2)->nullable();
+            $table->decimal('carbs_per_100g', 8, 2)->nullable();
+            $table->decimal('protein_per_100g', 8, 2)->nullable();
+
             $table->timestamps();
         });
     }

@@ -15,7 +15,8 @@
 <body>
 
 
-    <div class="max-w-full h-[400px] my-8
+    <div
+        class="max-w-full h-[400px] my-8
     grid grid-cols-1 sm:grid-cols-1
     mx-4
     md:grid-cols-2
@@ -96,7 +97,6 @@
             <span>babak@gmail.com</span>
         </div>
     </div>
-
 
     @vite('resources/js/test.js')
 </body>

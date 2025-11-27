@@ -1,4 +1,4 @@
-import { handleForm } from '../component/form/create/index';
+import { handleForm } from '../component/form/index';
 
 const form_id = 'unit-update-form';
 
