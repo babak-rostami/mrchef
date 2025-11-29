@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\ImageService;
 use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,35 +15,6 @@ class Category extends Model
     const EDITOR_KEY = 'category';
 
     protected $fillable = ['name', 'name_en', 'slug', 'description', 'body', 'image', 'parent_id'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($category) {
-
-            $category->load(['editorImages', 'children']);
-
-            $imageService = resolve(ImageService::class);
-
-            // حذف عکس اصلی
-            if ($category->image) {
-                $imageService->delete($category->image);
-            }
-
-            // حذف تصاویر CKEditor
-            foreach ($category->editorImages as $editorImage) {
-                $imageService->delete($editorImage->image);
-                $editorImage->delete();
-            }
-
-            // حذف زیر مجموعه‌ها و دوباره همین اتفاقا برای اونا هم میفته
-            // foreach ($category->children as $child) {
-            //     $child->delete();
-            // }
-        });
-    }
-
 
     public function children()
     {
