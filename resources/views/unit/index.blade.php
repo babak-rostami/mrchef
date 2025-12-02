@@ -14,7 +14,7 @@
     <div class="flex items-center justify-between mb-6">
         <h3 class="text-xl font-bold">واحد های اندازه گیری</h3>
 
-        <a href="{{ route('unit.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
+        <a href="{{ route('admin.unit.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
             <i class="fa fa-plus ml-1"></i>
             واحد اندازه گیری جدید
         </a>
@@ -30,7 +30,7 @@
                 <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500">هیچ واحد اندازه گیری ای یافت نشد</h5>
 
-                <a href="{{ route('unit.create') }}"
+                <a href="{{ route('admin.unit.create') }}"
                     class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
                     <i class="fa fa-plus ml-1"></i>
                     ایجاد اولین واحد اندازه گیری
@@ -54,7 +54,7 @@
                         <!-- Actions -->
                         <div class="flex justify-center mt-auto pt-3">
 
-                            <a href="{{ route('unit.edit', $unit->id) }}"
+                            <a href="{{ route('admin.unit.edit', $unit->id) }}"
                                 class="px-4 py-1.5 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600">
                                 ویرایش
                             </a>
@@ -67,7 +67,7 @@
                             <x-modal id="deleteUnit-{{ $unit->id }}">
                                 <h2 class="text-xl font-bold mb-3">حذف واحد اندازه گیری</h2>
 
-                                <form action="{{ route('unit.destroy', $unit->id) }}" method="POST">
+                                <form action="{{ route('admin.unit.destroy', $unit->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 

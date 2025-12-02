@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         unitSelect.innerHTML = '<option value="">در حال بارگذاری...</option>';
         unitSelect.disabled = true;
 
-        fetch(`/select/ingredient/${ingredientId}/units`)
+        fetch(`/admin/select/ingredient/${ingredientId}/units`)
             .then(response => response.json())
             .then(data => {
                 unitSelect.innerHTML = '<option value="">یک واحد اندازه گیری انتخاب کنید...</option>';

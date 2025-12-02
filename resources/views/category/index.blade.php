@@ -15,7 +15,7 @@
         <h3 class="text-xl font-bold">مدیریت دسته‌بندی‌ها</h3>
 
         <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600"
-            href="{{ route('category.create') }}">دسته بندی جدید</a>
+            href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
     </div>
 
     <!-- Categories List -->
@@ -28,7 +28,7 @@
                 <h5 class="text-gray-500">هیچ دسته‌بندی‌ای یافت نشد</h5>
 
                 <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600"
-                    href="{{ route('category.create') }}">دسته بندی جدید</a>
+                    href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -51,7 +51,7 @@
                         <!-- Actions -->
                         <div class="flex justify-center mt-auto pt-3">
 
-                            <a href="{{ route('category.edit', $category->slug) }}"
+                            <a href="{{ route('admin.category.edit', $category->slug) }}"
                                 class="px-4 py-1.5 bg-yellow-500 text-white text-sm rounded-xl shadow hover:bg-yellow-600 transition">
                                 ویرایش
                             </a>
@@ -64,7 +64,7 @@
                             <x-modal id="deleteCategory-{{ $category->id }}">
                                 <h2 class="text-xl font-bold mb-3">حذف دسته بندی</h2>
 
-                                <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 

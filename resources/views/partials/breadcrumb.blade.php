@@ -2,7 +2,7 @@
     <ol class="flex items-center gap-2 text-sm text-gray-600">
 
         <li>
-            <a href="{{ route('dashboard') }}" class="flex items-center text-indigo-600 hover:text-indigo-800">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center text-indigo-600 hover:text-indigo-800">
                 <i class="fa-solid fa-home ml-1"></i>
                 داشبورد
             </a>

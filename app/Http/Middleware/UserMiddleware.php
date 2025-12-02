@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserMiddleware
@@ -15,9 +16,11 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth('user')->check()) {
-            return redirect()->route('home')->with('error', 'وارد حساب کاربری خود شوید');
+        $user = Auth::user();
+        if ($user) {
+            return $next($request);
         }
-        return $next($request);
+
+        return redirect()->route('home')->with('error', 'وارد حساب کاربری خود شوید');
     }
 }

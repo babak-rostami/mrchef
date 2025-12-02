@@ -4,3 +4,5 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 
 @import "./partials/breadcrumb.css";
+
+@import "./utils/font/font.css";

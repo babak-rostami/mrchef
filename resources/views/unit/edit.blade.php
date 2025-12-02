@@ -13,7 +13,7 @@
             'breadcrumb_title' => 'واحد اندازه گیری جدید',
             'breadcrumb_parents' => [
                 [
-                    'url' => route('unit.index'),
+                    'url' => route('admin.unit.index'),
                     'title' => 'مدیریت مواد اولیه',
                 ],
             ],
@@ -27,7 +27,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="unit-update-form" action="{{ route('unit.update', $unit->id) }}" method="POST"
+                <form id="unit-update-form" action="{{ route('admin.unit.update', $unit->id) }}" method="POST"
                     enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 

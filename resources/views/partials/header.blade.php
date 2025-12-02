@@ -26,7 +26,7 @@
 
             @auth('user')
                 <li>
-                    <a href="{{ route('dashboard') }}" class="hover:text-indigo-400">داشبورد</a>
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-indigo-400">داشبورد</a>
                 </li>
 
                 <li>

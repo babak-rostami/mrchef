@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class GuestMiddleware
@@ -15,9 +16,13 @@ class GuestMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth('user')->check()) {
-            return redirect()->route('dashboard');
+        $user = Auth::user();
+        if (!$user) {
+            return $next($request);
         }
-        return $next($request);
+
+        return $user->role === 'admin'
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('home');
     }
 }

@@ -20,7 +20,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="category-update-form" action="{{ route('category.update', $category->slug) }}" method="POST"
+                <form id="category-update-form" action="{{ route('admin.category.update', $category->slug) }}" method="POST"
                     enctype="multipart/form-data" class="w-full md:w-3/4">
                     @csrf
 
@@ -47,7 +47,7 @@
 
                         {{-- PARENT CATEGORY --}}
                         <x-form.edit.select title="دسته بندی پدر" name="parent_id" id="parent_id" :items="$categories"
-                            itemsName="name" :value="$category->parent_id" />
+                            itemsName="name" :value="$category->parent_id" default="دسته بندی پدر ندارد" />
 
                         <div class="md:col-span-2 gap-4 mt-2">
                             {{-- DESCRIPTION --}}

@@ -13,7 +13,7 @@
             'breadcrumb_title' => 'ماده اولیه جدید',
             'breadcrumb_parents' => [
                 [
-                    'url' => route('ingredient.index'),
+                    'url' => route('admin.ingredient.index'),
                     'title' => 'مدیریت مواد اولیه',
                 ],
             ],
@@ -28,7 +28,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="ingredient-update-form" action="{{ route('ingredient.update', $ingredient->slug) }}" method="POST"
+                <form id="ingredient-update-form" action="{{ route('admin.ingredient.update', $ingredient->slug) }}" method="POST"
                     enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 

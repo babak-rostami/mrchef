@@ -22,14 +22,24 @@ describe('access tests', function () {
 
     test('authenticated user cannot access login page', function () {
         $user = User::factory()->create();
-        actingAs($user)->get(route('login'))->assertRedirect(route('dashboard'));
+        actingAs($user);
+        if ($user->role == 'admin') {
+            get(route('login'))->assertRedirect(route('admin.dashboard'));
+        } else {
+            get(route('login'))->assertRedirect(route('home'));
+        }
     });
 
-    test('authenticated user can see dashboard', function () {
-        $user = User::factory()->create();
-        actingAs($user)
-            ->get(route('dashboard'))
-            ->assertStatus(200);
+    test('authenticated admin can see admin dashboard', function () {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $user = User::factory()->create(['role' => 'user']);
+        actingAs($admin)->get(route('admin.dashboard'))->assertStatus(200);
+
+    });
+
+    test('authenticated user cant see admin dashboard', function () {
+        $user = User::factory()->create(['role' => 'user']);
+        actingAs($user)->get(route('admin.dashboard'))->assertStatus(status: 302);
     });
 });
 

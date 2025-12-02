@@ -13,7 +13,7 @@
             'breadcrumb_title' => 'ویرایش رسپی',
             'breadcrumb_parents' => [
                 [
-                    'url' => route('recipes.index'),
+                    'url' => route('admin.recipes.index'),
                     'title' => 'مدیریت رسپی ها',
                 ],
             ],
@@ -28,7 +28,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="recipes-update-form" action="{{ route('recipes.update', $recipe->slug) }}" method="POST"
+                <form id="recipes-update-form" action="{{ route('admin.recipes.update', $recipe->slug) }}" method="POST"
                     enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 

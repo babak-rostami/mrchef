@@ -63,8 +63,11 @@ class ImageService
         return $slug ?: 'image';
     }
 
-    public function delete(string $imagePath)
+    public function delete($imagePath)
     {
+        if (!$imagePath) {
+            return;
+        }
         $info = pathinfo($imagePath);
 
         $path = $info['dirname'];

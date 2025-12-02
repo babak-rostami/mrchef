@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             IngredientUnitSeeder::class,
             RecipeIngredientSeeder::class,
-            CkeditorImageSeeder::class
+            CkeditorImageSeeder::class,
+            RolePermissionSeeder::class
         ]);
     }
 }

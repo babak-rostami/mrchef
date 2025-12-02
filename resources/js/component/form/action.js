@@ -80,7 +80,7 @@ function addLengthErrorSection(fields) {
         const input_min_len = Number(field.dataset.minlength);
         const input_length = field.value.length;
 
-        if (input_length < input_min_len) {
+        if (field.value != '' && input_length < input_min_len) {
             field_error?.classList.remove('hidden');
             field_error?.classList.add('block');
             field_msg?.classList.add('hidden');

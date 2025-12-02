@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique()->index();
             $table->text('description');
             $table->text('body');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('views')->nullable();
             $table->unsignedSmallInteger('time_prepare')->nullable();

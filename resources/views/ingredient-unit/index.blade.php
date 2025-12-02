@@ -12,7 +12,7 @@
         'breadcrumb_title' => 'واحد های اندازه گیری',
         'breadcrumb_parents' => [
             [
-                'url' => route('ingredient.index'),
+                'url' => route('admin.ingredient.index'),
                 'title' => 'مواد اولیه',
             ],
         ],
@@ -34,7 +34,7 @@
             <span class="text-blue-400">مثلا 1 لیوان برنج = 150 گرم</span>
 
             <div class="flex justify-center mt-4">
-                <form id="ingredient-unit-store-form" action="{{ route('ingredient.units.store', $ingredient->slug) }}"
+                <form id="ingredient-unit-store-form" action="{{ route('admin.ingredient.units.store', $ingredient->slug) }}"
                     method="POST" enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
                     {{-- SELECT UNIT --}}
@@ -90,7 +90,7 @@
                                 <h2 class="text-xl font-bold mb-3">ویرایش</h2>
 
                                 <form id="ingredient-unit-update-form-{{ $i_unit->id }}"
-                                    action="{{ route('ingredient.units.update', ['ingredient' => $ingredient->id, 'unit' => $i_unit->id]) }}"
+                                    action="{{ route('admin.ingredient.units.update', ['ingredient' => $ingredient->id, 'unit' => $i_unit->id]) }}"
                                     method="POST" enctype="multipart/form-data"
                                     class="w-full space-y-6 ingredient-unit-update-form">
                                     @csrf
@@ -117,7 +117,7 @@
                                 <h2 class="text-xl font-bold mb-3">حذف وزن واحد</h2>
 
                                 <form
-                                    action="{{ route('ingredient.units.destroy', ['ingredient' => $ingredient->id, 'unit' => $i_unit->id]) }}"
+                                    action="{{ route('admin.ingredient.units.destroy', ['ingredient' => $ingredient->id, 'unit' => $i_unit->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')

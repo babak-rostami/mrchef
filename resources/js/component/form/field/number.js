@@ -61,7 +61,7 @@ function checkMinNumberError(fields) {
         }
         const field_value = Number(field.value);
 
-        if (field_value < input_min_len) {
+        if (field.value != '' && field_value < input_min_len) {
             field_error?.classList.remove('hidden');
             field_error?.classList.add('block');
             field_msg?.classList.add('hidden');

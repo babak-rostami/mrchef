@@ -27,7 +27,7 @@ test('register a new user and redirect to dashboard', function () {
     ]);
 
     assertAuthenticated();
-    $response->assertRedirect('/dashboard');
+    $response->assertRedirect(route('admin.dashboard'));
 });
 
 test('authenticated user cannot access register page', function () {
@@ -35,7 +35,12 @@ test('authenticated user cannot access register page', function () {
     actingAs($user);
 
     $response = get(route('register.show'));
-    $response->assertRedirect(route('dashboard'));
+
+    if ($user->role == 'admin') {
+        $response->assertRedirect(route('admin.dashboard'));
+    } else {
+        $response->assertRedirect(route('home'));
+    }
 });
 
 // ----------------------------------------------------------

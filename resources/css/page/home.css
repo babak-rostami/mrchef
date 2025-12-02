@@ -1,1 +1,41 @@
 @import "../app.css";
+@import "../bslider/index.css";
+
+/* انیمیشن متن */
+@keyframes textBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* انیمیشن آیکون */
+@keyframes iconShake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-6px);
+    }
+}
+
+/* کلاس‌های سفارشی */
+.animate-textBounce {
+    animation: textBounce 0.4s ease-in-out;
+}
+
+.animate-iconShake {
+    animation: iconShake 0.4s ease-in-out;
+}
+
+.group:hover span {
+    animation: textBounce 0.4s ease-in-out;
+}
+
+.group:hover img {
+    animation: iconShake 0.4s ease-in-out;
+}

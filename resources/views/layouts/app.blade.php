@@ -11,14 +11,14 @@
     @stack('styles')
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="text-gray-800">
 
     @include('partials.header')
 
-    <main class="mx-auto px-4 my-6">
+    <div class="px-4 mt-4">
         @include('partials.alerts')
         @yield('content')
-    </main>
+    </div>
 
     @include('partials.footer')
 

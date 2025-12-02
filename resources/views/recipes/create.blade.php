@@ -13,7 +13,7 @@
             'breadcrumb_title' => 'رسپی جدید',
             'breadcrumb_parents' => [
                 [
-                    'url' => route('recipes.index'),
+                    'url' => route('admin.recipes.index'),
                     'title' => 'مدیریت رسپی ها',
                 ],
             ],
@@ -28,7 +28,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="recipes-store-form" action="{{ route('recipes.store') }}" method="POST" enctype="multipart/form-data"
+                <form id="recipes-store-form" action="{{ route('admin.recipes.store') }}" method="POST" enctype="multipart/form-data"
                     class="w-full space-y-6">
                     @csrf
 

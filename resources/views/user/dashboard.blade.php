@@ -14,7 +14,7 @@
         <div class="grid grid-cols-2 gap-6 justify-center">
 
             <!-- دسته بندی‌ها -->
-            <a href="{{ route('category.index') }}" class="block">
+            <a href="{{ route('admin.category.index') }}" class="block">
                 <div class="bg-white shadow p-5 rounded-2xl hover:shadow-lg cursor-pointer flex flex-col items-center gap-2">
                     <img src="{{ asset('files/icon/category-48.png') }}" alt="">
                     <h5 class="font-bold">دسته بندی</h5>
@@ -23,7 +23,7 @@
             </a>
 
             <!-- رسپی ها -->
-            <a href="{{ route('recipes.index') }}" class="block">
+            <a href="{{ route('admin.recipes.index') }}" class="block">
                 <div
                     class="bg-white shadow p-5 rounded-2xl hover:shadow-lg cursor-pointer flex flex-col items-center gap-2">
                     <img src="{{ asset('files/icon/recipe-48.png') }}" alt="">
@@ -33,7 +33,7 @@
             </a>
 
             <!-- مواد اولیه -->
-            <a href="{{ route('ingredient.index') }}" class="block">
+            <a href="{{ route('admin.ingredient.index') }}" class="block">
                 <div
                     class="bg-white shadow p-5 rounded-2xl hover:shadow-lg cursor-pointer flex flex-col items-center gap-2">
                     <img src="{{ asset('files/icon/ingredient-48.png') }}" alt="">
@@ -43,7 +43,7 @@
             </a>
 
             <!-- واحد ها -->
-            <a href="{{ route('unit.index') }}" class="block">
+            <a href="{{ route('admin.unit.index') }}" class="block">
                 <div
                     class="bg-white shadow p-5 rounded-2xl hover:shadow-lg cursor-pointer flex flex-col items-center gap-2">
                     <img src="{{ asset('files/icon/units-48.png') }}" alt="">

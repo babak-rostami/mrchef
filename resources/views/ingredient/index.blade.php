@@ -14,7 +14,7 @@
     <div class="flex items-center justify-between mb-6">
         <h3 class="text-xl font-bold">مدیریت مواد اولیه</h3>
 
-        <a href="{{ route('ingredient.create') }}"
+        <a href="{{ route('admin.ingredient.create') }}"
             class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
             <i class="fa fa-plus ml-1"></i>
             ماده اولیه جدید
@@ -31,7 +31,7 @@
                 <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500">هیچ ماده اولیه ای یافت نشد</h5>
 
-                <a href="{{ route('ingredient.create') }}"
+                <a href="{{ route('admin.ingredient.create') }}"
                     class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
                     <i class="fa fa-plus ml-1"></i>
                     ایجاد اولین ماده اولیه
@@ -63,12 +63,12 @@
                         <!-- Actions -->
                         <div class="flex justify-center mt-auto pt-3">
 
-                            <a href="{{ route('ingredient.edit', $ingredient->slug) }}"
+                            <a href="{{ route('admin.ingredient.edit', $ingredient->slug) }}"
                                 class="px-4 py-1.5 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600">
                                 ویرایش
                             </a>
 
-                            <a href="{{ route('ingredient.units.index', $ingredient->slug) }}"
+                            <a href="{{ route('admin.ingredient.units.index', $ingredient->slug) }}"
                                 class="px-4 py-1.5 mx-2 bg-blue-500 text-white rounded-xl shadow hover:bg-blue-600">
                                 واحد های اندازه گیری
                             </a>
@@ -81,7 +81,7 @@
                             <x-modal id="deleteIngredient-{{ $ingredient->id }}">
                                 <h2 class="text-xl font-bold mb-3">حذف ماده اولیه</h2>
 
-                                <form action="{{ route('ingredient.destroy', $ingredient->id) }}" method="POST">
+                                <form action="{{ route('admin.ingredient.destroy', $ingredient->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 

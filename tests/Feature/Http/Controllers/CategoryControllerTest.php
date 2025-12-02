@@ -27,9 +27,9 @@ it('delete main image and editor images after delete category', function () {
         'editorable_type' => Category::class,
     ]);
 
-    $response = actingAs($user)->delete(route('category.destroy', $category->id));
+    $response = actingAs($user)->delete(route('admin.category.destroy', $category->id));
 
-    $response->assertRedirect(route('category.index'));
+    $response->assertRedirect(route('admin.category.index'));
 
     // editor images should be deleted from DB
     foreach ($editorImages as $image) {

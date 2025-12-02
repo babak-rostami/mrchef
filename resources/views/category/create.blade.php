@@ -13,7 +13,7 @@
             'breadcrumb_title' => 'دسته بندی جدید',
             'breadcrumb_parents' => [
                 [
-                    'url' => route('category.index'),
+                    'url' => route('admin.category.index'),
                     'title' => 'مدیریت دسته بندی ها',
                 ],
             ],
@@ -28,7 +28,7 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="category-store-form" action="{{ route('category.store') }}" method="POST"
+                <form id="category-store-form" action="{{ route('admin.category.store') }}" method="POST"
                     enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 

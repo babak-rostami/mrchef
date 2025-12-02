@@ -12,7 +12,7 @@
         'breadcrumb_title' => 'مواد اولیه',
         'breadcrumb_parents' => [
             [
-                'url' => route('recipes.index'),
+                'url' => route('admin.recipes.index'),
                 'title' => 'طرز پخت',
             ],
         ],
@@ -20,7 +20,7 @@
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold">مواد اولیه {{ $recipe->name }}</h3>
+        <h3 class="text-xl font-bold">مواد اولیه {{ $recipe->title }}</h3>
 
         <button onclick="openModal('createRecipeIngredient')"
             class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600">
@@ -34,7 +34,7 @@
             <span class="text-blue-400">مثلا تخم مرغ 2 عدد</span>
 
             <div class="flex justify-center mt-4">
-                <form id="recipe-ingredient-store-form" action="{{ route('recipe.ingredients.store', $recipe->id) }}"
+                <form id="recipe-ingredient-store-form" action="{{ route('admin.recipe.ingredients.store', $recipe->id) }}"
                     method="POST" enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
                     {{-- SELECT ingredient --}}
@@ -95,7 +95,7 @@
                                 <h2 class="text-xl font-bold mb-3">ویرایش</h2>
 
                                 <form id="recipe-ingredient-update-form-{{ $ri->id }}"
-                                    action="{{ route('recipe.ingredients.update', ['recipe' => $recipe->id, 'ingredient' => $ri->id]) }}"
+                                    action="{{ route('admin.recipe.ingredients.update', ['recipe' => $recipe->id, 'ingredient' => $ri->id]) }}"
                                     method="POST" enctype="multipart/form-data"
                                     class="w-full space-y-6 recipe-ingredient-update-form">
                                     @csrf
@@ -125,7 +125,7 @@
                                 <h2 class="text-xl font-bold mb-3">حذف مقدار لازم</h2>
 
                                 <form
-                                    action="{{ route('recipe.ingredients.destroy', ['recipe' => $recipe->id, 'ingredient' => $ri->id]) }}"
+                                    action="{{ route('admin.recipe.ingredients.destroy', ['recipe' => $recipe->id, 'ingredient' => $ri->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
