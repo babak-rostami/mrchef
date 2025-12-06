@@ -1,12 +1,16 @@
 @import "../../app.css";
 
-#recipe-body img{
-    max-height: 360px;
+#recipe-body img {
+    max-height: 420px;
     border-radius: 12px;
-    margin: 12px 0;
+    margin: 16px 0;
+    transition: scale 300ms;
+}
+#recipe-body img:hover {
+    scale: calc(105%);
 }
 
-#recipe-body h2{
+#recipe-body h2 {
     font-size: 28px;
     padding-bottom: 4px;
     margin: 8px 0;
@@ -14,7 +18,7 @@
     border-bottom: 1px solid #f1f1f1;
 }
 
-#recipe-body p{
+#recipe-body p {
     font-size: 18px;
 }
 

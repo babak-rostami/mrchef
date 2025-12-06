@@ -51,22 +51,20 @@ php artisan db:seed
 
 ## 👨‍🍳 Create Admin User
 
-You can create an admin user using Tinker:
+To create an admin account for accessing the admin dashboard, run:
 
 ```bash
-php artisan tinker
+php artisan make:admin
 ```
 
-Inside Tinker, create an admin:
+You'll be asked to enter:
 
-```php
-User::factory()->admin()->create([
-    'email' => 'enter-admin-email',
-    'password' => 'enter-admin-pass',
-]);
-```
+Enter admin email:
+Enter admin password:
 
-> **Note:** Replace `enter-admin-email` and `enter-admin-pass` with your desired credentials.
+Admin user created
+
+> **Note:** This command is useful after cloning the project or during initial setup.
 
 ---
 

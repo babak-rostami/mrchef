@@ -44,7 +44,7 @@
                 <div
                     class="bslider-item recipe-slider-item cursor-pointer ml-8 bg-white p-3
             hover:-translate-y-4 transition-all duration-300 ease-out">
-                    <a href="/">
+                    <a href="{{ route('recipes.show',$recipe->slug) }}">
                         <div class="flex flex-col items-start">
                             <img class="w-48 h-48 object-contain rounded-2xl" src="{{ $recipe->image_url }}"
                                 alt="{{ $recipe->title }}">
@@ -58,10 +58,13 @@
         {{-- رسپی پیشنهادی --}}
         <x-recipes.single-recipe-horizontal :recipe="$sigleRecipe" />
 
+
+        {{-- about site mrchef --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-            <img src="{{ asset('files/images/behnam.jpg') }}" alt="mrchef" class="w-full object-contain rounded-2xl">
+            <img src="{{ asset('files/images/behnam.jpg') }}" alt="mrchef" class="w-full object-contain rounded-2xl
+            hover:scale-95 duration-300">
             <div class="flex flex-col justify-center bg-gray-100 rounded-2xl
-            p-8">
+            p-8 hover:scale-95 duration-300">
                 <span class="font-extrabold text-gray-600 text-center
                 text-4xl">آشپزخونه بهنام</span>
                 <p class="text-gray-700 leading-relaxed whitespace-pre-line

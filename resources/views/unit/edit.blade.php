@@ -8,46 +8,42 @@
 
 @section('content')
 
-    <div class="mx-auto px-4">
+    <x-partials.breadcrumb panel="admin" page="ویرایش واحد اندازه گیری" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
 
-        <x-partials.breadcrumb panel="admin" page="ویرایش واحد اندازه گیری" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
+    <div class="md:mx-8 lg:mx-44">
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-xl font-bold">ویرایش واحد اندازه گیری</h3>
         </div>
 
-        <div class="bg-white rounded-2xl shadow p-6 mt-4">
+        <div class="flex justify-center">
+            <form id="unit-update-form" action="{{ route('admin.unit.update', $unit->id) }}" method="POST"
+                enctype="multipart/form-data" class="w-full space-y-6">
+                @csrf
 
-            <div class="flex justify-center">
-                <form id="unit-update-form" action="{{ route('admin.unit.update', $unit->id) }}" method="POST"
-                    enctype="multipart/form-data" class="w-full space-y-6">
-                    @csrf
+                @method('PUT')
 
-                    @method('PUT')
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {{-- NAME --}}
+                    <x-form.edit.input name="name" id="name" title="نام" placeholder="مثال: گرم"
+                        :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name" />
 
-                        {{-- NAME --}}
-                        <x-form.edit.input name="name" id="name" title="نام" placeholder="مثال: گرم"
-                            :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name" />
+                    {{-- NAME EN --}}
+                    <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: gram"
+                        :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name_en" />
 
-                        {{-- NAME EN --}}
-                        <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: gram"
-                            :required="true" msg="حداکثر 20 کاراکتر" :roles="['max-len' => 20]" :value="$unit->name_en" />
+                    {{-- LABEL --}}
+                    <x-form.edit.input name="label" id="label" title="نام نمایشی" placeholder="مثال: ق چ"
+                        :required="true" msg="حداکثر 10 کاراکتر" :roles="['max-len' => 10]" :value="$unit->label" />
 
-                        {{-- LABEL --}}
-                        <x-form.edit.input name="label" id="label" title="نام نمایشی" placeholder="مثال: ق چ"
-                            :required="true" msg="حداکثر 10 کاراکتر" :roles="['max-len' => 10]" :value="$unit->label" />
+                </div>
 
-                    </div>
+                {{-- SUBMIT --}}
+                <x-form.edit.submit title="ثبت تغییرات واحد اندازه گیری" />
 
-                    {{-- SUBMIT --}}
-                    <x-form.edit.submit title="ثبت تغییرات واحد اندازه گیری" />
-
-                </form>
-            </div>
-
+            </form>
         </div>
 
     </div>

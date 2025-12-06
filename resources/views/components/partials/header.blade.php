@@ -1,11 +1,12 @@
-<header class="bg-gray-900 text-white">
+<header class="bg-gray-50 md:mx-8 lg:mx-44 rounded-2xl mt-2">
     <nav class="container mx-auto flex items-center justify-between py-4 px-4">
 
         <!-- Logo -->
-        <a href="{{ url('/') }}" class="text-xl font-semibold flex items-center gap-2">
-            <i class="fa-solid fa-code"></i>
-            book
+        <a href="{{ url('/') }}" class="text-xl font-semibold flex items-center gap-2 duration-200 hover:scale-105">
+            <img src="{{ asset('files/icon/chef-icon-36.png') }}" alt="mr chef">
+            Mrchef
         </a>
+
 
         <!-- Mobile Button -->
         <button class="md:hidden text-2xl" onclick="document.getElementById('mainNav').classList.toggle('hidden')">
@@ -29,7 +30,7 @@
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button type="submit" class="hover:text-red-400">خروج از حساب</button>
+                        <button type="submit" class="hover:text-red-400 cursor-pointer">خروج از حساب</button>
                     </form>
                 </li>
             @else

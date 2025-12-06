@@ -9,55 +9,56 @@
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="مدیریت دسته بندی ها" />
+    <div class="md:mx-8 lg:mx-44">
 
+        <!-- Title + Create Button -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">مدیریت دسته‌بندی‌ها</h3>
 
-    <!-- Title + Create Button -->
-    <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold">مدیریت دسته‌بندی‌ها</h3>
+            <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600"
+                href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
+        </div>
 
-        <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600"
-            href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
-    </div>
+        <!-- Categories List -->
+        <div class="mt-6">
 
-    <!-- Categories List -->
-    <div class="bg-white rounded-2xl shadow p-6 mt-6">
+            @if ($categories->count() == 0)
 
-        @if ($categories->count() == 0)
+                <div class="flex flex-col items-center py-10 mb-32">
+                    <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                    <h5 class="text-gray-500">هنوز دسته بندی ایجاد نکردی</h5>
 
-            <div class="flex flex-col items-center py-10">
-                <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
-                <h5 class="text-gray-500">هیچ دسته‌بندی‌ای یافت نشد</h5>
+                    <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 mt-4 text-white rounded-xl shadow hover:bg-blue-600"
+                        href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
+                </div>
+            @else
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-32">
 
-                <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600"
-                    href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
-            </div>
-        @else
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    @foreach ($categories as $category)
+                        <div
+                            class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
-                @foreach ($categories as $category)
-                    <div class="p-4 bg-white border rounded-2xl shadow-sm hover:shadow transition flex flex-col">
-
-                        <!-- Image + Title -->
-                        <div class="flex items-center mb-3">
-                            <img src="{{ $category->thumb_url }}" class="w-14 h-14 rounded-lg object-cover">
-                            <div class="mr-3 flex flex-col">
-                                <h6 class="font-bold">{{ $category->name }}</h6>
-                                <span class="text-gray-500 text-sm">{{ $category->name_en }}</span>
-                                @isset($category->parent)
-                                    <span class="text-gray-500 text-sm">پدر: {{ $category->parent->name }}</span>
-                                @endisset
+                            <!-- Image + Title -->
+                            <div class="flex items-center mb-3">
+                                <img src="{{ $category->thumb_url }}" class="w-14 h-14 rounded-lg object-cover">
+                                <div class="mr-3 flex flex-col">
+                                    <h6 class="font-bold">{{ $category->name }}</h6>
+                                    <span class="text-gray-500 text-sm">{{ $category->name_en }}</span>
+                                    @isset($category->parent)
+                                        <span class="text-gray-500 text-sm">پدر: {{ $category->parent->name }}</span>
+                                    @endisset
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Actions -->
-                        <div class="flex justify-center mt-auto pt-3">
+                            <!-- Actions -->
+                            <div class="flex justify-center mt-auto pt-3">
 
-                            <a href="{{ route('admin.category.edit', $category->slug) }}"
-                                class="px-4 py-1.5 bg-yellow-500 text-white text-sm rounded-xl shadow hover:bg-yellow-600 transition">
-                                ویرایش
-                            </a>
+                                <a href="{{ route('admin.category.edit', $category->slug) }}"
+                                    class="px-4 py-1.5 bg-yellow-500 text-white text-sm rounded-xl shadow hover:bg-yellow-600 transition">
+                                    ویرایش
+                                </a>
 
-                            {{-- <button onclick="openModal('deleteCategory-{{ $category->id }}')"
+                                {{-- <button onclick="openModal('deleteCategory-{{ $category->id }}')"
                                 class="px-4 py-1.5 cursor-pointer bg-red-500 mr-2 text-white rounded-xl shadow hover:bg-red-600">
                                 حذف دسته بندی
                             </button>
@@ -89,15 +90,16 @@
                                 </form>
                             </x-modal> --}}
 
+                            </div>
+
                         </div>
+                    @endforeach
 
-                    </div>
-                @endforeach
+                </div>
 
-            </div>
+            @endif
 
-        @endif
-
+        </div>
     </div>
 
 @endsection

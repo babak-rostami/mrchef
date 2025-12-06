@@ -10,53 +10,52 @@
 
     <x-partials.breadcrumb panel="admin" page="مواد اولیه" :parents="[['url' => route('admin.recipes.index'), 'title' => 'طرز پخت']]" />
 
+    <div class="md:mx-8 lg:mx-44 mb-48">
+        <!-- Title + Create Button -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">مواد اولیه {{ $recipe->title }}</h3>
 
-    <!-- Title + Create Button -->
-    <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold">مواد اولیه {{ $recipe->title }}</h3>
+            <button onclick="openModal('createRecipeIngredient')"
+                class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600">
+                اضافه کردن
+            </button>
 
-        <button onclick="openModal('createRecipeIngredient')"
-            class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600">
-            اضافه کردن
-        </button>
+            <x-modal id="createRecipeIngredient">
+                <h2 class="text-xl font-bold mb-3">اضافه کردن ماده اولیه</h2>
+                <span class="text-blue-400">مثلا شیر 4 پیمانه</span>
+                <br>
+                <span class="text-blue-400">مثلا تخم مرغ 2 عدد</span>
 
-        <x-modal id="createRecipeIngredient">
-            <h2 class="text-xl font-bold mb-3">اضافه کردن ماده اولیه</h2>
-            <span class="text-blue-400">مثلا شیر 4 پیمانه</span>
-            <br>
-            <span class="text-blue-400">مثلا تخم مرغ 2 عدد</span>
+                <div class="flex justify-center mt-4">
+                    <form id="recipe-ingredient-store-form"
+                        action="{{ route('admin.recipe.ingredients.store', $recipe->id) }}" method="POST"
+                        enctype="multipart/form-data" class="w-full space-y-6">
+                        @csrf
+                        {{-- SELECT ingredient --}}
+                        <x-form.create.select title="ماده اولیه" name="ingredient_id" id="ingredient_id" :required="true"
+                            default="یک ماده اولیه انتخاب کنید..." :items="$ingredients" itemsName="name" />
 
-            <div class="flex justify-center mt-4">
-                <form id="recipe-ingredient-store-form" action="{{ route('admin.recipe.ingredients.store', $recipe->id) }}"
-                    method="POST" enctype="multipart/form-data" class="w-full space-y-6">
-                    @csrf
-                    {{-- SELECT ingredient --}}
-                    <x-form.create.select title="ماده اولیه" name="ingredient_id" id="ingredient_id" :required="true"
-                        default="یک ماده اولیه انتخاب کنید..." :items="$ingredients" itemsName="name" />
+                        {{-- SELECT unit --}}
+                        <x-form.create.select title="واحد اندازه گیری" name="unit_id" id="unit_id" :required="true"
+                            default="یک واحد اندازه گیری انتخاب کنید..." :items="[]" itemsName="name" />
 
-                    {{-- SELECT unit --}}
-                    <x-form.create.select title="واحد اندازه گیری" name="unit_id" id="unit_id" :required="true"
-                        default="یک واحد اندازه گیری انتخاب کنید..." :items="[]" itemsName="name" />
+                        {{-- amount --}}
+                        <x-form.create.number name="amount" id="amount" title="مقدار لازم" :required="true"
+                            placeholder="مثال: 16" msg="مقدار لازم را وارد کنید" :roles="['min-number' => 1, 'max-number' => 500000]" />
 
-                    {{-- amount --}}
-                    <x-form.create.number name="amount" id="amount" title="مقدار لازم" :required="true"
-                        placeholder="مثال: 16" msg="مقدار لازم را وارد کنید" :roles="['min-number' => 1, 'max-number' => 500000]" />
+                        {{-- SUBMIT --}}
+                        <x-form.create.submit title="ثبت وزن واحد اندازه گیری" />
+                    </form>
+                </div>
+            </x-modal>
 
-                    {{-- SUBMIT --}}
-                    <x-form.create.submit title="ثبت وزن واحد اندازه گیری" />
-                </form>
-            </div>
-        </x-modal>
+        </div>
 
-    </div>
-
-    <!-- ingredient List -->
-    <div class="bg-white rounded-2xl shadow p-6 mt-6">
-
+        <!-- ingredient List -->
         @if ($r_ingredients->count() == 0)
             <div class="flex flex-col items-center py-10">
                 <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
-                <h5 class="text-gray-500">مواد اولیه ثبت نشده</h5>
+                <h5 class="text-gray-500 mb-4">مواد اولیه ثبت نشده</h5>
 
                 <button onclick="openModal('createRecipeIngredient')"
                     class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 text-white rounded-xl shadow hover:bg-blue-600">
@@ -66,9 +65,9 @@
         @else
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @foreach ($r_ingredients as $ri)
-                    <div
-                        class="p-4 bg-white border border-gray-400 rounded-2xl
-                    hover:shadow-md transition flex flex-col">
+                    <div {{-- class="p-4 bg-white border border-gray-400 rounded-2xl
+                    hover:shadow-md transition flex flex-col"> --}}
+                        class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                         <!-- Title -->
                         <div class="mr-3 mb-3 flex gap-2">

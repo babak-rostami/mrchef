@@ -10,27 +10,25 @@
 
     <x-partials.breadcrumb panel="admin" page="مدیریت رسپی ها" />
 
+    <div class="md:mx-8 lg:mx-44">
 
-    <!-- Title + Create Button -->
-    <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold">مدیریت رسپی ها</h3>
+        <!-- Title + Create Button -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">مدیریت رسپی ها</h3>
 
-        <a href="{{ route('admin.recipes.create') }}"
-            class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
-            <i class="fa fa-plus ml-1"></i>
-            رسپی جدید
-        </a>
+            <a href="{{ route('admin.recipes.create') }}"
+                class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
+                <i class="fa fa-plus ml-1"></i>
+                رسپی جدید
+            </a>
 
-    </div>
-
-    <!-- recipes List -->
-    <div class="bg-white rounded-2xl shadow p-6 mt-6">
+        </div>
 
         @if ($recipes->count() == 0)
 
             <div class="flex flex-col items-center py-10">
                 <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
-                <h5 class="text-gray-500">هیچ رسپی یافت نشد</h5>
+                <h5 class="text-gray-500">هنوز رسپی ایجاد نکردین</h5>
 
                 <a href="{{ route('admin.recipes.create') }}"
                     class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
@@ -43,8 +41,7 @@
 
                 @foreach ($recipes as $recipe)
                     <div
-                        class="p-4 bg-white border border-gray-400 rounded-2xl
-                    hover:shadow-md transition flex flex-col">
+                        class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                         <!-- Image + Title -->
                         <div class="flex items-center mb-3">
@@ -128,7 +125,6 @@
             </div>
 
         @endif
-
     </div>
 
 @endsection
