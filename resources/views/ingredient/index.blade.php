@@ -8,7 +8,7 @@
 
 @section('content')
 
-    @include('partials.breadcrumb', ['breadcrumb_title' => 'مدیریت مواد اولیه'])
+    <x-partials.breadcrumb panel="admin" page="مدیریت مواد اولیه" />
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">

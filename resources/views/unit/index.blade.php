@@ -8,13 +8,14 @@
 
 @section('content')
 
-    @include('partials.breadcrumb', ['breadcrumb_title' => 'واحد های اندازه گیری'])
+    <x-partials.breadcrumb panel="admin" page="واحد های اندازه گیری" />
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">
         <h3 class="text-xl font-bold">واحد های اندازه گیری</h3>
 
-        <a href="{{ route('admin.unit.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
+        <a href="{{ route('admin.unit.create') }}"
+            class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
             <i class="fa fa-plus ml-1"></i>
             واحد اندازه گیری جدید
         </a>

@@ -9,16 +9,8 @@
 @section('content')
 
     <div class="mx-auto px-4">
-        @include('partials.breadcrumb', [
-            'breadcrumb_title' => 'ویرایش رسپی',
-            'breadcrumb_parents' => [
-                [
-                    'url' => route('admin.recipes.index'),
-                    'title' => 'مدیریت رسپی ها',
-                ],
-            ],
-        ])
 
+        <x-partials.breadcrumb panel="admin" page="ویرایش رسپی" :parents="[['url' => route('admin.recipes.index'), 'title' => 'مدیریت رسپی ها']]" />
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">

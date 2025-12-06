@@ -6,6 +6,9 @@ use App\Services\ImageService;
 use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Recipe extends Model
 {
@@ -44,13 +47,49 @@ class Recipe extends Model
         });
     }
 
-    public function editorImages()
+    public function editorImages(): MorphMany
     {
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
 
-    public function ingredients()
+    public function ingredients(): BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')->withPivot(['amount']);;
+        return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')->withPivot(['amount']);
     }
+
+    public function ingredientsWithUnit(): BelongsToMany
+    {
+        return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')
+            ->withPivot(['amount', 'unit_id'])
+            ->join('units', 'units.id', '=', 'recipe_ingredients.unit_id')
+            ->select([
+                'ingredients.id',
+                'ingredients.name',
+                'ingredients.image',
+                'recipe_ingredients.amount',
+                'units.name as unit_name'
+            ]);
+    }
+
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function defaultImage(): string
+    {
+        return asset('files/icon/default-recipe.jpg');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeLatest($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
 }

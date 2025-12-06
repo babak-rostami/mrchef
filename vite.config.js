@@ -6,19 +6,22 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                //-------------------------------------------------------------
+                //-------------------------for frontend------------------------
+                //-------------------------------------------------------------
+
+
+                //----------------------------user-----------------------------
                 'resources/css/user/dashboard.css',
                 'resources/css/user/login.css',
                 'resources/css/user/register.css',
 
+                //--------------------------category---------------------------
                 'resources/css/category/index.css',
                 'resources/css/category/edit.css',
                 'resources/js/category/index.js',
 
-                'resources/css/page/home.css',
-
-                'resources/css/test.css',
-                'resources/js/test.js',
-
+                //--------------------------recipe-----------------------------
                 'resources/css/recipe/index.css',
                 'resources/js/recipe/index.js',
                 'resources/css/recipe/create.css',
@@ -26,6 +29,7 @@ export default defineConfig({
                 'resources/css/recipe/edit.css',
                 'resources/js/recipe/edit.js',
 
+                //------------------------ingredient---------------------------
                 'resources/css/ingredient/index.css',
                 'resources/js/ingredient/index.js',
                 'resources/css/ingredient/create.css',
@@ -33,6 +37,7 @@ export default defineConfig({
                 'resources/css/ingredient/edit.css',
                 'resources/js/ingredient/edit.js',
 
+                //--------------------------unit-------------------------------
                 'resources/css/unit/index.css',
                 'resources/js/unit/index.js',
                 'resources/css/unit/create.css',
@@ -40,11 +45,23 @@ export default defineConfig({
                 'resources/css/unit/edit.css',
                 'resources/js/unit/edit.js',
 
+                //-------------------recipe ingredient-------------------------
                 'resources/css/recipe-ingredient/index.css',
                 'resources/js/recipe-ingredient/index.js',
 
+                //---------------------ingredient unit--------------------------
                 'resources/css/ingredient-unit/index.css',
                 'resources/js/ingredient-unit/index.js',
+
+                //-------------------------------------------------------------
+                //-------------------------for frontend------------------------
+                //-------------------------------------------------------------
+                'resources/css/page/home.css',
+
+                //-------------------------recipe------------------------------
+                'resources/css/recipe/frontend/index.css',
+                'resources/css/recipe/frontend/show.css',
+                'resources/js/recipe/frontend/index.js',
             ],
             refresh: true,
         }),

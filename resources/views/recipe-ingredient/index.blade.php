@@ -8,15 +8,8 @@
 
 @section('content')
 
-    @include('partials.breadcrumb', [
-        'breadcrumb_title' => 'مواد اولیه',
-        'breadcrumb_parents' => [
-            [
-                'url' => route('admin.recipes.index'),
-                'title' => 'طرز پخت',
-            ],
-        ],
-    ])
+    <x-partials.breadcrumb panel="admin" page="مواد اولیه" :parents="[['url' => route('admin.recipes.index'), 'title' => 'طرز پخت']]" />
+
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">

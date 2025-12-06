@@ -9,15 +9,8 @@
 @section('content')
 
     <div class="mx-auto px-4">
-        @include('partials.breadcrumb', [
-            'breadcrumb_title' => 'واحد اندازه گیری جدید',
-            'breadcrumb_parents' => [
-                [
-                    'url' => route('admin.unit.index'),
-                    'title' => 'مدیریت مواد اولیه',
-                ],
-            ],
-        ])
+
+        <x-partials.breadcrumb panel="admin" page="ویرایش واحد اندازه گیری" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">

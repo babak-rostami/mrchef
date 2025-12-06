@@ -12,11 +12,12 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    private $imageService;
+    private $imageService, $editorService;
 
-    public function __construct(ImageService $imageService)
+    public function __construct(ImageService $imageService, CkeditorService $editorService)
     {
         $this->imageService = $imageService;
+        $this->editorService = $editorService;
     }
 
     public function index()
@@ -31,7 +32,7 @@ class CategoryController extends Controller
         return view('category.create', compact('categories'));
     }
 
-    public function store(StoreRequest $request, CkeditorService $editorService)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
 
@@ -42,7 +43,7 @@ class CategoryController extends Controller
 
         $category = Category::create($data);
 
-        $editorService->store(Category::EDITOR_KEY, $category);
+        $this->editorService->store(Category::EDITOR_KEY, $category);
 
         return redirect()->route('admin.category.index')->with('success', 'دسته بندی با موفقیت ایجاد شد');
     }
@@ -58,7 +59,7 @@ class CategoryController extends Controller
         return view('category.edit', compact('categories', 'category'));
     }
 
-    public function update(UpdateRequest $request, CkeditorService $editorService, $slug)
+    public function update(UpdateRequest $request, $slug)
     {
         $category = Category::where('slug', $slug)->first();
         if (!isset($category)) {
@@ -74,7 +75,7 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        $editorService->update(Category::EDITOR_KEY, $category);
+        $this->editorService->update(Category::EDITOR_KEY, $category);
 
         return redirect()->route('admin.category.index')->with('success', 'دسته‌بندی با موفقیت ویرایش شد');
     }

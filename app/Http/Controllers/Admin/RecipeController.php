@@ -9,30 +9,27 @@ use App\Models\Category;
 use App\Models\Recipe;
 use App\Services\ckeditor\CkeditorService;
 use App\Services\ImageService;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
-    use AuthorizesRequests;
 
-    private $imageService;
+    private $imageService, $editorService;
 
-    public function __construct(ImageService $imageService)
+    public function __construct(ImageService $imageService, CkeditorService $editorService)
     {
         $this->imageService = $imageService;
+        $this->editorService = $editorService;
     }
 
     public function index()
     {
-        $this->authorize('viewAny', Recipe::class);
-        $recipes = Recipe::all();
+        $recipes = Recipe::latest()->get();
         return view('recipes.index', compact('recipes'));
     }
 
     public function create()
     {
-        $this->authorize('create', Recipe::class);
         $categories = Category::all();
         $status_select_options = [
             ['value' => 0, 'label' => 'تایید نشده'],
@@ -41,9 +38,8 @@ class RecipeController extends Controller
         return view('recipes.create', compact('categories', 'status_select_options'));
     }
 
-    public function store(StoreRequest $request, CkeditorService $editorService)
+    public function store(StoreRequest $request)
     {
-        $this->authorize('create', Recipe::class);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -55,7 +51,7 @@ class RecipeController extends Controller
 
         $recipe = Recipe::create($data);
 
-        $editorService->store(Recipe::EDITOR_KEY, $recipe);
+        $this->editorService->store(Recipe::EDITOR_KEY, $recipe);
 
         return redirect()->route('admin.recipes.index')->with('success', 'رسپی با موفقیت ثبت شد');
     }
@@ -63,7 +59,6 @@ class RecipeController extends Controller
     public function edit($slug)
     {
         $recipe = Recipe::where('slug', $slug)->first();
-        $this->authorize('update', $recipe);
 
         $categories = Category::all();
         $status_select_options = [
@@ -73,14 +68,13 @@ class RecipeController extends Controller
         return view('recipes.edit', compact('categories', 'recipe', 'status_select_options'));
     }
 
-    public function update(UpdateRequest $request, $slug, CkeditorService $editorService)
+    public function update(UpdateRequest $request, $slug)
     {
         $data = $request->validated();
         $recipe = Recipe::where('slug', $slug)->first();
         if (!$recipe) {
             return back()->with('error', 'رسپی پیدا نشد');
         }
-        $this->authorize('update', $recipe);
 
         if ($request->hasFile('image')) {
             $this->imageService->delete($recipe->image);
@@ -90,7 +84,7 @@ class RecipeController extends Controller
 
         $recipe->update($data);
 
-        $editorService->update(Recipe::EDITOR_KEY, $recipe);
+        $this->editorService->update(Recipe::EDITOR_KEY, $recipe);
 
         return redirect()->route('admin.recipes.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
@@ -98,7 +92,6 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
-        $this->authorize('delete', $recipe);
 
         if (!isset($recipe)) {
             return back()->with('error', 'رسپی وجود ندارد');

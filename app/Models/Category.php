@@ -31,7 +31,8 @@ class Category extends Model
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
 
-    public function defultImage(){
-        return asset('files/icon/empty-list.png');
+    public function defaultImage(): string
+    {
+        return asset('files/icon/default-category.png');
     }
 }

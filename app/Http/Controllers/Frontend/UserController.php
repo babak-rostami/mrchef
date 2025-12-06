@@ -28,9 +28,10 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
+        //خودش سشن آی دی رو regenerate میکنه لازم نیست
         Auth::login($user);
 
-        return redirect()->route('admin.dashboard')->with('success', 'ثبت نام با موفقیت انجام شد');
+        return redirect()->route('home')->with('success', 'ثبت نام با موفقیت انجام شد');
     }
 
     public function loginShow()
@@ -66,10 +67,9 @@ class UserController extends Controller
         //کوکی remember me را هم حذف می‌کنه
         Auth::logout();
         // سشن فعلی رو کامل پاک می‌کنه
-        // یه سشن جدید میسازه و آی دی سشن جدید رو میفرسته برای کوکی کاربر
         $request->session()->invalidate();
 
-        // جدید میذاره توی سشن _token
+        // یه سشن جدید درست میکنه و _token جدید رو ایجاد میکنه
         $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('success', 'از حساب کاربری خود خارج شدید.');

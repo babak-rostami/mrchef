@@ -13,14 +13,14 @@
 
 <body class="text-gray-800">
 
-    @include('partials.header')
+    <x-partials.header />
 
     <div class="px-4 mt-4">
-        @include('partials.alerts')
+        <x-partials.alerts />
         @yield('content')
     </div>
 
-    @include('partials.footer')
+    <x-partials.footer />
 
     @stack('scripts')
 </body>

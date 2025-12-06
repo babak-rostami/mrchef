@@ -25,7 +25,6 @@ class CategoryFactory extends Factory
             'slug' => Str::slug($name) . uniqid(),
             'description' => $this->faker->sentence(10),
             'body' => $this->faker->paragraph(),
-            'image' => 'files/category/car.webp',
             'parent_id' => null
         ];
     }

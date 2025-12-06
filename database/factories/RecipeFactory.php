@@ -28,10 +28,9 @@ class RecipeFactory extends Factory
             'description'    => $this->faker->paragraph(),
             'body'           => $this->faker->paragraph(),
             'status'         => $this->faker->randomElement([0, 1]),
-            'image'          => 'files\icon\empty-list.png',
             'time_prepare'   => rand(5, 600),
             'time_cook'      => rand(5, 600),
-            'servings'       => rand(1, 500),
+            'servings'       => rand(1, 20),
         ];
     }
 }

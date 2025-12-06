@@ -22,7 +22,6 @@ class IngredientFactory extends Factory
             'name' => $name,
             'name_en' => $name,
             'slug' => Str::slug($name) . uniqid(),
-            'image' => 'files\icon\empty-list.png',
             'show_in_search' => $this->faker->randomElement([0, 1])
         ];
     }

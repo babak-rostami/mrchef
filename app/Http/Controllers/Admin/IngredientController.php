@@ -8,13 +8,11 @@ use App\Http\Requests\ingredient\UpdateRequest;
 use App\Models\Ingredient;
 use App\Models\IngredientUnit;
 use App\Services\ImageService;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class IngredientController extends Controller
 {
-    use AuthorizesRequests;
 
     private $imageService;
 
@@ -25,14 +23,12 @@ class IngredientController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', Ingredient::class);
         $ingredients = Ingredient::all();
         return view('ingredient.index', compact('ingredients'));
     }
 
     public function create()
     {
-        $this->authorize('create', Ingredient::class);
         $show_select_options = [
             ['value' => 0, 'label' => 'خیر'],
             ['value' => 1, 'label' => 'بله']
@@ -42,7 +38,6 @@ class IngredientController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->authorize('create', Ingredient::class);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -59,7 +54,6 @@ class IngredientController extends Controller
     public function edit($slug)
     {
         $ingredient = Ingredient::where('slug', $slug)->first();
-        $this->authorize('update', $ingredient);
         $show_select_options = [
             ['value' => 0, 'label' => 'خیر'],
             ['value' => 1, 'label' => 'بله']
@@ -75,7 +69,6 @@ class IngredientController extends Controller
         if (!$ingredient) {
             return back()->with('error', 'ماده اولیه پیدا نشد');
         }
-        $this->authorize('update', $ingredient);
 
         if ($request->hasFile('image')) {
             $this->imageService->delete($ingredient->image);
@@ -91,7 +84,6 @@ class IngredientController extends Controller
     public function destroy($id)
     {
         $ingredient = Ingredient::find($id);
-        $this->authorize('delete', $ingredient);
 
         if (!isset($ingredient)) {
             return back()->with('error', 'ماده اولیه وجود ندارد');

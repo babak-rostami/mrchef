@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticatedAs;
@@ -31,13 +32,15 @@ describe('access tests', function () {
     });
 
     test('authenticated admin can see admin dashboard', function () {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $user = User::factory()->create(['role' => 'user']);
-        actingAs($admin)->get(route('admin.dashboard'))->assertStatus(200);
+        // ایجاد یوزر ادمین
+        $admin = User::factory()->admin()->create();
 
+        actingAs($admin)
+            ->get(route('admin.dashboard'))
+            ->assertStatus(200);
     });
 
-    test('authenticated user cant see admin dashboard', function () {
+    test('authenticated user can not see admin dashboard', function () {
         $user = User::factory()->create(['role' => 'user']);
         actingAs($user)->get(route('admin.dashboard'))->assertStatus(status: 302);
     });

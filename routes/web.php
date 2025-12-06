@@ -10,22 +10,15 @@ use App\Http\Controllers\Admin\IngredientUnitController;
 use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\RecipeIngredientController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Frontend\RecipeController as FrontendRecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
-Route::get('/recipes/{category?}', [RecipeController::class, 'index'])->name('recipes.index');
 
-Route::middleware('guest')->group(function () {
-    Route::get('register', [UserController::class, 'registerShow'])->name('register.show');
-    Route::post('register', [UserController::class, 'register'])->name('register');
-    Route::get('login', [UserController::class, 'loginShow'])->name('login.show');
-    Route::post('login', [UserController::class, 'login'])->name('login');
-});
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [UserController::class, 'logout'])->name('logout');
-});
-
+// ------------------------------recipe routes--------------------------------------
+Route::get('/recipes/{category:slug?}', [FrontendRecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recipe/{recipe:slug}', action: [FrontendRecipeController::class, 'show'])->name('recipes.show');
 
 //------------------------------------------------------------------------------------
 //--------------------------------admin routes----------------------------------------
@@ -64,3 +57,21 @@ Route::middleware(['role:admin'])
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::post('bf-ckeditor-upload/{page}', [BFCkeditorController::class, 'upload']);
     });
+
+//------------------------------------------------------------------------------------
+//---------------------------------user routes----------------------------------------
+//------------------------------------------------------------------------------------
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [UserController::class, 'logout'])->name('logout');
+});
+
+
+//------------------------------------------------------------------------------------
+//----------------auth user can not access this routes--------------------------------
+//------------------------------------------------------------------------------------
+Route::middleware('guest')->group(function () {
+    Route::get('register', [UserController::class, 'registerShow'])->name('register.show');
+    Route::post('register', [UserController::class, 'register'])->name('register');
+    Route::get('login', [UserController::class, 'loginShow'])->name('login.show');
+    Route::post('login', [UserController::class, 'login'])->name('login');
+});

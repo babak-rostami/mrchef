@@ -1,0 +1,21 @@
+@import "../../app.css";
+
+#recipe-body img{
+    max-height: 360px;
+    border-radius: 12px;
+    margin: 12px 0;
+}
+
+#recipe-body h2{
+    font-size: 28px;
+    padding-bottom: 4px;
+    margin: 8px 0;
+    font-weight: 600;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+#recipe-body p{
+    font-size: 18px;
+}
+
+/* #recipe-body img{} */

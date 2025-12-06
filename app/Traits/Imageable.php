@@ -41,13 +41,13 @@ trait Imageable
      * Default image
      * Model can override this
      */
-    private function getDefaultImage()
+    private function getDefaultImage(): string
     {
         // اگر مدل متدی به اسم defaultImage داشته باشد، از همان استفاده می‌کنیم
         if (method_exists($this, 'defaultImage')) {
             return $this->defaultImage();
         }
 
-        return asset('files/icon/empty-list.png');
+        return asset('files/icon/default-image.png');
     }
 }

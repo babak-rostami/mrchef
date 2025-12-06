@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,6 +18,8 @@ return new class extends Migration
             $table->text('description');
             $table->text('body')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('status')->default(1);
+            $table->unsignedSmallInteger('priority')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');

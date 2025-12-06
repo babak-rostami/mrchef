@@ -8,15 +8,8 @@
 
 @section('content')
 
-    @include('partials.breadcrumb', [
-        'breadcrumb_title' => 'واحد های اندازه گیری',
-        'breadcrumb_parents' => [
-            [
-                'url' => route('admin.ingredient.index'),
-                'title' => 'مواد اولیه',
-            ],
-        ],
-    ])
+    <x-partials.breadcrumb panel="admin" page="واحد های اندازه گیری" :parents="[['url' => route('admin.ingredient.index'), 'title' => 'مواد اولیه']]" />
+
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">
@@ -34,8 +27,9 @@
             <span class="text-blue-400">مثلا 1 لیوان برنج = 150 گرم</span>
 
             <div class="flex justify-center mt-4">
-                <form id="ingredient-unit-store-form" action="{{ route('admin.ingredient.units.store', $ingredient->slug) }}"
-                    method="POST" enctype="multipart/form-data" class="w-full space-y-6">
+                <form id="ingredient-unit-store-form"
+                    action="{{ route('admin.ingredient.units.store', $ingredient->slug) }}" method="POST"
+                    enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
                     {{-- SELECT UNIT --}}
                     <x-form.create.select title="واحد اندازه گیری" name="unit_id" id="unit_id" :required="true"

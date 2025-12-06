@@ -20,15 +20,12 @@
                 </button>
             </li>
 
-            <li>
-                <a href="{{ route('home') }}" class="hover:text-indigo-400">صفحه اصلی</a>
-            </li>
-
             @auth('user')
-                <li>
-                    <a href="{{ route('admin.dashboard') }}" class="hover:text-indigo-400">داشبورد</a>
-                </li>
-
+                @role('admin')
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}" class="hover:text-indigo-400">داشبورد</a>
+                    </li>
+                @endrole
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf

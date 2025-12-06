@@ -37,9 +37,5 @@ class RolePermissionSeeder extends Seeder
 
         // دادن همه‌ی پرمیشن‌ها به ادمین
         $adminRole->givePermissionTo($adminPermission['category']);
-
-        User::where('email', 'babakrostami76@gmail.com')
-            ->first()
-            ->assignRole('admin');
     }
 }

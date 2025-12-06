@@ -9,20 +9,9 @@
 @section('content')
 
     <div class="md:mx-8 lg:mx-44">
-        <div class="bslider pb-4" id="category-slider">
-            @foreach ($categories as $category)
-                <div
-                    class="bslider-item category-slider-item cursor-pointer rounded-2xl ml-8 bg-white py-3
-            hover:-translate-y-4 transition-all duration-300 ease-out">
-                    <a href="/">
-                        <div class="flex flex-col items-center">
-                            <img class="w-24 h-24 object-contain" src="{{ $category->image_url }}" alt="{{ $category->name }}">
-                            <span class="font-bold mt-4 text-gray-500">{{ $category->name }}</span>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
-        </div>
+
+        {{-- category slider --}}
+        <x-category.category-slider :categories="$categories" route="recipes.index" />
 
         <!-- بنر بالای صفحه -->
         <div class="relative w-full rounded-3xl overflow-hidden">
@@ -67,32 +56,7 @@
         </div>
 
         {{-- رسپی پیشنهادی --}}
-
-        <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] mt-4 rounded-2xl overflow-hidden items-start">
-
-            <!-- IMAGE -->
-            <div class="flex justify-center md:block">
-                <img class="w-11/12 md:w-auto md:h-64 object-contain rounded-2xl md:rounded-none" src="{{ $sigleRecipe->image_url }}" alt="pizza">
-            </div>
-
-            <!-- TEXT BOX -->
-            <div class="flex flex-col items-start p-4 gap-4 bg-gray-100
-            rounded-2xl md:rounded-none
-            mt-4 md:mt-0 md:h-full w-full">
-                <span class="text-3xl font-extrabold text-gray-600">{{ $sigleRecipe->title }}</span>
-
-                <span class="whitespace-pre-line">{{ $sigleRecipe->description }}</span>
-
-                <a href="/recipes"
-                    class="group flex items-center gap-2 bg-white text-green-700
-            px-4 py-2 rounded-3xl hover:bg-green-800 hover:text-white">
-                    <span>دستور پخت</span>
-                    <img class="bg-green-900 rounded-2xl p-1" src="{{ asset('files/icon/arrow-left-24.png') }}"
-                        alt="arrow">
-                </a>
-            </div>
-        </div>
-
+        <x-recipes.single-recipe-horizontal :recipe="$sigleRecipe" />
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             <img src="{{ asset('files/images/behnam.jpg') }}" alt="mrchef" class="w-full object-contain rounded-2xl">

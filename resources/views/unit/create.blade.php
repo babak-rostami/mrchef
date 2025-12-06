@@ -9,15 +9,8 @@
 @section('content')
 
     <div class="mx-auto px-4">
-        @include('partials.breadcrumb', [
-            'breadcrumb_title' => 'واحد اندازه گیری جدید',
-            'breadcrumb_parents' => [
-                [
-                    'url' => route('admin.unit.index'),
-                    'title' => 'مدیریت مواد اولیه',
-                ],
-            ],
-        ])
+
+        <x-partials.breadcrumb panel="admin" page="واحد اندازه گیری جدید" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">
@@ -27,8 +20,8 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="unit-store-form" action="{{ route('admin.unit.store') }}" method="POST" enctype="multipart/form-data"
-                    class="w-full space-y-6">
+                <form id="unit-store-form" action="{{ route('admin.unit.store') }}" method="POST"
+                    enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

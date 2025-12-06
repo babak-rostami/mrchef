@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('name_en');
             $table->string('slug');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->boolean('show_in_search');
 
             $table->decimal('calories_per_100g', 8, 2)->nullable();

@@ -9,16 +9,8 @@
 @section('content')
 
     <div class="mx-auto px-4">
-        @include('partials.breadcrumb', [
-            'breadcrumb_title' => 'رسپی جدید',
-            'breadcrumb_parents' => [
-                [
-                    'url' => route('admin.recipes.index'),
-                    'title' => 'مدیریت رسپی ها',
-                ],
-            ],
-        ])
 
+        <x-partials.breadcrumb panel="admin" page="رسپی جدید" :parents="[['url' => route('admin.recipes.index'), 'title' => 'مدیریت رسپی ها']]" />
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">
@@ -28,8 +20,8 @@
         <div class="bg-white rounded-2xl shadow p-6 mt-4">
 
             <div class="flex justify-center">
-                <form id="recipes-store-form" action="{{ route('admin.recipes.store') }}" method="POST" enctype="multipart/form-data"
-                    class="w-full space-y-6">
+                <form id="recipes-store-form" action="{{ route('admin.recipes.store') }}" method="POST"
+                    enctype="multipart/form-data" class="w-full space-y-6">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-4">

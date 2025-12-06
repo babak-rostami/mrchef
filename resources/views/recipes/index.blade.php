@@ -8,13 +8,15 @@
 
 @section('content')
 
-    @include('partials.breadcrumb', ['breadcrumb_title' => 'مدیریت رسپی ها'])
+    <x-partials.breadcrumb panel="admin" page="مدیریت رسپی ها" />
+
 
     <!-- Title + Create Button -->
     <div class="flex items-center justify-between mb-6">
         <h3 class="text-xl font-bold">مدیریت رسپی ها</h3>
 
-        <a href="{{ route('admin.recipes.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
+        <a href="{{ route('admin.recipes.create') }}"
+            class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">
             <i class="fa fa-plus ml-1"></i>
             رسپی جدید
         </a>

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -29,12 +30,22 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'role' => $this->faker->randomElement(['admin', 'user']),
             'phone' => $this->faker->phoneNumber(),
-            'image' => 'files/category/car.webp',
             'status' => $this->faker->randomElement([0, 1]),
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function admin()
+    {
+        return $this->afterCreating(function ($user) {
+            // اگر نقش admin وجود ندارد بساز
+            $role = Role::firstOrCreate(['name' => 'admin']);
+
+            // نقش را به یوزر بده
+            $user->assignRole($role);
+        });
     }
 
     /**

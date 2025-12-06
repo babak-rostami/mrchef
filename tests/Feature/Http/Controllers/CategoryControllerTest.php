@@ -16,7 +16,7 @@ it('delete main image and editor images after delete category', function () {
     app()->instance(ImageService::class, $mock);
 
     //admin user that can delete category
-    $user = User::factory()->create(['role' => 'admin']);
+    $user = User::factory()->admin()->create();
     //create category
     $category = Category::factory()->create([
         'image' => 'test.jpg',
