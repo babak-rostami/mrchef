@@ -15,8 +15,10 @@
 
     <x-partials.header />
 
-    <div class="px-4 mt-4">
-        <x-partials.alerts />
+    <div class="mt-4">
+        <div class="md:mx-8 lg:mx-44">
+            <x-partials.alerts />
+        </div>
         @yield('content')
     </div>
 

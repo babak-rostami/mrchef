@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, Imageable;
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +36,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['thumb_url'];
+
+
     /**
      * Get the attributes that should be cast.
      *
@@ -45,5 +50,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function defaultImage(): string
+    {
+        return asset('files/icon/profile2-40.png');
     }
 }

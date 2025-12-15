@@ -52,6 +52,18 @@ class Recipe extends Model
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
 
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function commentsWithUser(): MorphMany
+    {
+        return $this
+            ->morphMany(Comment::class, 'commentable')
+            ->with(['user:id,name,username,image']);
+    }
+
     public function ingredients(): BelongsToMany
     {
         return $this->belongsToMany(Ingredient::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')->withPivot(['amount']);

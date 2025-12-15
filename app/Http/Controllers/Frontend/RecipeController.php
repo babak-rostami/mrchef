@@ -35,8 +35,9 @@ class RecipeController extends Controller
     public function show(Request $request, Recipe $recipe): View
     {
         $ingredients = $recipe->ingredientsWithUnit;
-
-        return view('frontend.recipes.show', compact('recipe', 'ingredients'));
+        $comments = $recipe->commentsWithUser;
+        
+        return view('frontend.recipes.show', compact('recipe', 'comments', 'ingredients'));
     }
 
 }

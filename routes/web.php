@@ -10,15 +10,23 @@ use App\Http\Controllers\Admin\IngredientUnitController;
 use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\RecipeIngredientController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\RecipeController as FrontendRecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
 
 
+//------------------------------------------------------------------------------------
+//------------------------------all user routes---------------------------------------
+//------------------------------------------------------------------------------------
+
 // ------------------------------recipe routes--------------------------------------
 Route::get('/recipes/{category:slug?}', [FrontendRecipeController::class, 'index'])->name('recipes.index');
 Route::get('/recipe/{recipe:slug}', action: [FrontendRecipeController::class, 'show'])->name('recipes.show');
+
+// ------------------------------recipe routes--------------------------------------
+Route::get('show-comment-replies/{comment}', [CommentController::class, 'showReplies'])->name('show.comment.replies');
 
 //------------------------------------------------------------------------------------
 //--------------------------------admin routes----------------------------------------
@@ -63,8 +71,10 @@ Route::middleware(['role:admin'])
 //------------------------------------------------------------------------------------
 Route::middleware('auth')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->name('logout');
-});
 
+    // ------------------------------comment routes--------------------------------------
+    Route::post('comment-store', [CommentController::class, 'store'])->name('comment.store');
+});
 
 //------------------------------------------------------------------------------------
 //----------------auth user can not access this routes--------------------------------
