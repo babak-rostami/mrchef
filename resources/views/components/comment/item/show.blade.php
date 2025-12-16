@@ -17,11 +17,8 @@
 
     {{-- اکشن های کامنت --}}
     <div class="flex gap-2 mt-8 mb-2">
-        {{-- like --}}
-        <x-comment.item.action.like :comment="$comment" />
-
-        {{-- dislike --}}
-        <x-comment.item.action.dislike :comment="$comment" />
+        {{-- reaction --}}
+        <x-comment.item.action.reaction :comment="$comment" />
 
         {{-- reply --}}
         <x-comment.item.action.reply :comment="$comment" />

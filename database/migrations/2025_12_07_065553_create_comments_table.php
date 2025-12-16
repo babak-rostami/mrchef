@@ -25,7 +25,7 @@ return new class extends Migration {
 
             $table->unsignedSmallInteger('reply_count')->default(0); //0 - 65,535 i think it's enough
             $table->unsignedInteger('like_count')->default(0); //0 - 4,294,967,295
-            $table->unsignedInteger('unlike_count')->default(0); //0 - 4,294,967,295
+            $table->unsignedInteger('dislike_count')->default(0); //0 - 4,294,967,295
 
             $table->timestamps();
 

@@ -1,0 +1,37 @@
+@keyframes bcomment-like-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bcomment-dislike-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(12px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bcomment-like-animate {
+    animation: bcomment-like-bounce 0.4s ease-out;
+}
+
+.bcomment-dislike-animate {
+    animation: bcomment-dislike-bounce 0.4s ease-out;
+}
+
+#bcomment-like-btn-[data-loading="true"],
+#bcomment-dislike-btn-[data-loading="true"] {
+    pointer-events: none;
+    opacity: 0.6;
+}

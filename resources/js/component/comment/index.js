@@ -1,4 +1,5 @@
 import './action/reply';
+import './action/reaction';
 import './action/show-replies';
 import { isBodyValid } from './validation/body'
 
