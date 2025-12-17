@@ -2,9 +2,10 @@
 
 @section('title', 'داشبورد')
 
-@push('styles')
-    @vite('resources/css/user/dashboard.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/user/dashboard.css'])
+@endsection
+
 
 @section('content')
 

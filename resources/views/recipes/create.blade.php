@@ -2,9 +2,9 @@
 
 @section('title', 'رسپی جدید')
 
-@push('styles')
-    @vite('resources/css/recipe/create.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/recipe/create.css'])
+@endsection
 
 @section('content')
 
@@ -81,6 +81,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/recipe/create.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/recipe/create.js'])
+@endsection

@@ -2,9 +2,9 @@
 
 @section('title', 'ماده اولیه جدید')
 
-@push('styles')
-    @vite('resources/css/ingredient/create.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/ingredient/create.css'])
+@endsection
 
 @section('content')
 
@@ -58,6 +58,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/ingredient/create.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/ingredient/create.js'])
+@endsection

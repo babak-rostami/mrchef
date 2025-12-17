@@ -1,2 +1,3 @@
-import './bootstrap';
-import './utils/darkmode'
+import "./bootstrap";
+import "./component/modal";
+// import "./utils/darkmode";

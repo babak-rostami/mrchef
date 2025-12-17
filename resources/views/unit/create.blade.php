@@ -2,9 +2,9 @@
 
 @section('title', 'واحد اندازه گیری جدید')
 
-@push('styles')
-    @vite('resources/css/unit/create.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/unit/create.css'])
+@endsection
 
 @section('content')
 
@@ -47,6 +47,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/unit/create.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/unit/create.js'])
+@endsection

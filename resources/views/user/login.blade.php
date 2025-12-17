@@ -2,9 +2,9 @@
 
 @section('title', 'ورود')
 
-@push('styles')
-    @vite('resources/css/user/login.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/user/login.css'])
+@endsection
 
 @section('content')
 

@@ -2,9 +2,9 @@
 
 @section('title', 'ویرایش دسته بندی')
 
-@push('styles')
-    @vite('resources/css/category/edit.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/category/edit.css'])
+@endsection
 
 @section('content')
 
@@ -65,7 +65,6 @@
 
 @endsection
 
-
-@push('scripts')
-    @vite('resources/js/category/edit.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/category/edit.js'])
+@endsection

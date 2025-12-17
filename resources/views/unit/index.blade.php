@@ -2,9 +2,9 @@
 
 @section('title', 'واحد های اندازه گیری')
 
-@push('styles')
-    @vite('resources/css/unit/index.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/unit/index.css'])
+@endsection
 
 @section('content')
 
@@ -41,8 +41,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
                 @foreach ($units as $unit)
-                    <div
-                        class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
+                    <div class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                         <!-- Image + Title -->
                         <div class="flex items-center mb-3 gap-4 justify-center">
@@ -104,6 +103,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/unit/index.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/unit/index.js'])
+@endsection

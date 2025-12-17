@@ -1,5 +1,4 @@
 import '../app.js';
-import '../component/modal.js';
 import '../utils/button.js'
 import { handleForm } from '../component/form/index';
 

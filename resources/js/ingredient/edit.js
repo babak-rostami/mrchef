@@ -1,8 +1,9 @@
-import { createImages, handleForm } from '../component/form/index';
+import "../app";
+import { createImages, handleForm } from "../component/form/index";
 
-const form_id = 'ingredient-update-form';
+const form_id = "ingredient-update-form";
 
-createImages(['image'])
+createImages(["image"]);
 
 handleForm(form_id, ({ is_error }) => {
     if (!is_error) {

@@ -1,4 +1,4 @@
-import "../component/modal.js";
+import "../../js/app.js";
 import "../component/btable/index.js";
 
 // دکمه رو disable میکنه که کاربر چند بار کلیک کزد فرم اشتباهی چند بار سابمیت نشه

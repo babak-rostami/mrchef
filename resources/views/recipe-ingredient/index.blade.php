@@ -2,9 +2,9 @@
 
 @section('title', 'مواد اولیه')
 
-@push('styles')
-    @vite('resources/css/recipe-ingredient/index.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/recipe-ingredient/index.css'])
+@endsection
 
 @section('content')
 
@@ -66,8 +66,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @foreach ($r_ingredients as $ri)
                     <div {{-- class="p-4 bg-white border border-gray-400 rounded-2xl
-                    hover:shadow-md transition flex flex-col"> --}}
-                        class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
+                    hover:shadow-md transition flex flex-col"> --}} class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                         <!-- Title -->
                         <div class="mr-3 mb-3 flex gap-2">
@@ -155,6 +154,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/recipe-ingredient/index.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/recipe-ingredient/index.js'])
+@endsection

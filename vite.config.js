@@ -59,10 +59,10 @@ export default defineConfig({
                 'resources/css/page/home.css',
 
                 //-------------------------recipe------------------------------
-                'resources/css/recipe/frontend/index.css',
-                'resources/js/recipe/frontend/index.js',
-                'resources/css/recipe/frontend/show.css',
-                'resources/js/recipe/frontend/show.js',
+                'resources/css/frontend/recipe/index.css',
+                'resources/js/frontend/recipe/index.js',
+                'resources/css/frontend/recipe/show.css',
+                'resources/js/frontend/recipe/show.js',
             ],
             refresh: true,
         }),

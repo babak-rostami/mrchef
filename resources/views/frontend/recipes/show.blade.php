@@ -2,9 +2,9 @@
 
 @section('title', 'رسپی ها')
 
-@push('styles')
-    @vite('resources/css/frontend/recipe/show.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/frontend/recipe/show.css'])
+@endsection
 
 @section('content')
 
@@ -101,6 +101,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/frontend/recipe/show.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/frontend/recipe/show.js'])
+@endsection

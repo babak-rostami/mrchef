@@ -1,1 +1,2 @@
-import '../../component/comment/index'
+import "../../app";
+import "../../component/comment/index";

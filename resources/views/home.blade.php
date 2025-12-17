@@ -2,9 +2,9 @@
 
 @section('title', 'خانه')
 
-@push('styles')
-    @vite('resources/css/page/home.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/page/home.css'])
+@endsection
 
 @section('content')
 
@@ -44,7 +44,7 @@
                 <div
                     class="bslider-item recipe-slider-item cursor-pointer ml-8 bg-white p-3
             hover:-translate-y-4 transition-all duration-300 ease-out">
-                    <a href="{{ route('recipes.show',$recipe->slug) }}">
+                    <a href="{{ route('recipes.show', $recipe->slug) }}">
                         <div class="flex flex-col items-start">
                             <img class="w-48 h-48 object-contain rounded-2xl" src="{{ $recipe->image_url }}"
                                 alt="{{ $recipe->title }}">
@@ -61,7 +61,8 @@
 
         {{-- about site mrchef --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-            <img src="{{ asset('files/images/behnam.jpg') }}" alt="mrchef" class="w-full object-contain rounded-2xl
+            <img src="{{ asset('files/images/behnam.jpg') }}" alt="mrchef"
+                class="w-full object-contain rounded-2xl
             hover:scale-95 duration-300">
             <div class="flex flex-col justify-center bg-gray-100 rounded-2xl
             p-8 hover:scale-95 duration-300">
@@ -79,6 +80,6 @@
     </div>
 @endsection
 
-@push('scripts')
-    @vite('resources/js/page/home.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/page/home.js'])
+@endsection

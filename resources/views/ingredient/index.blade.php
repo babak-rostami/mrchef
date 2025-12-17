@@ -2,9 +2,9 @@
 
 @section('title', 'مدیریت مواد اولیه')
 
-@push('styles')
-    @vite('resources/css/ingredient/index.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/ingredient/index.css'])
+@endsection
 
 @section('content')
 
@@ -43,8 +43,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-32">
 
                     @foreach ($ingredients as $ingredient)
-                        <div
-                            class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
+                        <div class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                             <!-- Image + Title -->
                             <div class="flex items-center mb-3">
@@ -121,6 +120,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/ingredient/index.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/ingredient/index.js'])
+@endsection

@@ -1,3 +1,4 @@
+import '../app';
 import { handleForm } from '../component/form/index';
 
 const form_id = 'unit-update-form';

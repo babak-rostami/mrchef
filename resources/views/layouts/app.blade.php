@@ -10,7 +10,13 @@
 
     <title>@yield('title', 'book')</title>
 
-    @stack('styles')
+    {{-- CSS --}}
+    @hasSection('styles')
+        @yield('styles')
+    @else
+        @vite(['resources/css/app.css'])
+    @endif
+    {{-- @stack('styles') --}}
 </head>
 
 <body class="text-gray-800">
@@ -26,7 +32,12 @@
 
     <x-partials.footer />
 
-    @stack('scripts')
+    @hasSection('scripts')
+        @yield('scripts')
+    @else
+        @vite(['resources/js/app.js'])
+    @endif
+    {{-- @stack('scripts') --}}
 </body>
 
 </html>

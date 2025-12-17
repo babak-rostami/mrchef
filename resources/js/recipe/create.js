@@ -1,15 +1,23 @@
-import { handleForm, createCkeditors, createImages } from '../component/form/index';
+import "../app";
 
-const form_id = 'recipes-store-form';
-const page = 'recipe_create';
+import {
+    handleForm,
+    createCkeditors,
+    createImages,
+} from "../component/form/index";
 
-let ck_up_url = "/admin/bf-ckeditor-upload/" + page + '?_token=';
-ck_up_url += document.getElementById(form_id).querySelector('input[name="_token"]').value;
+const form_id = "recipes-store-form";
+const page = "recipe_create";
 
-const ckeditors = [{ id: 'body', url: ck_up_url }];
+let ck_up_url = "/admin/bf-ckeditor-upload/" + page + "?_token=";
+ck_up_url += document
+    .getElementById(form_id)
+    .querySelector('input[name="_token"]').value;
+
+const ckeditors = [{ id: "body", url: ck_up_url }];
 
 createCkeditors(ckeditors);
-createImages(['image']);
+createImages(["image"]);
 
 handleForm(form_id, ({ is_error }) => {
     if (!is_error) {

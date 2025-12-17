@@ -2,9 +2,9 @@
 
 @section('title', 'دسته بندی جدید')
 
-@push('styles')
-    @vite('resources/css/category/create.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/category/create.css'])
+@endsection
 
 @section('content')
 
@@ -68,6 +68,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/category/create.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/category/create.js'])
+@endsection

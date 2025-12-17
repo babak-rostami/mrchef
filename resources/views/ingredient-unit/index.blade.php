@@ -2,9 +2,9 @@
 
 @section('title', 'واحد های اندازه گیری')
 
-@push('styles')
-    @vite('resources/css/ingredient-unit/index.css')
-@endpush
+@section('styles')
+    @vite(['resources/css/ingredient-unit/index.css'])
+@endsection
 
 @section('content')
 
@@ -63,8 +63,7 @@
         @else
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @foreach ($ingredient->units as $i_unit)
-                    <div
-                        class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
+                    <div class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">
 
                         <!-- Title -->
                         <div class="mr-3 mb-3 flex flex-col items-start gap-2">
@@ -147,6 +146,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/ingredient-unit/index.js')
-@endpush
+@section('scripts')
+    @vite(['resources/js/ingredient-unit/index.js'])
+@endsection
