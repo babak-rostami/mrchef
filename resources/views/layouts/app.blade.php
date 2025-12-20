@@ -34,6 +34,10 @@
 
     <x-partials.footer />
 
+    <script>
+        window.isGuest = @json(auth()->guest());
+    </script>
+
     @hasSection('scripts')
         @yield('scripts')
     @else

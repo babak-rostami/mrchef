@@ -71,4 +71,8 @@
         </div>
     </div>
 
+    <script>
+        const page = 'reset-password';
+    </script>
+
 @endsection
