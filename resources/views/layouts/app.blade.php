@@ -16,7 +16,6 @@
     @else
         @vite(['resources/css/app.css'])
     @endif
-    {{-- @stack('styles') --}}
 </head>
 
 <body class="text-gray-800">
@@ -32,6 +31,8 @@
 
     @include('user.auth-modal.index')
 
+    <x-mobile.bottom-nav />
+
     <x-partials.footer />
 
     <script>
@@ -43,7 +44,6 @@
     @else
         @vite(['resources/js/app.js'])
     @endif
-    {{-- @stack('scripts') --}}
 </body>
 
 </html>

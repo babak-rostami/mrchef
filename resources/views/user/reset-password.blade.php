@@ -71,8 +71,9 @@
         </div>
     </div>
 
-    <script>
-        const page = 'reset-password';
-    </script>
+@endsection
 
+
+@section('scripts')
+    @vite(['resources/js/user/reset-password.js'])
 @endsection

@@ -14,6 +14,7 @@ export default defineConfig({
                 "resources/css/user/dashboard.css",
                 "resources/css/user/login.css",
                 "resources/css/user/register.css",
+                "resources/js/user/reset-password.js",
 
                 //--------------------------category---------------------------
                 "resources/css/category/index.css",

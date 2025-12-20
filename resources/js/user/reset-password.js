@@ -1,3 +1,5 @@
+import "../app";
+
 const form = document.getElementById("reset-password-form");
 
 const submitBtn = document.getElementById("auth-reset-btn");
