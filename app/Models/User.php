@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -55,5 +57,12 @@ class User extends Authenticatable
     public function defaultImage(): string
     {
         return asset('files/icon/profile2-40.png');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url(route('password.reset', $token));
+
+        $this->notify(new ResetPasswordNotification($url));
     }
 }

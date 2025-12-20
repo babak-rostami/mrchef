@@ -1,4 +1,5 @@
-import '../component/bslider/index'
+import "../app";
+import "../component/bslider/index";
 
 const categorySlider = document.getElementById("category-slider");
 const recipeSlider = document.getElementById("recipe-slider");

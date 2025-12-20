@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\UserMiddleware;

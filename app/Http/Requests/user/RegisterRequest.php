@@ -23,8 +23,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:50',
+            'username' => 'required|alpha_num|min:3|max:30|unique:users,username',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ];
     }
 
@@ -34,6 +35,12 @@ class RegisterRequest extends FormRequest
             'name.required' => 'وارد کردن نام الزامی است.',
             'name.min' => 'نام باید حداقل :min کاراکتر باشد.',
             'name.max' => 'نام نمی‌تواند بیشتر از :max کاراکتر باشد.',
+
+            'username.required' => 'وارد کردن نام کاربری الزامی است.',
+            'username.alpha_num' => 'نام کاربری فقط شامل حروف انگلیسی و عدد باشد.',
+            'username.min' => 'نام کاربری باید حداقل :min کاراکتر باشد.',
+            'username.max' => 'نام کاربری نمی‌تواند بیشتر از :max کاراکتر باشد.',
+            'username.unique' => 'این نام کاربری قبلاً ثبت شده است.',
 
             'email.required' => 'ایمیل خود را وارد کنید.',
             'email.email' => 'فرمت ایمیل وارد شده معتبر نیست.',

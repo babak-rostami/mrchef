@@ -30,6 +30,8 @@
         @yield('content')
     </div>
 
+    @include('user.auth-modal.index')
+
     <x-partials.footer />
 
     @hasSection('scripts')

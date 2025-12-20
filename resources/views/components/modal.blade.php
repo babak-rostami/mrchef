@@ -1,16 +1,32 @@
-@props(['id', 'maxWidth' => 'max-w-full'])
+@props(['id', 'bg' => null])
 
 <div id="{{ $id }}-overlay"
-    class="fixed inset-0 hidden bg-black/50 z-50 overflow-y-auto pt-20 justify-items-center">
+    class="fixed inset-0 hidden bg-black/80 z-50 overflow-y-auto pt-20 justify-items-center">
 
     <div id="{{ $id }}"
-        class="bg-white rounded-2xl shadow-xl p-6 w-auto min-w-96
-                {{ $maxWidth }} mx-4 relative
-                transform opacity-0 -translate-y-6 scale-95 transition-all duration-300">
+        class="relative bg-white rounded-2xl shadow-lg shadow-gray-900 p-6 w-auto min-w-[450px]
+               max-w-full mx-4 overflow-hidden
+               transform opacity-0 -translate-y-6 scale-95
+               transition-all duration-300">
 
-        <button class="absolute top-3 left-4 text-gray-600 hover:text-black"
-            onclick="closeModal('{{ $id }}')">✕</button>
+        {{-- background image --}}
+        @if ($bg)
+            <div class="absolute inset-0 bg-cover bg-center blur-[2px]" style="background-image: url('{{ $bg }}')"></div>
 
-        {{ $slot }}
+            {{-- background overlay --}}
+            <div class="absolute inset-0 bg-black/50"></div>
+        @endif
+
+        {{-- close button --}}
+        <button class="absolute top-3 left-4 z-20 text-gray-600 hover:text-black"
+            onclick="closeModal('{{ $id }}')">
+            ✕
+        </button>
+
+        {{-- modal content --}}
+        <div class="relative z-10">
+            {{ $slot }}
+        </div>
+
     </div>
 </div>

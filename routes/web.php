@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\IngredientUnitController;
 use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\RecipeIngredientController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\CommentReactionController;
 use App\Http\Controllers\Frontend\RecipeController as FrontendRecipeController;
@@ -86,4 +88,11 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [UserController::class, 'register'])->name('register');
     Route::get('login', [UserController::class, 'loginShow'])->name('login.show');
     Route::post('login', [UserController::class, 'login'])->name('login');
+
+    Route::post('check-email-exist', [UserController::class, 'checkEmailExist']);
+    // ------------------------------password reset routes--------------------------------------
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])
+        ->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 });

@@ -35,7 +35,7 @@
                 </li>
             @else
                 <li>
-                    <a href="{{ route('login.show') }}" class="hover:text-indigo-400">ورود</a>
+                    <span onclick="openModal('user-login')" class="hover:text-indigo-400 cursor-pointer">ورود</span>
                 </li>
             @endauth
 
