@@ -31,6 +31,8 @@
 
     @include('user.auth-modal.index')
 
+    <x-partials.main-search />
+
     <x-mobile.bottom-nav />
 
     <x-partials.footer />

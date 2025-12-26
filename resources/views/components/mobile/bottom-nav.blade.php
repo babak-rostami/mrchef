@@ -30,7 +30,8 @@
     </a>
 
     {{-- جستجو --}}
-    <button onclick="openSearchModal()" class="group flex flex-col items-center gap-1 w-full text-gray-400 transition">
+    <button onclick="openModal('main-search')"
+        class="group flex flex-col items-center gap-1 w-full text-gray-400 transition">
         <div
             class="bg-emerald-500 text-white p-3 rounded-full shadow-lg
                    -mt-2 active:scale-95 transition">

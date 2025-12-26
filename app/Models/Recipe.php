@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Services\ImageService;
 use App\Traits\Imageable;
+use Babak\Elasticsearch\Traits\ElasticsearchableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Recipe extends Model
 {
-    use Imageable, HasFactory;
+    use Imageable, HasFactory, ElasticsearchableTrait;
 
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
@@ -45,6 +46,28 @@ class Recipe extends Model
                 $editorImage->delete();
             }
         });
+    }
+
+    protected static function elasticsearchProperties(): array
+    {
+        return [
+            'title' => [
+                'type' => 'text',
+                'analyzer' => 'autocomplete_index',
+                'search_analyzer' => 'autocomplete_search',
+            ]
+        ];
+    }
+
+
+    protected static function elasticsearchFields(): array
+    {
+        return ['title'];
+    }
+
+    public static function elasticsearchIndex(): string
+    {
+        return 'recipes';
     }
 
     public function editorImages(): MorphMany
@@ -103,5 +126,4 @@ class Recipe extends Model
     {
         return $query->orderBy('created_at', 'desc');
     }
-
 }

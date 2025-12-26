@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleBtn = document.getElementById("profile-toggle");
     const dropdown = document.getElementById("profile-dropdown");
     const loginBtn = document.getElementById("login-btn");
-    const searchBtn = document.getElementById("search-btn");
 
     if (!toggleBtn || !dropdown) return;
 
@@ -24,13 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loginBtn.addEventListener("click", () => {
             dropdown.classList.add("hidden");
             openModal("user-login");
-        });
-    }
-
-    // Search modal
-    if (searchBtn) {
-        searchBtn.addEventListener("click", () => {
-            openSearchModal();
         });
     }
 });

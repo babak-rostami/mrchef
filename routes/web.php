@@ -15,14 +15,16 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\CommentReactionController;
 use App\Http\Controllers\Frontend\RecipeController as FrontendRecipeController;
+use App\Http\Controllers\Frontend\SearchController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', [IndexController::class, 'home'])->name('home');
 
 
 //------------------------------------------------------------------------------------
 //------------------------------all user routes---------------------------------------
 //------------------------------------------------------------------------------------
+
+Route::get('/', [IndexController::class, 'home'])->name('home');
+Route::post('/search', [SearchController::class, 'index']);
 
 // ------------------------------recipe routes--------------------------------------
 Route::get('/recipes/{category:slug?}', [FrontendRecipeController::class, 'index'])->name('recipes.index');

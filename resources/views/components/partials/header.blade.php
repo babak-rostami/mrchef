@@ -17,13 +17,13 @@
             </li>
 
             <li>
-                <button id="search-btn"
+                <button onclick="openModal('main-search')"
                     class="flex items-center gap-1 text-gray-600 hover:text-emerald-600 transition cursor-pointer">
+                    جستجو
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 21l-4.35-4.35m1.85-5.4a7.25 7.25 0 11-14.5 0 7.25 7.25 0 0114.5 0z" />
                     </svg>
-                    جستجو
                 </button>
             </li>
 

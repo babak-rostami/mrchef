@@ -28,12 +28,19 @@ class createAdminUser extends Command
     public function handle()
     {
         $email = $this->ask('Enter admin email');
-        $password = $this->secret('Enter admin password');
         // اگر قبلاً با این ایمیل کاربر وجود داشته باشد
-        if (User::where('email', $email)->exists()) {
-            $this->error('User with this email already exists.');
-            return 1;
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            if ($user->hasRole('admin')) {
+                $this->error('User already has admin role.');
+                return 1;
+            } else {
+                $user->assignRole('admin');
+                $this->info("Admin Role Added");
+                return 0;
+            }
         }
+        $password = $this->secret('Enter admin password');
         $user = User::factory()
             ->admin()
             ->create([
