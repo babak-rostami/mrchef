@@ -22,7 +22,7 @@ class RecipeIngredientController extends Controller
             ->join('ingredients as i', 'i.id', '=', 'ri.ingredient_id')
             ->join('units as u', 'u.id', '=', 'ri.unit_id')
             ->where('ri.recipe_id', $recipe->id)
-            ->select('i.id', 'i.name', 'ri.amount', 'u.name as unit_name')
+            ->select('i.id', 'i.name', 'ri.amount', 'ri.recipe_id as recipe_id', 'u.name as unit_name')
             ->get();
 
         if (!isset($recipe)) {
