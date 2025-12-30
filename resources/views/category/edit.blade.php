@@ -9,7 +9,7 @@
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="ویرایش دسته بندی" :parents="[['url' => route('admin.category.index'), 'title' => 'مدیریت دسته بندی ها']]" />
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-xl font-bold">ویرایش دسته‌بندی {{ $category->name }}</h3>

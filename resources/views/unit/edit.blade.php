@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="ویرایش واحد اندازه گیری" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
 
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">

@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="مدیریت مواد اولیه" />
 
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         <!-- Title + Create Button -->
         <div class="flex items-center justify-between mb-6">
@@ -40,7 +40,7 @@
                     </a>
                 </div>
             @else
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-32">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
 
                     @foreach ($ingredients as $ingredient)
                         <div class="p-4 bg-white shadow-sm hover:shadow-lg rounded-2xl flex flex-col">

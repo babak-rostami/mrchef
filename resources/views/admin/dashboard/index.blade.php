@@ -9,7 +9,7 @@
 
 @section('content')
 
-    <div class="mb-40 md:mx-8 lg:mx-44 bg-gray-50 px-4 py-8 rounded-2xl">
+    <div class="md:mx-8 lg:mx-44 bg-gray-50 px-4 py-8 rounded-2xl">
         <h3 class="text-center mb-6 font-bold text-2xl">داشبورد مدیریت</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">

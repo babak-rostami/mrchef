@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\UserController;
 use App\Services\EmailService;
+use App\Services\ImageService;
 use App\Services\NotifierService;
 use App\Services\SmsService;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        $this->app->singleton('image-service', function () {
+            return new ImageService();
+        });
     }
 
     /**

@@ -6,7 +6,7 @@
 ])
 <x-comment.form :page="$page" :object="$object" :form_action="$form_action" />
 
-<div id="comments-box" class="mb-48">
+<div id="comments-box" class="mb-12">
     @foreach ($comments as $comment)
         <x-comment.item.show :comment="$comment" :has_reply="1" :is_reply="0" />
     @endforeach

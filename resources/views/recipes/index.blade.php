@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="مدیریت رسپی ها" />
 
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         <!-- Title + Create Button -->
         <div class="flex items-center justify-between mb-6">

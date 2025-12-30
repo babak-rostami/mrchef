@@ -11,7 +11,7 @@
     <x-partials.breadcrumb panel="user" page="{{ $recipe->title }}" :parents="[['url' => route('recipes.index'), 'title' => 'رسپی ها']]" />
 
     <!-- container -->
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         {{-- category slider --}}
 
@@ -71,32 +71,6 @@
 
         <x-comment.section page="recipe" :object="$recipe" :comments="$comments" />
 
-        {{-- <form action="{{ route('comment.store') }}" method="post" id="store-comment-form">
-
-            @csrf
-
-            <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
-
-            <textarea id="comment-textarea" name="body" placeholder="نظر خود را اینجا بنویسید..."
-                class="w-full border border-gray-200 outline-0 rounded-2xl
-                                                                                                hover:shadow-blue-100 hover:shadow-md duration-300 mt-8
-                                                                                                focus:outline-4 focus:outline-blue-200
-                                                                                                text-2xl h-36 p-4 resize-none"></textarea>
-
-            <!-- نمایش پیام خطا -->
-            <div id="comment-error" class="bg-red-100 text-lg mb-2 pr-2 py-2 rounded hidden"></div>
-            @error('body')
-            <p class="bg-red-100 text-lg mb-2 pr-2 py-2 rounded">{{ $message }}</p>
-            @enderror
-            <input type="submit" value="ثبت نظر"
-                class="w-full bg-blue-500 text-white rounded-2xl
-                                                                                                py-2 text-2xl cursor-pointer hover:bg-blue-600">
-        </form>
-
-
-        <div id="comments-box" class="mb-48">
-            <x-comment.comment-item :has_reply="1" :is_reply="0" />
-        </div> --}}
     </div>
 
 @endsection

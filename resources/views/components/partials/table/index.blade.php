@@ -1,33 +1,27 @@
-@props(['columns' => [], 'rows' => []])
+@props(['columns' => [], 'rows' => [], 'id'])
 
-<div class="btable-wrapper w-full">
+<div class="w-full border-2 border-gray-100 rounded-2xl py-4" id="{{ $id }}">
 
     {{-- Search --}}
-    <div class="mb-4">
-        <input type="text" class="btable-search w-64 border rounded-lg px-3 py-2 focus:ring focus:outline-none"
-            placeholder="Search...">
-    </div>
+    <x-partials.table.search />
 
     <div class="overflow-x-auto">
         <table class="btable-table w-full border-collapse">
-            <thead class="bg-gray-100">
+            <thead class="bg-gray-100 text-right">
                 <tr>
-                    @foreach ($columns as $col)
-                        <th class="btable-th px-4 py-2 text-left select-none
-                                   {{ $col['sortable'] ?? false ? 'cursor-pointer' : '' }}"
-                            data-key="{{ $col['key'] }}" data-sortable="{{ $col['sortable'] ?? false }}"
-                            data-searchable="{{ $col['searchable'] ?? false }}">
-                            {{ $col['label'] }}
-                        </th>
-                    @endforeach
+                    {{-- Table Columns --}}
+                    <x-partials.table.columns :columns="$columns" />
                 </tr>
             </thead>
 
             <tbody class="btable-body">
-                @foreach ($rows as $row)
-                    <x-partials.table.rows :row="$row" :columns="$columns" />
-                @endforeach
+                {{-- Table rows --}}
+                <x-partials.table.rows :rows="$rows" :columns="$columns" />
             </tbody>
         </table>
     </div>
+
+    {{-- Pagination --}}
+    <x-partials.table.pagination />
+
 </div>

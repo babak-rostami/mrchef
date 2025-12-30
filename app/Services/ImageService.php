@@ -16,7 +16,7 @@ class ImageService
      * 0 = فقط تصویر اصلی
      * 1 = تصویر اصلی + تامبنیل  (دیفالت)
      */
-    public function upload($file, string $name, string $path, int $hasThumb = 1)
+    public function upload($file, string $name, string $path, int $hasThumb = 1): string
     {
         $name = $this->slug($name);
         $name = $this->uniqueName($name, $path, $this->ext);
@@ -53,7 +53,7 @@ class ImageService
             Storage::put("{$thumb}", $thumbnail);
         }
 
-        // همیشه مسیر عکس اصلی به دیتابیس بازگردانده می‌شود
+        // مسیر عکس اصلی به دیتابیس بازگردانده می‌شود
         return $original;
     }
 

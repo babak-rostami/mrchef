@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="مواد اولیه" :parents="[['url' => route('admin.recipes.index'), 'title' => 'طرز پخت']]" />
 
-    <div class="md:mx-8 lg:mx-44 mb-48">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44 mb-48">
         <!-- Title + Create Button -->
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-bold">مواد اولیه {{ $recipe->title }}</h3>

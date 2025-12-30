@@ -1,7 +1,9 @@
 import "../../js/app.js";
-import "../component/btable/index.js";
+import initialTable from "../component/btable/index.js";
 
-// دکمه رو disable میکنه که کاربر چند بار کلیک کزد فرم اشتباهی چند بار سابمیت نشه
+initialTable("categories");
+
+// for delete btn
 window.submitForm = function (btn, wait_text) {
     // جلوگیری از کلیک مجدد
     setTimeout(() => {

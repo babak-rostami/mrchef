@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="ماده اولیه جدید" :parents="[['url' => route('admin.ingredient.index'), 'title' => 'مدیریت مواد اولیه']]" />
 
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         <!-- Title -->
         <div class="flex justify-between items-center mb-6">

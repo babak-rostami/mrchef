@@ -1,5 +1,5 @@
-<header class="bg-gray-50 md:mx-8 lg:mx-44 rounded-2xl mt-2 shadow-sm">
-    <nav class="container mx-auto flex items-center justify-between py-4 px-4">
+<header class="px-3 md:p-0 md:mx-8 lg:mx-44 mt-2">
+    <nav class="container mx-auto flex items-center justify-between py-4 px-4 bg-gray-50 shadow-sm rounded-2xl">
 
         {{-- Logo --}}
         <a href="{{ url('/') }}" class="text-xl font-semibold flex items-center gap-2 hover:scale-105 transition">

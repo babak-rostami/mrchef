@@ -37,7 +37,12 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $this->imageService->upload($request->file('image'), Str::limit($data['slug'], 20), Category::STORE_IMAGE_PATH, 1);
+            $imagePath = $this->imageService->upload(
+                $request->file('image'),
+                Str::limit($data['slug'], 20),
+                Category::STORE_IMAGE_PATH,
+                1
+            );
             $data['image'] = $imagePath;
         }
 

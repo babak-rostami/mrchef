@@ -23,7 +23,7 @@
     <x-partials.header />
 
     <div class="mt-4">
-        <div class="md:mx-8 lg:mx-44">
+        <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
             <x-partials.alerts />
         </div>
         @yield('content')

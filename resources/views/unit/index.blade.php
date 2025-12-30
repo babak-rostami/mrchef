@@ -10,7 +10,7 @@
 
     <x-partials.breadcrumb panel="admin" page="واحد های اندازه گیری" />
 
-    <div class="md:mx-8 lg:mx-44 mb-40 mt-8">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44 mb-12 mt-8">
 
         <!-- Title + Create Button -->
         <div class="flex items-center justify-between mb-6">

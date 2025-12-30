@@ -1,4 +1,4 @@
-<footer class="bg-gray-50 rounded-2xl mt-10 md:mx-8 lg:mx-44">
+<footer class="bg-gray-50 rounded-2xl mt-10 md:mx-8 lg:mx-44 mb-14 md:mb-0">
     <div class="container mx-auto py-6 text-center">
 
         <div class="flex justify-center gap-4 text-xl mt-2">

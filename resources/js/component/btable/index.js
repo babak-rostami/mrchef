@@ -1,57 +1,22 @@
-document.querySelectorAll(".btable-wrapper").forEach((wrapper) => {
-    const searchInput = wrapper.querySelector(".btable-search");
+import tableSearch from "./search";
+import tableSort from "./sort";
+import tablePagination from "./pagination";
+import { tableState } from "./tableState";
+
+export default function initialTable(table_id) {
+    const wrapper = document.getElementById(table_id);
     const rows = Array.from(wrapper.querySelectorAll(".btable-row"));
-    const headers = wrapper.querySelectorAll(".btable-th");
+
+    tableState.allRows = rows;
+    tableState.filteredRows = [...rows];
+    tableState.sortedRows = [...rows];
 
     // SEARCH
-    searchInput.addEventListener("input", (e) => {
-        const value = e.target.value.toLowerCase();
-
-        rows.forEach((row) => {
-            const searchableTds = Array.from(row.querySelectorAll("td")).filter(
-                (td) => {
-                    const key = td.dataset.key;
-                    return (
-                        wrapper.querySelector(`.btable-th[data-key="${key}"]`)
-                            ?.dataset.searchable === "true"
-                    );
-                }
-            );
-
-            const match = searchableTds.some((td) =>
-                td.textContent.toLowerCase().includes(value)
-            );
-
-            row.classList.toggle("hidden", !match);
-        });
-    });
+    tableSearch(wrapper);
 
     // SORT
-    headers.forEach((th) => {
-        if (th.dataset.sortable !== "true") return;
+    tableSort(wrapper);
 
-        let asc = true;
-
-        th.addEventListener("click", () => {
-            const key = th.dataset.key;
-            asc = !asc;
-
-            const sorted = rows.sort((a, b) => {
-                const aText = a.querySelector(
-                    `td[data-key="${key}"]`
-                ).textContent;
-                const bText = b.querySelector(
-                    `td[data-key="${key}"]`
-                ).textContent;
-
-                return asc
-                    ? aText.localeCompare(bText)
-                    : bText.localeCompare(aText);
-            });
-
-            const tbody = wrapper.querySelector(".btable-body");
-            tbody.innerHTML = "";
-            sorted.forEach((r) => tbody.appendChild(r));
-        });
-    });
-});
+    // PAGINATION
+    tablePagination(wrapper);
+}

@@ -9,7 +9,7 @@
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="مدیریت دسته بندی ها" />
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         <!-- Title + Create Button -->
         <div class="flex items-center justify-between mb-6">
@@ -31,24 +31,14 @@
                         href="{{ route('admin.category.create') }}">دسته بندی جدید</a>
                 </div>
             @else
-                <x-partials.table.index :columns="[
-                    ['key' => 'thumb', 'label' => 'Image', 'view' => 'category.part.table.thumb'],
-                    ['key' => 'name', 'label' => 'Name', 'sortable' => true, 'searchable' => true],
-                    ['key' => 'name_en', 'label' => 'Name EN', 'searchable' => true],
-                    ['key' => 'parent', 'label' => 'Parent', 'view' => 'category.part.table.parent'],
-                    ['key' => 'actions', 'label' => 'Actions', 'view' => 'category.part.table.actions'],
+                <x-partials.table.index id="categories" :columns="[
+                    ['key' => 'id', 'label' => 'id', 'sortable' => true],
+                    ['key' => 'thumb', 'label' => 'تصویر', 'view' => 'category.part.table.thumb'],
+                    ['key' => 'name', 'label' => 'نام', 'sortable' => true, 'searchable' => true],
+                    ['key' => 'name_en', 'label' => 'نام انگلیسی', 'searchable' => true],
+                    ['key' => 'parent', 'label' => 'دسته پدر', 'view' => 'category.part.table.parent'],
+                    ['key' => 'actions', 'label' => '#', 'view' => 'category.part.table.actions'],
                 ]" :rows="$categories" />
-
-
-                {{-- <div class="grid grid-cols-1 gap-5 mb-32">
-
-                    @foreach ($categories as $category)
-                        @include('category.part.category-item', [
-                            'category' => $category,
-                        ])
-                    @endforeach
-
-                </div> --}}
             @endif
 
         </div>

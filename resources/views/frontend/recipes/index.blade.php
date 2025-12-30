@@ -15,7 +15,7 @@
     @endif
 
     <!-- container -->
-    <div class="md:mx-8 lg:mx-44">
+    <div class="px-3 md:p-0 md:mx-8 lg:mx-44">
 
         {{-- category slider --}}
         <x-category.category-slider :categories="$categories" route="recipes.index" />
