@@ -2,10 +2,6 @@
 
 @section('title', 'مدیریت مواد اولیه')
 
-@section('styles')
-    @vite(['resources/css/ingredient/index.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="مدیریت مواد اولیه" />
@@ -54,6 +50,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/ingredient/index.js'])
-@endsection
+@endpush

@@ -1,4 +1,3 @@
-import "../app.js";
 import "../utils/button.js";
 import { handleForm } from "../component/form/index";
 import initialTable from "../component/btable/index.js";

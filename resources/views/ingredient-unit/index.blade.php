@@ -2,10 +2,6 @@
 
 @section('title', 'واحد های اندازه گیری')
 
-@section('styles')
-    @vite(['resources/css/ingredient-unit/index.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="واحد های اندازه گیری" :parents="[['url' => route('admin.ingredient.index'), 'title' => 'مواد اولیه']]" />
@@ -79,6 +75,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/ingredient-unit/index.js'])
-@endsection
+@endpush

@@ -2,10 +2,6 @@
 
 @section('title', 'ماده اولیه جدید')
 
-@section('styles')
-    @vite(['resources/css/ingredient/create.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="ماده اولیه جدید" :parents="[['url' => route('admin.ingredient.index'), 'title' => 'مدیریت مواد اولیه']]" />
@@ -58,6 +54,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/ingredient/create.js'])
-@endsection
+@endpush

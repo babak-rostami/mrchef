@@ -2,9 +2,9 @@
 
 @section('title', 'دسته بندی ها')
 
-@section('styles')
+@push('styles')
     @vite(['resources/css/category/index.css'])
-@endsection
+@endpush
 
 @section('content')
 
@@ -46,6 +46,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/category/index.js'])
-@endsection
+@endpush

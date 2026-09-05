@@ -2,10 +2,6 @@
 
 @section('title', 'ثبت نام')
 
-@section('styles')
-    @vite(['resources/css/user/register.css'])
-@endsection
-
 @section('content')
     <div class="flex justify-center mt-10">
         <div class="w-full max-w-md">

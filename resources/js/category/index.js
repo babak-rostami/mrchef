@@ -1,4 +1,3 @@
-import "../../js/app.js";
 import initialTable from "../component/btable/index.js";
 
 initialTable("categories");

@@ -2,10 +2,6 @@
 
 @section('title', 'ورود')
 
-@section('styles')
-    @vite(['resources/css/user/login.css'])
-@endsection
-
 @section('content')
 
     <div class="flex justify-center">

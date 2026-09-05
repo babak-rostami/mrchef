@@ -1,4 +1,3 @@
-import '../../js/app';
 import { handleForm, createCkeditors, createImages } from '../component/form/index';
 
 const form_id = 'recipes-update-form';

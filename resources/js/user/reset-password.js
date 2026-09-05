@@ -1,5 +1,3 @@
-import "../app";
-
 const form = document.getElementById("reset-password-form");
 
 const submitBtn = document.getElementById("auth-reset-btn");
@@ -9,11 +7,11 @@ const errorSpan = document.getElementById("auth-reset-error");
 
 const emailInput = document.getElementById("auth-reset-email-input");
 const resetPasswordToggle = document.getElementById(
-    "auth-reset-password-toggle"
+    "auth-reset-password-toggle",
 );
 const passwordInput = document.getElementById("auth-reset-password-input");
 const resetPasswordToggle2 = document.getElementById(
-    "auth-reset-password2-toggle"
+    "auth-reset-password2-toggle",
 );
 const passwordInput2 = document.getElementById("auth-reset-password2-input");
 

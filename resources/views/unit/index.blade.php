@@ -2,10 +2,6 @@
 
 @section('title', 'واحد های اندازه گیری')
 
-@section('styles')
-    @vite(['resources/css/unit/index.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="واحد های اندازه گیری" />
@@ -50,6 +46,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/unit/index.js'])
-@endsection
+@endpush

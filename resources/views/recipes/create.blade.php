@@ -2,10 +2,6 @@
 
 @section('title', 'رسپی جدید')
 
-@section('styles')
-    @vite(['resources/css/recipe/create.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="رسپی جدید" :parents="[['url' => route('admin.recipes.index'), 'title' => 'مدیریت رسپی ها']]" />
@@ -81,6 +77,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/recipe/create.js'])
-@endsection
+@endpush

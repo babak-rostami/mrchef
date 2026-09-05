@@ -2,9 +2,9 @@
 
 @section('title', 'خانه')
 
-@section('styles')
+@push('styles')
     @vite(['resources/css/page/home.css'])
-@endsection
+@endpush
 
 @section('content')
 
@@ -80,6 +80,6 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/page/home.js'])
-@endsection
+@endpush

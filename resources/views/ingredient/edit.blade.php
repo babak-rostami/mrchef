@@ -2,10 +2,6 @@
 
 @section('title', 'ویرایش ماده اولیه')
 
-@section('styles')
-    @vite(['resources/css/ingredient/edit.css'])
-@endsection
-
 @section('content')
 
 
@@ -79,6 +75,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/ingredient/edit.js'])
-@endsection
+@endpush

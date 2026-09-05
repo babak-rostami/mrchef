@@ -2,10 +2,6 @@
 
 @section('title', 'دسته بندی جدید')
 
-@section('styles')
-    @vite(['resources/css/category/create.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="دسته بندی جدید" :parents="[['url' => route('admin.category.index'), 'title' => 'مدیریت دسته بندی ها']]" />
@@ -68,6 +64,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/category/create.js'])
-@endsection
+@endpush

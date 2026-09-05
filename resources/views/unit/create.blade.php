@@ -2,10 +2,6 @@
 
 @section('title', 'واحد اندازه گیری جدید')
 
-@section('styles')
-    @vite(['resources/css/unit/create.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="واحد اندازه گیری جدید" :parents="[['url' => route('admin.unit.index'), 'title' => 'واحد های اندازه گیری']]" />
@@ -47,6 +43,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/unit/create.js'])
-@endsection
+@endpush

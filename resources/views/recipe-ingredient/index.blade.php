@@ -2,10 +2,6 @@
 
 @section('title', 'مواد اولیه')
 
-@section('styles')
-    @vite(['resources/css/recipe-ingredient/index.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="مواد اولیه" :parents="[['url' => route('admin.recipes.index'), 'title' => 'طرز پخت']]" />
@@ -80,6 +76,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/recipe-ingredient/index.js'])
-@endsection
+@endpush

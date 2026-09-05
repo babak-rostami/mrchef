@@ -1,4 +1,3 @@
-import "../app";
 import { handleForm, createImages } from "../component/form/index";
 
 const form_id = "ingredient-store-form";

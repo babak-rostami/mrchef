@@ -11,11 +11,8 @@
     <title>@yield('title', 'book')</title>
 
     {{-- CSS --}}
-    @hasSection('styles')
-        @yield('styles')
-    @else
-        @vite(['resources/css/app.css'])
-    @endif
+    @vite('resources/css/app.css')
+    @stack('styles')
 </head>
 
 <body class="text-gray-800">
@@ -41,11 +38,8 @@
         window.isGuest = @json(auth()->guest());
     </script>
 
-    @hasSection('scripts')
-        @yield('scripts')
-    @else
-        @vite(['resources/js/app.js'])
-    @endif
+    @vite('resources/js/app.js')
+    @stack('scripts')
 </body>
 
 </html>

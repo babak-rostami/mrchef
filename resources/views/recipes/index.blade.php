@@ -2,10 +2,6 @@
 
 @section('title', 'مدیریت رسپی ها')
 
-@section('styles')
-    @vite(['resources/css/recipe/index.css'])
-@endsection
-
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="مدیریت رسپی ها" />
@@ -48,6 +44,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     @vite(['resources/js/recipe/index.js'])
-@endsection
+@endpush
