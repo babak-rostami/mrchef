@@ -22,8 +22,8 @@
 
         <div class="relative w-full rounded-3xl overflow-hidden mb-8">
             <div class="absolute inset-0">
-                <img src="{{ asset('files/images/recipe-index.jpg') }}" class="w-full h-full object-cover"
-                    alt="امروز غذا چی بپزم؟">
+                <img src="{{ config('images.ftp_path') . '/files/images/recipe-index.jpg' }}"
+                    class="w-full h-full object-cover" alt="امروز غذا چی بپزم؟">
                 <div class="absolute inset-0 bg-black/40"></div> <!-- لایه تاریک روی عکس -->
             </div>
             <div class="relative z-10 w-full py-32 px-8 flex flex-col items-center md:items-start text-white">
@@ -40,9 +40,8 @@
         @if ($recipes->count() == 0)
 
             <div class="flex flex-col items-center">
-                <img src="{{ asset('files/images/behnam.jpg') }}"
-                    class="w-64 rounded-full mb-3
-                hover:-translate-y-2 duration-300 cursor-pointer">
+                <img src="{{ config('images.ftp_path') . '/files/images/behnam.jpg' }}" class="w-64 rounded-full mb-3
+                                hover:-translate-y-2 duration-300 cursor-pointer">
                 <span class="text-2xl font-black block mb-2">رسپی های جدید تو راهه</span>
                 <span>به دسته بندی های دیگه سر بزن</span>
             </div>

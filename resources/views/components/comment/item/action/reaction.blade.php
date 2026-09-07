@@ -4,7 +4,7 @@
     <span id="bcomment-like-count-{{ $comment->id }}">
         {{ $comment->like_count }}
     </span>
-    <img class="w-6" src="{{ asset('files/icon/like-finger.svg') }}">
+    <img class="w-6" src="{{ config('images.ftp_path') . '/files/icon/like-finger.svg' }}">
 </div>
 
 <div id="bcomment-dislike-btn-{{ $comment->id }}" data-loading="false"
@@ -13,5 +13,5 @@
     <span id="bcomment-dislike-count-{{ $comment->id }}">
         {{ $comment->dislike_count }}
     </span>
-    <img class="w-6" src="{{ asset('files/icon/dislike-finger.svg') }}">
+    <img class="w-6" src="{{ config('images.ftp_path') . '/files/icon/dislike-finger.svg' }}">
 </div>

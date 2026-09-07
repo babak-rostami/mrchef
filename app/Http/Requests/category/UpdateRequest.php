@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -28,6 +29,12 @@ class UpdateRequest extends FormRequest
             'body'           => 'string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
             'parent_id' => 'nullable|exists:categories,id',
+            'slug' => [
+                'nullable',
+                'string',
+                'max:40',
+                Rule::unique('categories', 'slug')->ignore($this->category),
+            ],
         ];
     }
 }

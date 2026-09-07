@@ -24,7 +24,7 @@
 
             @if ($categories->count() == 0)
                 <div class="flex flex-col items-center py-10 mb-32">
-                    <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                    <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                     <h5 class="text-gray-500">هنوز دسته بندی ایجاد نکردی</h5>
 
                     <a class="px-4 py-1.5 cursor-pointer bg-blue-500 mr-2 mt-4 text-white rounded-xl shadow hover:bg-blue-600"

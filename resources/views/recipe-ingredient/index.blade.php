@@ -50,7 +50,7 @@
         <!-- ingredient List -->
         @if ($r_ingredients->count() == 0)
             <div class="flex flex-col items-center py-10">
-                <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500 mb-4">مواد اولیه ثبت نشده</h5>
 
                 <button onclick="openModal('createRecipeIngredient')"
@@ -60,16 +60,16 @@
             </div>
         @else
             <x-partials.table.index id="r_ingredients" :columns="[
-                ['key' => 'id', 'label' => 'id', 'sortable' => true],
-                [
-                    'key' => 'title',
-                    'label' => 'مقدار لازم',
-                    'sortable' => true,
-                    'searchable' => true,
-                    'view' => 'recipe-ingredient.part.table.title',
-                ],
-                ['key' => 'actions', 'label' => '#', 'view' => 'recipe-ingredient.part.table.actions'],
-            ]" :rows="$r_ingredients" />
+                    ['key' => 'id', 'label' => 'id', 'sortable' => true],
+                    [
+                        'key' => 'title',
+                        'label' => 'مقدار لازم',
+                        'sortable' => true,
+                        'searchable' => true,
+                        'view' => 'recipe-ingredient.part.table.title',
+                    ],
+                    ['key' => 'actions', 'label' => '#', 'view' => 'recipe-ingredient.part.table.actions'],
+                ]" :rows="$r_ingredients" />
         @endif
 
     </div>

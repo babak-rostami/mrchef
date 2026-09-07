@@ -48,7 +48,7 @@
         <!-- ingredient List -->
         @if ($ingredient->units->count() == 0)
             <div class="flex flex-col items-center py-10">
-                <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500 mb-4">وزن واحد های اندازه گیری ثبت نشده</h5>
 
                 <button onclick="openModal('createIngredientUnit')"
@@ -58,17 +58,17 @@
             </div>
         @else
             <x-partials.table.index id="ingredient_units" :columns="[
-                ['key' => 'id', 'label' => 'id', 'sortable' => true],
-                ['key' => 'name', 'label' => 'واحد اندازه گیری', 'sortable' => true],
-                [
-                    'key' => 'unit_weight',
-                    'label' => 'وزن واحد به گرم',
-                    'sortable' => true,
-                    'searchable' => true,
-                    'view' => 'ingredient-unit.part.table.unit_weight',
-                ],
-                ['key' => 'actions', 'label' => '#', 'view' => 'ingredient-unit.part.table.actions'],
-            ]" :rows="$ingredient->units" />
+                    ['key' => 'id', 'label' => 'id', 'sortable' => true],
+                    ['key' => 'name', 'label' => 'واحد اندازه گیری', 'sortable' => true],
+                    [
+                        'key' => 'unit_weight',
+                        'label' => 'وزن واحد به گرم',
+                        'sortable' => true,
+                        'searchable' => true,
+                        'view' => 'ingredient-unit.part.table.unit_weight',
+                    ],
+                    ['key' => 'actions', 'label' => '#', 'view' => 'ingredient-unit.part.table.actions'],
+                ]" :rows="$ingredient->units" />
         @endif
 
     </div>

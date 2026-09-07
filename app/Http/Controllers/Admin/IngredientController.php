@@ -7,19 +7,14 @@ use App\Http\Requests\ingredient\StoreRequest;
 use App\Http\Requests\ingredient\UpdateRequest;
 use App\Models\Ingredient;
 use App\Models\IngredientUnit;
-use App\Services\ImageService;
+use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class IngredientController extends Controller
 {
 
-    private $imageService;
-
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
+    public function __construct(private ImageUploadService $images) {}
 
     public function index()
     {
@@ -41,8 +36,13 @@ class IngredientController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $this->imageService->upload($request->file('image'), Str::limit($request->slug, 20), Ingredient::STORE_IMAGE_PATH, 1);
-            $data['image'] = $imagePath;
+            $filename = Str::limit($data['slug'], 20);
+            $path = $this->images->upload(
+                $request->file('image'),
+                Ingredient::IMAGE_DIRECTORY,
+                array_merge(Ingredient::IMAGE_UPLOAD_OPTIONS, ['filename' => $filename])
+            );
+            $data['image'] = $path;
         }
 
         Ingredient::create($data);
@@ -71,9 +71,13 @@ class IngredientController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            $this->imageService->delete($ingredient->image);
-            $imagePath = $this->imageService->upload($request->file('image'), $ingredient->image_name, Ingredient::STORE_IMAGE_PATH, 1);
-            $data['image'] = $imagePath;
+            $path = $this->images->replace(
+                $request->file('image'),
+                $ingredient->image_path,
+                Ingredient::IMAGE_DIRECTORY,
+                Ingredient::IMAGE_UPLOAD_OPTIONS
+            );
+            $data['image'] = $path;
         }
 
         $ingredient->update($data);
@@ -84,6 +88,10 @@ class IngredientController extends Controller
     public function destroy($id)
     {
         $ingredient = Ingredient::find($id);
+
+        if ($ingredient->image) {
+            $this->images->delete($ingredient->image_path);
+        }
 
         if (!isset($ingredient)) {
             return back()->with('error', 'ماده اولیه وجود ندارد');

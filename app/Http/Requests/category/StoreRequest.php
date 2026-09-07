@@ -3,6 +3,7 @@
 namespace App\Http\Requests\category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -24,11 +25,16 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:40',
             'name_en' => 'required|string|max:40',
-            'slug' => 'required|string|max:40',
             'description' => 'required|string',
             'body'           => 'string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
             'parent_id' => 'nullable|exists:categories,id',
+            'slug' => [
+                'required',
+                'string',
+                'max:40',
+                Rule::unique('categories', 'slug'),
+            ],
         ];
     }
 }

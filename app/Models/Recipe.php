@@ -20,7 +20,13 @@ class Recipe extends Model
     const STATUS_PENDING = 2;
     const EDITOR_PATH = 'recipe/editor/1';
     const EDITOR_KEY = 'recipe';
-    const STORE_IMAGE_PATH = 'recipe';
+    public const IMAGE_DIRECTORY = 'recipe/images';
+    public const IMAGE_UPLOAD_OPTIONS = [
+        'width'   => 1000,
+        'format'  => 'webp',
+        'quality' => 90,
+        'has_thumb' => true
+    ];
 
     protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'description', 'body', 'status', 'image', 'time_prepare', 'time_cook', 'servings'];
 
@@ -34,11 +40,6 @@ class Recipe extends Model
             $recipe->load(['editorImages']);
 
             $imageService = resolve(ImageService::class);
-
-            // حذف عکس اصلی
-            if ($recipe->image) {
-                $imageService->delete($recipe->image);
-            }
 
             // حذف تصاویر CKEditor
             foreach ($recipe->editorImages as $editorImage) {
@@ -114,7 +115,7 @@ class Recipe extends Model
 
     public function defaultImage(): string
     {
-        return asset('files/icon/default-recipe.jpg');
+        return config('images.ftp_path') . '/files/icon/default-recipe.jpg';
     }
 
     public function scopeActive($query)

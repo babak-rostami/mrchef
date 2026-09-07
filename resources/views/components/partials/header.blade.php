@@ -3,7 +3,7 @@
 
         {{-- Logo --}}
         <a href="{{ url('/') }}" class="text-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
-            <img src="{{ asset('files/icon/chef-icon-36.png') }}" alt="mr chef">
+            <img src="{{ config('images.ftp_path') . '/files/icon/chef-icon-36.png' }}" alt="mr chef">
             <span class="text-gray-900">Mrchef</span>
         </a>
 
@@ -33,13 +33,12 @@
         <div class="relative">
 
             {{-- Avatar --}}
-            <button id="profile-toggle"
-                class="w-10 h-10 rounded-full overflow-hidden
+            <button id="profile-toggle" class="w-10 h-10 rounded-full overflow-hidden
                        hover:scale-105
                        transition flex items-center justify-center bg-white cursor-pointer">
 
                 @auth('user')
-                    <img src="{{ auth('user')->user()->thumb_url ?? asset('files/icon/profile2-40.png') }}"
+                    <img src="{{ auth('user')->user()->thumb_url ?? config('images.ftp_path') . '/files/icon/profile2-40.png' }}"
                         class="w-full h-full object-cover">
                 @else
                     <svg onclick="openModal('user-login')" class="w-6 h-6 text-emerald-600" fill="none"
@@ -52,8 +51,7 @@
             </button>
 
             {{-- Dropdown --}}
-            <div id="profile-dropdown"
-                class="hidden absolute left-0 mt-3 w-44
+            <div id="profile-dropdown" class="hidden absolute left-0 mt-3 w-44
                         bg-white rounded-xl shadow-lg border border-gray-200 p-2 text-sm z-10">
 
                 @auth('user')
@@ -63,9 +61,8 @@
 
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button
-                            class="w-full text-right px-3 py-2 rounded-lg
-                                   text-red-500 hover:bg-red-50 transition cursor-pointer">
+                        <button class="w-full text-right px-3 py-2 rounded-lg
+                                           text-red-500 hover:bg-red-50 transition cursor-pointer">
                             خروج از حساب
                         </button>
                     </form>

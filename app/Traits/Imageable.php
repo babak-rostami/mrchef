@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Services\ImageUploadService;
 use Illuminate\Support\Facades\Storage;
 
 trait Imageable
@@ -9,10 +10,10 @@ trait Imageable
     /**
      * URL of main image
      */
-    public function getImageUrlAttribute()
+    public function getImageUrlAttribute(): ?string
     {
-        return $this->image
-            ? Storage::url($this->image)
+        return $this->image ?
+            app(ImageUploadService::class)->url($this->image, 'ftp')
             : $this->getDefaultImage();
     }
 
@@ -22,8 +23,8 @@ trait Imageable
     public function getThumbUrlAttribute()
     {
         if ($this->image) {
-            $thumb = str_replace('.webp', '2.webp', $this->image);
-            return Storage::url($thumb);
+            $thumb = str_replace('.webp', '-thumb.webp', $this->image_url);
+            return $thumb;
         }
 
         return $this->getDefaultImage();
@@ -37,6 +38,15 @@ trait Imageable
         return pathinfo($this->image, PATHINFO_FILENAME);
     }
 
+    public function getImagePathAttribute()
+    {
+        return $this->image;
+    }
+    public function getThumbPathAttribute()
+    {
+        return str_replace('.webp', '-thumb.webp', $this->getImagePathAttribute());
+    }
+
     /**
      * Default image
      * Model can override this
@@ -48,6 +58,6 @@ trait Imageable
             return $this->defaultImage();
         }
 
-        return asset('files/icon/default-image.png');
+        return config('images.ftp_path') . '/files/icon/default-image.png';
     }
 }

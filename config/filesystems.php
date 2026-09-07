@@ -65,15 +65,18 @@ return [
             'host'     => env('FTP_HOST'),
             'username' => env('FTP_USERNAME'),
             'password' => env('FTP_PASSWORD'),
-            'port'     => env('FTP_PORT', 21),
-
-            // مسیر روت در سرور
-            'root' => env('FTP_ROOT', '/'),
-
-            'passive' => true,
-            'ssl'     => false,
-            'timeout' => 30,
-        ],
+            'port'    => (int) env('FTP_PORT', 21),
+            'timeout' => (int) env('FTP_TIMEOUT', 30),
+            'passive' => filter_var(env('FTP_PASSIVE', true), FILTER_VALIDATE_BOOLEAN),
+            'ssl'     => filter_var(env('FTP_SSL', false), FILTER_VALIDATE_BOOLEAN),
+            'root' => env('FTP_ROOT', ''),
+            'permPublic'    => 0644,
+            'permPrivate'   => 0600,
+            'dirPermPublic' => 0755,
+            'url'        => env('FTP_URL'),
+            'visibility' => 'public',
+            'throw'      => true,
+        ]
 
 
     ],

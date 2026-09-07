@@ -23,7 +23,7 @@
         <!-- unit List -->
         @if ($units->count() == 0)
             <div class="flex flex-col items-center py-10">
-                <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500">هیچ واحد اندازه گیری ای یافت نشد</h5>
 
                 <a href="{{ route('admin.unit.create') }}"
@@ -34,12 +34,12 @@
             </div>
         @else
             <x-partials.table.index id="units" :columns="[
-                ['key' => 'id', 'label' => 'id', 'sortable' => true],
-                ['key' => 'name', 'label' => 'نام', 'sortable' => true, 'searchable' => true],
-                ['key' => 'name_en', 'label' => 'نام انگلیسی', 'sortable' => true, 'searchable' => true],
-                ['key' => 'label', 'label' => 'اختصار', 'sortable' => true, 'searchable' => true],
-                ['key' => 'actions', 'label' => '#', 'view' => 'unit.part.table.actions'],
-            ]" :rows="$units" />
+                    ['key' => 'id', 'label' => 'id', 'sortable' => true],
+                    ['key' => 'name', 'label' => 'نام', 'sortable' => true, 'searchable' => true],
+                    ['key' => 'name_en', 'label' => 'نام انگلیسی', 'sortable' => true, 'searchable' => true],
+                    ['key' => 'label', 'label' => 'اختصار', 'sortable' => true, 'searchable' => true],
+                    ['key' => 'actions', 'label' => '#', 'view' => 'unit.part.table.actions'],
+                ]" :rows="$units" />
         @endif
 
     </div>

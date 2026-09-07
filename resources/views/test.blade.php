@@ -15,8 +15,7 @@
 <body>
 
 
-    <div
-        class="max-w-full h-[400px] my-8
+    <div class="max-w-full h-[400px] my-8
     grid grid-cols-1 sm:grid-cols-1
     mx-4
     md:grid-cols-2
@@ -30,18 +29,16 @@
     </div>
 
 
-    <button id="theme-toggle"
-        class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-700 text-gray-900
+    <button id="theme-toggle" class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-700 text-gray-900
         dark:text-gray-100 shadow transition font-semibold">
     </button>
 
     <div class="max-w-[1400px] mx-auto">
         <div class="flex gap-4 justify-center">
-            <div
-                class="w-80 border border-gray-200 rounded-2xl overflow-hidden
+            <div class="w-80 border border-gray-200 rounded-2xl overflow-hidden
     shadow pb-2
     dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                <img src="{{ asset('files\category\car.webp') }}" alt="" srcset="">
+                <img src="{{ config('images.ftp_path') . '\files\category\car.webp' }}" alt="" srcset="">
                 <div class="p-2 space-y-2">
                     <h2 class="text-xl font-bold">واگذاری پرنده آروم</h2>
                     <p class="text-gray-600">یک پرنده بسیار آروم هستش و دستی هستش و حرف هم میزنه</p>
@@ -49,11 +46,10 @@
         rounded py-1 px-3">مشاهده مطلب</button>
                 </div>
             </div>
-            <div
-                class="w-80 border border-gray-200 rounded-2xl overflow-hidden
+            <div class="w-80 border border-gray-200 rounded-2xl overflow-hidden
     shadow pb-2
     dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                <img src="{{ asset('files\category\car.webp') }}" alt="" srcset="">
+                <img src="{{ config('images.ftp_path') . '\files\category\car.webp' }}" alt="" srcset="">
                 <div class="p-2 space-y-2">
                     <h2 class="text-xl font-bold">واگذاری پرنده آروم</h2>
                     <p class="text-gray-600">یک پرنده بسیار آروم هستش و دستی هستش و حرف هم میزنه</p>
@@ -61,11 +57,10 @@
         rounded py-1 px-3">مشاهده مطلب</button>
                 </div>
             </div>
-            <div
-                class="w-80 border border-gray-200 rounded-2xl overflow-hidden
+            <div class="w-80 border border-gray-200 rounded-2xl overflow-hidden
     shadow pb-2
     dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                <img src="{{ asset('files\category\car.webp') }}" alt="" srcset="">
+                <img src="{{ config('images.ftp_path') . '\files\category\car.webp' }}" alt="" srcset="">
                 <div class="p-2 space-y-2">
                     <h2 class="text-xl font-bold">واگذاری پرنده آروم</h2>
                     <p class="text-gray-600">یک پرنده بسیار آروم هستش و دستی هستش و حرف هم میزنه</p>
@@ -73,11 +68,10 @@
         rounded py-1 px-3">مشاهده مطلب</button>
                 </div>
             </div>
-            <div
-                class="w-80 border border-gray-200 rounded-2xl overflow-hidden
+            <div class="w-80 border border-gray-200 rounded-2xl overflow-hidden
     shadow pb-2
     dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                <img src="{{ asset('files\category\car.webp') }}" alt="" srcset="">
+                <img src="{{ config('images.ftp_path') . '\files\category\car.webp' }}" alt="" srcset="">
                 <div class="p-2 space-y-2">
                     <h2 class="text-xl font-bold">واگذاری پرنده آروم</h2>
                     <p class="text-gray-600">یک پرنده بسیار آروم هستش و دستی هستش و حرف هم میزنه</p>
@@ -91,7 +85,7 @@
 
     <div class="flex mt-16 mx-auto bg-gray-300 w-fit
         rounded overflow-hidden hover:shadow cursor-pointer">
-        <img class="w-20" src="{{ asset('files\category\car.webp') }}">
+        <img class="w-20" src="{{ config('images.ftp_path') . '\files\category\car.webp' }}">
         <div class="flex flex-col p-4">
             <span>babak rostami</span>
             <span>babak@gmail.com</span>

@@ -1,9 +1,9 @@
 <div class="text-center hidden" id="auth-login-section">
 
-    <div id="auth-login-email-field"
-        class="mt-4 bg-gray-300 rounded-2xl
+    <div id="auth-login-email-field" class="mt-4 bg-gray-300 rounded-2xl
     w-fit cursor-pointer mx-auto pl-4 hover:scale-105 duration-300 overflow-hidden mb-4">
-        <img class="inline bg-gray-500" src="{{ asset('files/icon/arrow-24.png') }}" loading="lazy">
+        <img class="inline bg-gray-500" src="{{ config('images.ftp_path') . '/files/icon/arrow-24.png' }}"
+            loading="lazy">
         <span class="inline">تغییر حساب</span>
     </div>
 
@@ -30,15 +30,13 @@
             </button>
         </div>
 
-        <span id="auth-login-error"
-            class=" bg-red-600 rounded-2xl mt-6 py-2 text-[20px]
+        <span id="auth-login-error" class=" bg-red-600 rounded-2xl mt-6 py-2 text-[20px]
     hover:bg-red-700 text-white cursor-pointer hidden mb-8">
         </span>
-        <button type="button" id="auth-login-btn"
-            class=" bg-green-500 rounded-2xl mt-6 py-2
+        <button type="button" id="auth-login-btn" class=" bg-green-500 rounded-2xl mt-6 py-2
         hover:bg-green-700 text-white cursor-pointer text-2xl mb-8">
             <span>ورود</span>
-            <img class="inline" src="{{ asset('files/icon/arrow-left-24.png') }}">
+            <img class="inline" src="{{ config('images.ftp_path') . '/files/icon/arrow-left-24.png' }}">
         </button>
 
         <span id="auth-login-forgot-btn"

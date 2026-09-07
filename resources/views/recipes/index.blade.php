@@ -22,7 +22,7 @@
 
         @if ($recipes->count() == 0)
             <div class="flex flex-col items-center py-10">
-                <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                 <h5 class="text-gray-500">هنوز رسپی ایجاد نکردین</h5>
 
                 <a href="{{ route('admin.recipes.create') }}"
@@ -33,12 +33,12 @@
             </div>
         @else
             <x-partials.table.index id="recipes" :columns="[
-                ['key' => 'id', 'label' => 'id', 'sortable' => true],
-                ['key' => 'thumb', 'label' => 'تصویر', 'view' => 'recipes.part.table.thumb'],
-                ['key' => 'title', 'label' => 'عنوان', 'sortable' => true, 'searchable' => true],
-                ['key' => 'status', 'label' => 'وضعیت', 'view' => 'recipes.part.table.status'],
-                ['key' => 'actions', 'label' => '#', 'view' => 'recipes.part.table.actions'],
-            ]" :rows="$recipes" />
+                    ['key' => 'id', 'label' => 'id', 'sortable' => true],
+                    ['key' => 'thumb', 'label' => 'تصویر', 'view' => 'recipes.part.table.thumb'],
+                    ['key' => 'title', 'label' => 'عنوان', 'sortable' => true, 'searchable' => true],
+                    ['key' => 'status', 'label' => 'وضعیت', 'view' => 'recipes.part.table.status'],
+                    ['key' => 'actions', 'label' => '#', 'view' => 'recipes.part.table.actions'],
+                ]" :rows="$recipes" />
         @endif
     </div>
 

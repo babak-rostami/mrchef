@@ -10,23 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     use Imageable, HasFactory;
-
-    const STORE_IMAGE_PATH = 'ingredient';
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($recipe) {
-
-            $imageService = resolve(ImageService::class);
-
-            // حذف عکس اصلی
-            if ($recipe->image) {
-                $imageService->delete($recipe->image);
-            }
-        });
-    }
+    public const IMAGE_DIRECTORY = 'ingredient/images';
+    public const IMAGE_UPLOAD_OPTIONS = [
+        'width'   => 128,
+        'format'  => 'webp',
+        'quality' => 90,
+        'has_thumb' => false
+    ];
 
     protected $fillable = ['name', 'name_en', 'slug', 'image', 'show_in_search', 'calories_per_100g', 'fat_per_100g', 'carbs_per_100g', 'protein_per_100g'];
 

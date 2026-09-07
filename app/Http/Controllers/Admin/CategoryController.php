@@ -7,18 +7,12 @@ use App\Http\Requests\category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
 use App\Services\ckeditor\CkeditorService;
-use App\Services\ImageService;
+use App\Services\ImageUploadService;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    private $imageService, $editorService;
-
-    public function __construct(ImageService $imageService, CkeditorService $editorService)
-    {
-        $this->imageService = $imageService;
-        $this->editorService = $editorService;
-    }
+    public function __construct(private ImageUploadService $images, private CkeditorService $editorService) {}
 
     public function index()
     {
@@ -37,13 +31,13 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $this->imageService->upload(
+            $filename = Str::limit($data['slug'], 20);
+            $path = $this->images->upload(
                 $request->file('image'),
-                Str::limit($data['slug'], 20),
-                Category::STORE_IMAGE_PATH,
-                1
+                Category::IMAGE_DIRECTORY,
+                array_merge(Category::IMAGE_UPLOAD_OPTIONS, ['filename' => $filename])
             );
-            $data['image'] = $imagePath;
+            $data['image'] = $path;
         }
 
         $category = Category::create($data);
@@ -73,9 +67,14 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $this->imageService->delete($category->image);
-            $imagePath = $this->imageService->upload($request->file('image'), $category->image_name, Category::STORE_IMAGE_PATH, 1);
-            $data['image'] = $imagePath;
+            $path = $this->images->replace(
+                $request->file('image'),
+                $category->image_path,
+                Category::IMAGE_DIRECTORY,
+                Category::IMAGE_UPLOAD_OPTIONS
+            );
+
+            $data['image'] = $path;
         }
 
         $category->update($data);
@@ -93,14 +92,15 @@ class CategoryController extends Controller
             return back()->with('error', 'دسته بندی وجود ندارد');
         }
 
-        //         // حذف عکس اصلی
+        // حذف عکس و تامبنیل
         if ($category->image) {
-            $this->imageService->delete($category->image);
+            $this->images->delete($category->image_path);
+            $this->images->delete($category->thumb_path);
         }
 
         // حذف تصاویر CKEditor
         foreach ($category->editorImages as $editorImage) {
-            $this->imageService->delete($editorImage->image);
+            $this->images->delete($editorImage->image);
             $editorImage->delete();
         }
 

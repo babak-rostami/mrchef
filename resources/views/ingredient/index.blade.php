@@ -25,7 +25,7 @@
 
             @if ($ingredients->count() == 0)
                 <div class="flex flex-col items-center py-10 mb-32">
-                    <img src="{{ asset('files/icon/empty-list.png') }}" class="w-28 mb-3 opacity-70">
+                    <img src="{{ config('images.ftp_path') . '/files/icon/empty-list.png' }}" class="w-28 mb-3 opacity-70">
                     <h5 class="text-gray-500">هنوز ماده اولیه ایجاد نکرده اید</h5>
 
                     <a href="{{ route('admin.ingredient.create') }}"

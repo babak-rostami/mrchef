@@ -17,7 +17,7 @@
             <!-- دسته بندی‌ها -->
             @include('admin.dashboard.page-item', [
                 'route' => route('admin.category.index'),
-                'icon' => asset('files/icon/category-48.png'),
+                'icon' => config('images.ftp_path') . '/files/icon/category-48.png',
                 'title' => 'دسته بندی',
                 'desc' => 'مدیریت دسته بندی',
             ])
@@ -25,7 +25,7 @@
             <!-- رسپی ها -->
             @include('admin.dashboard.page-item', [
                 'route' => route('admin.recipes.index'),
-                'icon' => asset('files/icon/recipe-48.png'),
+                'icon' => config('images.ftp_path') . '/files/icon/recipe-48.png',
                 'title' => 'رسپی ها',
                 'desc' => 'مدیریت رسپی ها',
             ])
@@ -33,7 +33,7 @@
             <!-- مواد اولیه -->
             @include('admin.dashboard.page-item', [
                 'route' => route('admin.ingredient.index'),
-                'icon' => asset('files/icon/ingredient-48.png'),
+                'icon' => config('images.ftp_path') . '/files/icon/ingredient-48.png',
                 'title' => 'مواد اولیه',
                 'desc' => 'مدیریت مواد اولیه',
             ])
@@ -41,7 +41,7 @@
             <!-- واحد ها -->
             @include('admin.dashboard.page-item', [
                 'route' => route('admin.unit.index'),
-                'icon' => asset('files/icon/units-48.png'),
+                'icon' => config('images.ftp_path') . '/files/icon/units-48.png',
                 'title' => 'واحد های اندازه گیری',
                 'desc' => 'مدیریت واحد های اندازه گیری',
             ])

@@ -2,9 +2,8 @@
 
 @if ($recipe)
     <a href="{{ route('recipes.show', $recipe->slug) }}">
-        <div
-            class="grid grid-cols-1 md:grid-cols-[auto_1fr] mt-4 rounded-2xl overflow-hidden items-start
-    border border-gray-100">
+        <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] mt-4 rounded-2xl overflow-hidden items-start
+        border border-gray-100">
 
             <!-- IMAGE -->
             <div class="flex justify-center md:block">
@@ -13,20 +12,18 @@
             </div>
 
             <!-- TEXT BOX -->
-            <div
-                class="flex flex-col items-start p-4 gap-4
-            rounded-2xl md:rounded-none
-            mt-4 md:mt-0 md:h-full w-full">
+            <div class="flex flex-col items-start p-4 gap-4
+                rounded-2xl md:rounded-none
+                mt-4 md:mt-0 md:h-full w-full">
                 <span class="text-3xl font-extrabold text-gray-600">{{ $recipe->title }}</span>
 
                 <span class="whitespace-pre-line">{{ $recipe->description }}</span>
 
-                <div
-                    class="group flex items-center gap-2 bg-white text-green-700
-            px-4 py-2 rounded-3xl hover:bg-green-800 hover:text-white">
+                <div class="group flex items-center gap-2 bg-white text-green-700
+                px-4 py-2 rounded-3xl hover:bg-green-800 hover:text-white">
                     <span>دستور پخت</span>
-                    <img class="bg-green-900 rounded-2xl p-1" src="{{ asset('files/icon/arrow-left-24.png') }}"
-                        alt="arrow">
+                    <img class="bg-green-900 rounded-2xl p-1"
+                        src="{{ config('images.ftp_path') . '/files/icon/arrow-left-24.png' }}" alt="arrow">
                 </div>
             </div>
         </div>

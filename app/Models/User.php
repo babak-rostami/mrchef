@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function defaultImage(): string
     {
-        return asset('files/icon/profile2-40.png');
+        return config('images.ftp_path') . '/files/icon/profile2-40.png';
     }
 
     public function sendPasswordResetNotification($token)

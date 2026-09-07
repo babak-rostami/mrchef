@@ -10,9 +10,15 @@ class Category extends Model
 {
     use Imageable, HasFactory;
 
-    const EDITOR_PATH = 'category/editor/1';
-    const STORE_IMAGE_PATH = 'category';
-    const EDITOR_KEY = 'category';
+    public const EDITOR_PATH = 'category/editor/1';
+    public const EDITOR_KEY = 'category';
+    public const IMAGE_DIRECTORY = 'category/images';
+    public const IMAGE_UPLOAD_OPTIONS = [
+        'width'   => 300,
+        'format'  => 'webp',
+        'quality' => 90,
+        'has_thumb' => true
+    ];
 
     protected $fillable = ['name', 'name_en', 'slug', 'description', 'body', 'image', 'parent_id'];
 
@@ -33,6 +39,6 @@ class Category extends Model
 
     public function defaultImage(): string
     {
-        return asset('files/icon/default-category.png');
+        return config('images.ftp_path') . '/files/icon/default-category.png';
     }
 }
