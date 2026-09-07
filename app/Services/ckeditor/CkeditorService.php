@@ -3,12 +3,10 @@
 namespace App\Services\ckeditor;
 
 use App\Models\CkeditorImage;
-use App\Models\Recipe;
 use App\Services\ckeditor\factories\EditorProcessorFactory;
+use App\Services\ImageUploadService;
 use DOMDocument;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 /*-------------------------------------------------
 مدیریت تصاویر CKEditor برای مدل‌های مختلف 
@@ -18,6 +16,8 @@ use Illuminate\Support\Str;
 
 class CkeditorService
 {
+    public function __construct(private ImageUploadService $images) {}
+
     /**
      * @param string $type
      * @param Model $editorable
@@ -117,6 +117,7 @@ class CkeditorService
         $deletedImages = CkeditorImage::where('editorable_id', $editorable_id)
             ->whereNotIn('id', $imageModelsInEditor->pluck('id'))->get();
         foreach ($deletedImages as $dimage) {
+            $this->images->delete($dimage->image_path);
             $dimage->delete();
         }
     }

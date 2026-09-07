@@ -10,7 +10,7 @@ class Category extends Model
 {
     use Imageable, HasFactory;
 
-    public const EDITOR_PATH = 'category/editor/1';
+    public const EDITOR_PATH = 'category/editor';
     public const EDITOR_KEY = 'category';
     public const IMAGE_DIRECTORY = 'category/images';
     public const IMAGE_UPLOAD_OPTIONS = [

@@ -18,7 +18,7 @@ class Recipe extends Model
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_PENDING = 2;
-    const EDITOR_PATH = 'recipe/editor/1';
+    const EDITOR_PATH = 'recipe/editor';
     const EDITOR_KEY = 'recipe';
     public const IMAGE_DIRECTORY = 'recipe/images';
     public const IMAGE_UPLOAD_OPTIONS = [
@@ -29,25 +29,6 @@ class Recipe extends Model
     ];
 
     protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'description', 'body', 'status', 'image', 'time_prepare', 'time_cook', 'servings'];
-
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($recipe) {
-
-            $recipe->load(['editorImages']);
-
-            $imageService = resolve(ImageService::class);
-
-            // حذف تصاویر CKEditor
-            foreach ($recipe->editorImages as $editorImage) {
-                $imageService->delete($editorImage->image);
-                $editorImage->delete();
-            }
-        });
-    }
 
     protected static function elasticsearchProperties(): array
     {

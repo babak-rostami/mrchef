@@ -6,14 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CkeditorImage;
 use App\Models\Recipe;
-use App\Services\ImageService;
+use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class BFCkeditorController extends Controller
 {
+    public function __construct(private ImageUploadService $images) {}
 
-    public function upload(Request $request, $page, ImageService $imageService)
+    public const IMAGE_UPLOAD_OPTIONS = [
+        'width'   => 1000,
+        'format'  => 'webp',
+        'quality' => 90,
+        'has_thumb' => false
+    ];
+
+    public function upload(Request $request, $page)
     {
         try {
             $this->validateUpload($request);
@@ -23,9 +31,13 @@ class BFCkeditorController extends Controller
             $fileName = $this->generateFileName();
 
             //مسیر ذخیره عکس با توجه به page
-            $path = $this->uploadPath($page);
+            $path = $this->uploadPath($page) . '/';
 
-            $imagePath = $imageService->upload($file, $fileName, $path, 0);
+            $imagePath = $this->images->upload(
+                $file,
+                $path,
+                array_merge(self::IMAGE_UPLOAD_OPTIONS, ['filename' => $fileName])
+            );
 
             $editorImage = $this->storeEditorImage($imagePath);
 
@@ -52,28 +64,18 @@ class BFCkeditorController extends Controller
 
     private function generateFileName()
     {
-        $random = Str::lower(Str::random(6));
-        return $random . '-' . time();
+        $random = Str::lower(Str::random(4));
+        return $random . time();
     }
 
     private function uploadPath($page)
     {
-        switch ($page) {
-            case 'recipe_create':
-                return Recipe::EDITOR_PATH;
-                break;
-            case 'recipe_edit':
-                return Recipe::EDITOR_PATH;
-                break;
-            case 'category_create':
-                return Category::EDITOR_PATH;
-                break;
-            case 'category_edit':
-                return Category::EDITOR_PATH;
-                break;
-            default:
-                throw new \Exception("Invalid upload page: {$page}");
-        }
+        return match ($page) {
+            'recipe_create' => Recipe::EDITOR_PATH,
+            'recipe_edit' => Recipe::EDITOR_PATH,
+            'category_create' => Category::EDITOR_PATH,
+            'category_edit' => Category::EDITOR_PATH,
+        };
     }
 
     private function storeEditorImage($path)

@@ -107,6 +107,11 @@ class RecipeController extends Controller
             $this->images->delete($recipe->thumb_path);
         }
 
+        foreach ($recipe->editorImages as $editorImage) {
+            $this->images->delete($editorImage->image_path);
+            $editorImage->delete();
+        }
+
         $recipe->delete();
 
         return redirect()->route('admin.recipes.index')->with('success', 'رسپی با موفقیت حذف شد');

@@ -100,7 +100,7 @@ class CategoryController extends Controller
 
         // حذف تصاویر CKEditor
         foreach ($category->editorImages as $editorImage) {
-            $this->images->delete($editorImage->image);
+            $this->images->delete($editorImage->image_path);
             $editorImage->delete();
         }
 
