@@ -60,7 +60,7 @@ class CkeditorService
             '<img loading="lazy"$1>',
             $editorable->body
         );
-        $editorable->update();
+        $editorable->saveQuietly();
     }
 
     /*-------------------------------------------------

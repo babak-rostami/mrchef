@@ -48,9 +48,7 @@ class RecipeController extends Controller
 
         $data['user_id'] = auth('user')->id();
 
-        $recipe = Recipe::create($data);
-
-        $this->editorService->store(Recipe::EDITOR_KEY, $recipe);
+        Recipe::create($data);
 
         return redirect()->route('admin.recipes.index')->with('success', 'رسپی با موفقیت ثبت شد');
     }
@@ -89,8 +87,6 @@ class RecipeController extends Controller
 
         $recipe->update($data);
 
-        $this->editorService->update(Recipe::EDITOR_KEY, $recipe);
-
         return redirect()->route('admin.recipes.index')->with('success', 'تغییرات با موفقیت ثبت شد');
     }
 
@@ -100,16 +96,6 @@ class RecipeController extends Controller
 
         if (!isset($recipe)) {
             return back()->with('error', 'رسپی وجود ندارد');
-        }
-
-        if ($recipe->image) {
-            $this->images->delete($recipe->image_path);
-            $this->images->delete($recipe->thumb_path);
-        }
-
-        foreach ($recipe->editorImages as $editorImage) {
-            $this->images->delete($editorImage->image_path);
-            $editorImage->delete();
         }
 
         $recipe->delete();

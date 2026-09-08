@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function __construct(private ImageUploadService $images, private CkeditorService $editorService) {}
+    public function __construct(private ImageUploadService $images) {}
 
     public function index()
     {
@@ -40,9 +40,7 @@ class CategoryController extends Controller
             $data['image'] = $path;
         }
 
-        $category = Category::create($data);
-
-        $this->editorService->store(Category::EDITOR_KEY, $category);
+        Category::create($data);
 
         return redirect()->route('admin.category.index')->with('success', 'دسته بندی با موفقیت ایجاد شد');
     }
@@ -79,8 +77,6 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        $this->editorService->update(Category::EDITOR_KEY, $category);
-
         return redirect()->route('admin.category.index')->with('success', 'دسته‌بندی با موفقیت ویرایش شد');
     }
 
@@ -90,18 +86,6 @@ class CategoryController extends Controller
 
         if (!isset($category)) {
             return back()->with('error', 'دسته بندی وجود ندارد');
-        }
-
-        // حذف عکس و تامبنیل
-        if ($category->image) {
-            $this->images->delete($category->image_path);
-            $this->images->delete($category->thumb_path);
-        }
-
-        // حذف تصاویر CKEditor
-        foreach ($category->editorImages as $editorImage) {
-            $this->images->delete($editorImage->image_path);
-            $editorImage->delete();
         }
 
         $category->delete();

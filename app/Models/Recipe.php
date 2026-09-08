@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Observers\RecipeObserver;
 use App\Services\ImageService;
 use App\Traits\Imageable;
 use Babak\Elasticsearch\Traits\ElasticsearchableTrait;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+#[ObservedBy(RecipeObserver::class)]
 class Recipe extends Model
 {
     use Imageable, HasFactory, ElasticsearchableTrait;
