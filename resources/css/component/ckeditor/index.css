@@ -1,0 +1,248 @@
+/* =========================================================
+   CKEditor Content Styles
+   فقط برای محتوای داخل CKEditor
+   ========================================================= */
+
+.ck-editor__editable.ck-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    direction: rtl;
+}
+
+/* =========================================================
+   Paragraph
+   ========================================================= */
+
+.ck-editor__editable.ck-content p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* =========================================================
+   Headings
+   ========================================================= */
+
+.ck-editor__editable.ck-content h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.ck-editor__editable.ck-content h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 700;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.ck-editor__editable.ck-content h4 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================================
+   Links
+   ========================================================= */
+
+.ck-editor__editable.ck-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* =========================================================
+   Bold / Italic / Underline / Strike
+   ========================================================= */
+
+.ck-editor__editable.ck-content strong,
+.ck-editor__editable.ck-content b {
+    font-weight: 700;
+}
+
+.ck-editor__editable.ck-content em,
+.ck-editor__editable.ck-content i {
+    font-style: italic;
+}
+
+.ck-editor__editable.ck-content u {
+    text-decoration: underline;
+}
+
+.ck-editor__editable.ck-content s,
+.ck-editor__editable.ck-content del {
+    text-decoration: line-through;
+}
+
+/* =========================================================
+   Lists
+   ========================================================= */
+
+/*
+ * Tailwind Preflight این‌ها را reset می‌کند:
+ *
+ * ul, ol {
+ *     list-style: none;
+ *     margin: 0;
+ *     padding: 0;
+ * }
+ *
+ * بنابراین اینجا عمداً !important استفاده شده.
+ */
+
+.ck-editor__editable.ck-content ul {
+    display: block !important;
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+.ck-editor__editable.ck-content ol {
+    display: block !important;
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+/* List items */
+
+.ck-editor__editable.ck-content ul > li,
+.ck-editor__editable.ck-content ol > li {
+    display: list-item !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    padding: 0 !important;
+}
+
+/* Marker */
+
+.ck-editor__editable.ck-content ul > li::marker {
+    content: "• " !important;
+    font-size: 1rem !important;
+}
+
+.ck-editor__editable.ck-content ol > li::marker {
+    font-size: 1rem !important;
+}
+
+/* =========================================================
+   Nested Lists
+   ========================================================= */
+
+.ck-editor__editable.ck-content ul ul {
+    list-style-type: circle !important;
+}
+
+.ck-editor__editable.ck-content ul ul ul {
+    list-style-type: square !important;
+}
+
+.ck-editor__editable.ck-content ol ol {
+    list-style-type: lower-alpha !important;
+}
+
+.ck-editor__editable.ck-content ol ol ol {
+    list-style-type: lower-roman !important;
+}
+
+/* =========================================================
+   Blockquote
+   ========================================================= */
+
+.ck-editor__editable.ck-content blockquote {
+    border-left: 4px solid #d1d5db;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+/* =========================================================
+   Inline Code
+   ========================================================= */
+
+.ck-editor__editable.ck-content code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background: #f3f4f6;
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.25rem;
+}
+
+/* =========================================================
+   Code Block
+   ========================================================= */
+
+.ck-editor__editable.ck-content pre {
+    font-family: monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    background: #f3f4f6;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    border-radius: 0.5rem;
+}
+
+/* =========================================================
+   Images
+   ========================================================= */
+
+.ck-editor__editable.ck-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================================
+   Tables
+   ========================================================= */
+
+.ck-editor__editable.ck-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.ck-editor__editable.ck-content th,
+.ck-editor__editable.ck-content td {
+    border: 1px solid #d1d5db;
+    padding: 0.5rem 0.75rem;
+}
+
+.ck-editor__editable.ck-content th {
+    font-weight: 700;
+}
+
+/* =========================================================
+   Horizontal Rule
+   ========================================================= */
+
+.ck-editor__editable.ck-content hr {
+    border: 0;
+    border-top: 1px solid #d1d5db;
+    margin: 1.5rem 0;
+}
+
+/* =========================================================
+   Sub / Sup
+   ========================================================= */
+
+.ck-editor__editable.ck-content sub {
+    vertical-align: sub;
+    font-size: 0.75em;
+}
+
+.ck-editor__editable.ck-content sup {
+    vertical-align: super;
+    font-size: 0.75em;
+}

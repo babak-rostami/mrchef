@@ -6,9 +6,9 @@ x-queue-worker: &queue-worker
     - ./:/var/www
   depends_on:
     - app
-    - postgres
     - redis
   networks:
+    - music-network
     - cooking-network
 
 x-general-worker: &general-worker
@@ -32,6 +32,7 @@ services:
       cooking-network:
         aliases:
           - cooking-app
+      music-network:
 
   nginx:
     image: nginx:1.31
@@ -51,21 +52,6 @@ services:
     <<: *general-worker
     container_name: cooking-queue-general
 
-  postgres:
-    image: postgres:18
-    container_name: cooking-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "5433:5432"
-    volumes:
-      - cooking_postgres_data:/var/lib/postgresql
-    networks:
-      - cooking-network
-
   redis:
     image: redis:8.8
     container_name: cooking-redis
@@ -77,29 +63,12 @@ services:
     networks:
       - cooking-network
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.4.2
-    container_name: cooking-elasticsearch
-    restart: unless-stopped
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    ports:
-      - "9201:9200"
-    volumes:
-      - cooking_es_data:/usr/share/elasticsearch/data
-    networks:
-      - cooking-network
-
 volumes:
-  cooking_postgres_data:
-    driver: local
   cooking_redis_data:
-    driver: local
-  cooking_es_data:
     driver: local
 
 networks:
   cooking-network:
     driver: bridge
+  music-network:
+    external: true

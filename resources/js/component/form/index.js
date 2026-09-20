@@ -20,11 +20,11 @@ export function handleForm(form_id, onSubmitCallback) {
     const form = document.getElementById(form_id);
 
     //با زدن دکمه Enter کیبورد فرم سابمیت نشه
-    form.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
+    // form.addEventListener('keydown', function (e) {
+    //     if (e.key === 'Enter') {
+    //         e.preventDefault();
+    //     }
+    // });
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();

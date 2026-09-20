@@ -2,6 +2,10 @@
 
 @section('title', 'ویرایش دسته بندی')
 
+@push('styles')
+    @vite(['resources/css/component/ckeditor/index.css'])
+@endpush
+
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="ویرایش دسته بندی" :parents="[['url' => route('admin.category.index'), 'title' => 'مدیریت دسته بندی ها']]" />
@@ -30,15 +34,15 @@
                     msg="حداکثر 40 کاراکتر برای سئو بهتر" :roles="['max-len' => 40]" :value="$category->name" />
 
                 {{-- NAME EN --}}
-                <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: cake"
-                    :required="true" msg="حداکثر 40 کاراکتر برای سئو بهتر" :roles="['max-len' => 40]" :value="$category->name_en" />
+                <x-form.edit.input name="name_en" id="name_en" title="نام انگلیسی" placeholder="مثال: cake" :required="true"
+                    msg="حداکثر 40 کاراکتر برای سئو بهتر" :roles="['max-len' => 40]" :value="$category->name_en" />
 
                 {{-- SLUG --}}
                 <x-form.edit.readonly id="slug" title="اسلاگ" msg="اسلاگ نباید تغییر کند" :value="$category->slug" />
 
                 {{-- PARENT CATEGORY --}}
-                <x-form.edit.select title="دسته بندی پدر" name="parent_id" id="parent_id" :items="$categories" itemsName="name"
-                    :value="$category->parent_id" default="دسته بندی پدر ندارد" />
+                <x-form.edit.select title="دسته بندی پدر" name="parent_id" id="parent_id" :items="$categories"
+                    itemsName="name" :value="$category->parent_id" default="دسته بندی پدر ندارد" />
 
                 <div class="md:col-span-2 gap-4 mt-2">
                     {{-- DESCRIPTION --}}

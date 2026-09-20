@@ -2,6 +2,10 @@
 
 @section('title', 'ویرایش رسپی')
 
+@push('styles')
+    @vite(['resources/css/component/ckeditor/index.css'])
+@endpush
+
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="ویرایش رسپی" :parents="[['url' => route('admin.recipes.index'), 'title' => 'مدیریت رسپی ها']]" />
@@ -36,27 +40,32 @@
 
                     {{-- TITLE --}}
                     <x-form.edit.input name="title" id="title" title="عنوان" placeholder="مثال: طرز تهیه پاستا مخصوص"
-                        :required="true" msg="حداکثر 55 کاراکتر برای سئو بهتر" :roles="['min-len' => 15, 'max-len' => 55]" :value="$recipe->title" />
+                        :required="true" msg="حداکثر 55 کاراکتر برای سئو بهتر" :roles="['min-len' => 15, 'max-len' => 55]"
+                        :value="$recipe->title" />
 
 
                     {{-- SLUG --}}
                     <x-form.edit.readonly id="slug" title="اسلاگ" msg="اسلاگ نباید تغییر کند" :value="$recipe->slug" />
 
                     {{-- STATUS --}}
-                    <x-form.edit.select title="وضعیت" name="status" id="status" :arrayItems="$status_select_options" :value="$recipe->status" />
+                    <x-form.edit.select title="وضعیت" name="status" id="status" :arrayItems="$status_select_options"
+                        :value="$recipe->status" />
 
                     {{-- TIME PREPARE --}}
                     <x-form.edit.number name="time_prepare" id="time_prepare" title="زمان آماده سازی" placeholder="مثال: 20"
-                        msg="چند دقیقه طول میکشه وسایل آماده بشه؟" :roles="['min-number' => 5, 'max-number' => 1000]" :value="$recipe->time_prepare" />
+                        msg="چند دقیقه طول میکشه وسایل آماده بشه؟" :roles="['min-number' => 5, 'max-number' => 1000]"
+                        :value="$recipe->time_prepare" />
 
                     {{-- TIME COOK --}}
                     <x-form.edit.number name="time_cook" id="time_cook" title="زمان پخت" placeholder="مثال: 45"
-                        msg="چند دقیقه طول میکشه که غذا بپزه؟" :roles="['min-number' => 5, 'max-number' => 1000]" :value="$recipe->time_cook" />
+                        msg="چند دقیقه طول میکشه که غذا بپزه؟" :roles="['min-number' => 5, 'max-number' => 1000]"
+                        :value="$recipe->time_cook" />
 
 
                     {{-- SERVINGS --}}
                     <x-form.edit.number name="servings" id="servings" title="تعداد سرو" placeholder="مثال: 4"
-                        msg="این دستور پخت برای چند نفر تهیه شده؟" :roles="['min-number' => 2, 'max-number' => 500]" :value="$recipe->servings" />
+                        msg="این دستور پخت برای چند نفر تهیه شده؟" :roles="['min-number' => 2, 'max-number' => 500]"
+                        :value="$recipe->servings" />
 
                 </div>
 
@@ -66,9 +75,8 @@
                     :required="true" :roles="['min-len' => 25]" :value="$recipe->description" />
 
                 {{-- body CKEDITOR --}}
-                <x-form.edit.ckeditor title="طرز پخت" name="body" id="body"
-                    placeholder="طرز پخت رو کامل‌ و با جزئیات بنویس" msg="در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس"
-                    :required="true" :value="$recipe->body" />
+                <x-form.edit.ckeditor title="طرز پخت" name="body" id="body" placeholder="طرز پخت رو کامل‌ و با جزئیات بنویس"
+                    msg="در این قسمت طرز پخت رو کامل‌ و با جزئیات بنویس" :required="true" :value="$recipe->body" />
 
                 {{-- SUBMIT --}}
                 <x-form.edit.submit title="ثبت تغییرات رسپی" />

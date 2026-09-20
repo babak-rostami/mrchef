@@ -2,6 +2,10 @@
 
 @section('title', 'رسپی جدید')
 
+@push('styles')
+    @vite(['resources/css/component/ckeditor/index.css'])
+@endpush
+
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="رسپی جدید" :parents="[['url' => route('admin.recipes.index'), 'title' => 'مدیریت رسپی ها']]" />

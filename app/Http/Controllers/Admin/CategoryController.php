@@ -16,13 +16,13 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('created_at', 'desc')->get();
         return view('category.index', compact('categories'));
     }
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('parent_id', null)->get();
         return view('category.create', compact('categories'));
     }
 
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         if (!isset($category)) {
             return redirect()->route('admin.category.index')->with('error', 'دسته بندی وجود ندارد');
         }
-        $categories = Category::where('id', '!=', $category->id)->get();
+        $categories = Category::where('parent_id', null)->where('id', '!=', $category->id)->get();
         return view('category.edit', compact('categories', 'category'));
     }
 

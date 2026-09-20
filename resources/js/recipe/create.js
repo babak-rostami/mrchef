@@ -8,7 +8,7 @@ import {
 const form_id = "recipes-store-form";
 const page = "recipe_create";
 
-let ck_up_url = "/admin/bf-ckeditor-upload/" + page + "?_token=";
+let ck_up_url = "/admin_page/bf-ckeditor-upload/" + page + "?_token=";
 ck_up_url += document
     .getElementById(form_id)
     .querySelector('input[name="_token"]').value;

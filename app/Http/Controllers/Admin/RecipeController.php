@@ -14,11 +14,11 @@ use Illuminate\Support\Str;
 class RecipeController extends Controller
 {
 
-    public function __construct(private ImageUploadService $images, private CkeditorService $editorService) {}
+    public function __construct(private ImageUploadService $images) {}
 
     public function index()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::orderBy('created_at', 'desc')->get();
         return view('recipes.index', compact('recipes'));
     }
 

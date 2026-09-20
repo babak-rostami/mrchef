@@ -2,6 +2,10 @@
 
 @section('title', 'دسته بندی جدید')
 
+@push('styles')
+    @vite(['resources/css/component/ckeditor/index.css'])
+@endpush
+
 @section('content')
 
     <x-partials.breadcrumb panel="admin" page="دسته بندی جدید" :parents="[['url' => route('admin.category.index'), 'title' => 'مدیریت دسته بندی ها']]" />
