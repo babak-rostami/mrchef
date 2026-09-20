@@ -21,7 +21,7 @@ class GuestMiddleware
             return $next($request);
         }
 
-        return $user->role === 'admin'
+        return $user->hasRole('admin')
             ? redirect()->route('admin.dashboard')
             : redirect()->route('home');
     }

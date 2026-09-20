@@ -84,6 +84,10 @@ submitBtn.addEventListener("click", async function () {
         submitBtnImg.classList.remove("hidden");
         submitBtnImg.classList.add("inline");
 
+        if (error.response?.status === 429) {
+            showForgotError("درخواست‌ها زیاد بود، کمی بعد دوباره تلاش کنید");
+            return;
+        }
         // 🔥 هندل validation لاراول
         if (error.response?.status === 422 || error.response?.status === 404) {
             const message = error.response.data.message;

@@ -54,6 +54,9 @@ class IngredientController extends Controller
     public function edit($slug)
     {
         $ingredient = Ingredient::where('slug', $slug)->first();
+        if (!$ingredient) {
+            return redirect()->route('admin.ingredient.index')->with('error', 'ماده اولیه پیدا نشد');
+        }
         $show_select_options = [
             ['value' => 0, 'label' => 'خیر'],
             ['value' => 1, 'label' => 'بله']
@@ -89,12 +92,12 @@ class IngredientController extends Controller
     {
         $ingredient = Ingredient::find($id);
 
-        if ($ingredient->image) {
-            $this->images->delete($ingredient->image_path);
+        if (!$ingredient) {
+            return back()->with('error', 'ماده اولیه وجود ندارد');
         }
 
-        if (!isset($ingredient)) {
-            return back()->with('error', 'ماده اولیه وجود ندارد');
+        if ($ingredient->image) {
+            $this->images->delete($ingredient->image_path);
         }
 
         $ingredient->delete();

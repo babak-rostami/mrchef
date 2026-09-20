@@ -15,8 +15,10 @@ class RecipeIngredientController extends Controller
 {
     public function index($recipe_slug)
     {
-        $recipe = Recipe::where('slug', $recipe_slug)->with('ingredients')->first();
-
+        $recipe = Recipe::where('slug', $recipe_slug)->first();
+        if (!$recipe) {
+            return redirect()->route('admin.recipes.index')->with('error', 'رسپی پیدا نشد');
+        }
         //get recipe ingredients
         $r_ingredients = DB::table('recipe_ingredients as ri')
             ->join('ingredients as i', 'i.id', '=', 'ri.ingredient_id')
@@ -25,9 +27,6 @@ class RecipeIngredientController extends Controller
             ->select('i.id', 'i.name', 'ri.amount', 'ri.recipe_id as recipe_id', 'u.name as unit_name')
             ->get();
 
-        if (!isset($recipe)) {
-            return back()->with('error', 'رسپی پیدا نشد');
-        }
         $ingredients = Ingredient::all();
 
         return view('recipe-ingredient.index', compact('recipe', 'ingredients', 'r_ingredients'));

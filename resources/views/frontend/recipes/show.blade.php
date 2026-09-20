@@ -18,7 +18,7 @@
         <div class="flex justify-center">
             <img src="{{ $recipe->image_url }}" alt="{{ $recipe->title }}"
                 class="h-96 rounded-2xl
-                                                                                                                                                                                                                                                        hover:scale-105 duration-300">
+                                                                                                                                                                                                                                                            hover:scale-105 duration-300">
         </div>
         <h1 class="text-2xl font-extrabold mt-8 mb-2">{{ $recipe->title }}</h1>
         <p class="whitespace-pre-line">{{ $recipe->description }}</p>
@@ -30,9 +30,9 @@
                     @foreach ($ingredients as $ingredient)
                         <div
                             class="flex items-center bg-white
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    px-4 py-3 my-2 rounded-3xl
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    hover:-translate-y-3 duration-300">
-                            <img class="w-14 ml-4" src="{{ $ingredient->thumb_url }}" alt="{{ $ingredient->name }}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                px-4 py-3 my-2 rounded-3xl
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                hover:-translate-y-3 duration-300">
+                            <img class="w-14 ml-4" src="{{ $ingredient->image_url }}" alt="{{ $ingredient->name }}">
                             <span class="text-[18px]">{{ $ingredient->name }}</span>
                             <div class="mr-auto">
                                 <span class="text-[20px]">{{ $ingredient->amount }}</span>
@@ -47,19 +47,19 @@
         <div class="grid grid-cols-3 text-center mt-4 gap-2">
             <div
                 class="flex flex-col bg-gray-50 rounded-2xl p-4 gap-2
-                                                                                                                                                                                                                                                        hover:translate-y-2 duration-300">
+                                                                                                                                                                                                                                                            hover:translate-y-2 duration-300">
                 <span class="font-extrabold text-[18px]">آماده سازی</span>
                 <span>{{ $recipe->time_prepare }} دقیقه</span>
             </div>
             <div
                 class="flex flex-col bg-gray-50 rounded-2xl p-4 gap-2
-                                                                                                                                                                                                                                                        hover:translate-y-2 duration-300">
+                                                                                                                                                                                                                                                            hover:translate-y-2 duration-300">
                 <span class="font-extrabold text-[18px]">زمان کل</span>
                 <span>{{ $recipe->time_cook }} دقیقه</span>
             </div>
             <div
                 class="flex flex-col bg-gray-50 rounded-2xl p-4 gap-2
-                                                                                                                                                                                                                                                        hover:translate-y-2 duration-300">
+                                                                                                                                                                                                                                                            hover:translate-y-2 duration-300">
                 <span class="font-extrabold text-[18px]">تعداد نفرات</span>
                 <span>{{ $recipe->servings }} نفر</span>
             </div>

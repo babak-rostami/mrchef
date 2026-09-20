@@ -33,6 +33,7 @@ class UserController extends Controller
         ]);
 
         Auth::login($user);
+        $request->session()->regenerate();
 
         return response()->json([
             'success' => true,
@@ -136,7 +137,7 @@ class UserController extends Controller
     //         ], 404);
     //     }
 
-        
+
 
     //     // ارسال ایمیل بازیابی رمز عبور (اینجا فقط شبیه‌سازی شده)
     //     Mail::to($user->email)->send(new ForgotPasswordMail($route));

@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:40',
             'name_en' => 'required|string|max:40',
             'description' => 'required|string',
-            'body'           => 'string',
+            'body'           => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
             'parent_id' => 'nullable|exists:categories,id',
             'slug' => [

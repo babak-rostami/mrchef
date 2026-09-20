@@ -15,14 +15,12 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email'
         ]);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $status = Password::sendResetLink($request->only('email'));
 
-        return $status === Password::RESET_LINK_SENT
-            ? response()->json(['message' => 'ایمیل بازیابی رمز عبور ارسال شد'], 200)
-            : response()->json([
-                'message' => 'حسابی با این ایمیل ثبت نشده'
-            ], 404);
+        return match ($status) {
+            Password::RESET_LINK_SENT => response()->json(['message' => 'ایمیل بازیابی رمز عبور ارسال شد']),
+            Password::RESET_THROTTLED => response()->json(['message' => 'لطفاً یک دقیقه صبر کنید و دوباره تلاش کنید'], 429),
+            default => response()->json(['message' => 'حسابی با این ایمیل ثبت نشده'], 404),
+        };
     }
 }

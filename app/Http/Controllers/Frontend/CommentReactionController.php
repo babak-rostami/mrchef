@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\CommentReaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CommentReactionController extends Controller
@@ -107,11 +108,12 @@ class CommentReactionController extends Controller
      */
     protected function visitorId(): string
     {
+        if (Auth::check()) {
+            return 'u' . Auth::id();
+        }
+
         if (! session()->has('visitor_id')) {
-            session()->put(
-                'visitor_id',
-                substr(hash('sha256', session()->getId()), 0, 32)
-            );
+            session()->put('visitor_id', substr(hash('sha256', session()->getId()), 0, 32));
         }
 
         return session()->get('visitor_id');

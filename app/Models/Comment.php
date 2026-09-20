@@ -47,12 +47,12 @@ class Comment extends Model
     public function repliesForJson(): HasMany
     {
         return $this->hasMany(related: Comment::class, foreignKey: 'parent_id')
-            ->select(['id', 'parent_id', 'user_id', 'body', 'like_count', 'unlike_count', 'created_at'])
+            ->select(['id', 'parent_id', 'user_id', 'body', 'like_count', 'dislike_count', 'created_at'])
             ->with(['user:id,name,username,image']);
     }
 
     public function reactions()
     {
-        return $this->hasMany(CommentLike::class);
+        return $this->hasMany(CommentReaction::class);
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Services;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -78,22 +76,27 @@ class ImageUploadService
     {
         $options = array_merge($this->defaults, $options);
 
-        $binary = $this->process($file, $options);
-        $path   = $this->buildPath($file, $directory, $options);
-
-        $this->put($path, $binary, $options['disk']);
+        $path = $this->buildPath($file, $directory, $options);
+        $this->put($path, $this->process($file, $options), $options['disk']);
 
         if ($options['has_thumb']) {
-            $thumb_name = $options['filename'] . '-thumb';
-            $thumb_options = array_merge($options, [
-                'width'  => self::THUMB_WIDTH,
-                'filename'   => $thumb_name,
-                'has_thumb'  => false,
-            ]);
-            $this->upload($file, $directory, $thumb_options);
+            $thumbOptions = array_merge($options, ['width' => self::THUMB_WIDTH]);
+            $this->put(
+                $this->thumbPathFor($path),
+                $this->process($file, $thumbOptions),
+                $options['disk']
+            );
         }
 
         return $path;
+    }
+
+    /** name.webp → name-thumb.webp (همان منطق Imageable::getThumbPathAttribute) */
+    protected function thumbPathFor(string $path): string
+    {
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+
+        return substr($path, 0, - (strlen($ext) + 1)) . '-thumb.' . $ext;
     }
 
     /**
@@ -126,15 +129,8 @@ class ImageUploadService
 
                 // ۲. لاجیک به‌روزرسانی تامبنیل
                 if ($options['has_thumb']) {
-                    $extension = pathinfo($oldPath, PATHINFO_EXTENSION);
-                    $pathWithoutExt = substr($oldPath, 0, - (strlen($extension) + 1));
-                    $thumbPath = $pathWithoutExt . '-thumb.' . $extension;
-
-                    // پردازش و جایگزینی تامبنیل
-                    $thumbOptions = array_merge($options, [
-                        'width' => self::THUMB_WIDTH,
-                    ]);
-                    $this->put($thumbPath, $this->process($file, $thumbOptions), $options['disk']);
+                    $thumbOptions = array_merge($options, ['width' => self::THUMB_WIDTH]);
+                    $this->put($this->thumbPathFor($oldPath), $this->process($file, $thumbOptions), $options['disk']);
                 }
 
                 return $oldPath;

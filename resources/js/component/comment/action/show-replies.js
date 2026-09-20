@@ -46,14 +46,14 @@ function showReplies(comment_id) {
                     user_thumb: reply.user.thumb_url,
                     body: reply.body,
                     time_text: reply.created_at,
-                    reply_count: 0,
+                    like_count: reply.like_count,
+                    dislike_count: reply.dislike_count,
                 });
 
-                box.append(newComment);
+                if (newComment) box.append(newComment);
             });
 
             box.classList.remove("hidden");
-
             btn.dataset.loaded = "true";
             btn.dataset.open = "true";
             btn.textContent = "پنهان کردن پاسخ‌ها";
@@ -70,73 +70,49 @@ function showReplies(comment_id) {
         });
 }
 
-window.showReplies = showReplies;
+function cloneAndFillComment(parentId, data) {
+    const original = document.getElementById(`comment-box-${parentId}`);
+    if (!original) return null;
 
-function cloneAndFillComment(existingId, newData) {
-    const original = document.getElementById(`comment-box-${existingId}`);
-    if (!original) {
-        return;
-    }
-
-    // clone the element
     const clone = original.cloneNode(true);
 
-    // update outer id
-    clone.id = `comment-box-${newData.id}`;
+    // اول بخش پاسخ‌های خود والد را از کلون حذف کن
+    clone.querySelector("button[onclick^='showReplies']")?.remove();
+    clone.querySelector(`#replies-box-${parentId}`)?.remove();
 
+    clone.id = `comment-box-${data.id}`;
     clone.classList.add("bg-gray-50");
 
-    // update profile image
-    clone.querySelector("img.rounded-full").src = newData.user_thumb;
-    clone.querySelector("img.rounded-full").alt = `عکس ${newData.user_name}`;
+    // کاربر و زمان
+    const avatar = clone.querySelector("img.rounded-full");
+    avatar.src = data.user_thumb;
+    avatar.alt = `عکس ${data.user_name}`;
+    clone.querySelector(".font-black").textContent = data.username;
+    clone.querySelector(".text-gray-600").textContent = data.user_name;
+    clone.querySelector(".text-gray-500").textContent = data.time_text;
 
-    // username
-    clone.querySelector(".font-black").textContent = newData.username;
+    // متن
+    clone.querySelector("p").textContent = data.body;
 
-    // full name
-    clone.querySelector(".text-gray-600").textContent = newData.user_name;
+    // لایک و دیس‌لایک
+    ["like", "dislike"].forEach((type) => {
+        const btn = clone.querySelector(`#bcomment-${type}-btn-${parentId}`);
+        const count = clone.querySelector(
+            `#bcomment-${type}-count-${parentId}`,
+        );
 
-    // time
-    clone.querySelector(".text-gray-500").textContent = newData.time_text;
+        btn.id = `bcomment-${type}-btn-${data.id}`;
+        btn.dataset.loading = "false";
+        btn.setAttribute("onclick", `reactTobComment('${data.id}','${type}')`);
 
-    // comment body
-    const p = clone.querySelector("p");
-    p.textContent = newData.body;
+        count.id = `bcomment-${type}-count-${data.id}`;
+        count.textContent = data[`${type}_count`];
+    });
 
-    // like count + ids
-    clone.querySelector(
-        `#category-comment-like-count-${existingId}`
-    ).id = `category-comment-like-count-${newData.id}`;
-    clone.querySelector(
-        `#like-com-image-${existingId}`
-    ).id = `like-com-image-${newData.id}`;
-    clone
-        .querySelector(".like-icon")
-        .setAttribute("onclick", `likeCategoryComment('${newData.id}')`);
-
-    // dislike
-    clone.querySelector(
-        `#category-comment-unlike-count-${existingId}`
-    ).id = `category-comment-unlike-count-${newData.id}`;
-    clone.querySelector(
-        `#unlike-com-image-${existingId}`
-    ).id = `unlike-com-image-${newData.id}`;
-    clone
-        .querySelector(".dislike-icon")
-        .setAttribute("onclick", `unlikeCategoryComment('${newData.id}')`);
-
-    // reply button
+    // دکمه پاسخ
     clone
         .querySelector("button[onclick^='replyModal']")
-        .setAttribute("onclick", `replyModal('${newData.id}')`);
-
-    // -------------------------------
-    //  NEW: remove or update reply section
-    // -------------------------------
-    const replyBtn = clone.querySelector("button[onclick^='showReplies']");
-    const repliesBox = clone.querySelector(`#replies-box-${existingId}`);
-    if (replyBtn) replyBtn.remove();
-    if (repliesBox) repliesBox.remove();
+        .setAttribute("onclick", `replyModal('${data.id}')`);
 
     return clone;
 }

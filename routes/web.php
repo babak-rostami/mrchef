@@ -38,7 +38,7 @@ Route::post('comments/{comment}/reaction', [CommentReactionController::class, 't
 //--------------------------------admin routes----------------------------------------
 //------------------------------------------------------------------------------------
 Route::middleware(['role:admin'])
-    ->prefix('admin')
+    ->prefix('admin_page')
     ->name('admin.')
     ->group(function () {
         Route::resource('category', CategoryController::class);
@@ -87,14 +87,15 @@ Route::middleware('auth')->group(function () {
 //------------------------------------------------------------------------------------
 Route::middleware('guest')->group(function () {
     Route::get('register', [UserController::class, 'registerShow'])->name('register.show');
-    Route::post('register', [UserController::class, 'register'])->name('register');
     Route::get('login', [UserController::class, 'loginShow'])->name('login.show');
-    Route::post('login', [UserController::class, 'login'])->name('login');
 
-    Route::post('check-email-exist', [UserController::class, 'checkEmailExist']);
+    Route::post('register', [UserController::class, 'register'])->name('register')->middleware('throttle:5,1');
+    Route::post('login', [UserController::class, 'login'])->name('login')->middleware('throttle:10,1');
+    Route::post('check-email-exist', [UserController::class, 'checkEmailExist'])->middleware('throttle:10,1');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->middleware('throttle:5,1');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->middleware('throttle:10,1');
+
     // ------------------------------password reset routes--------------------------------------
-    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])
         ->name('password.reset');
-    Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 });

@@ -11,10 +11,11 @@ use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    public function showForm(string $token)
+    public function showForm(Request $request, string $token)
     {
         return view('user.reset-password', [
-            'token' => $token
+            'token' => $token,
+            'email' => $request->query('email'),
         ]);
     }
 

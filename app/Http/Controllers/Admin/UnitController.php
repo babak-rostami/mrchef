@@ -36,7 +36,9 @@ class UnitController extends Controller
     public function edit($id)
     {
         $unit = Unit::find($id);
-
+        if (!$unit) {
+            return redirect()->route('admin.unit.index')->with('error', 'واحد اندازه گیری پیدا نشد');
+        }
         return view('unit.edit', compact('unit'));
     }
 

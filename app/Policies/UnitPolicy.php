@@ -29,7 +29,7 @@ class UnitPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'admin';
+        return $user->hasRole('admin');
     }
 
     /**
@@ -37,7 +37,7 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit): bool
     {
-        return $user->role === 'admin';
+        return $user->hasRole('admin');
     }
 
     /**
@@ -45,7 +45,7 @@ class UnitPolicy
      */
     public function delete(User $user, Unit $unit): bool
     {
-        return $user->role === 'admin';
+        return $user->hasRole('admin');
     }
 
     /**

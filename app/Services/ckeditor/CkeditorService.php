@@ -127,9 +127,7 @@ class CkeditorService
         libxml_use_internal_errors(true);
 
         $dom = new DOMDocument();
-        $dom->loadHTML(
-            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')
-        );
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $html);
 
         libxml_clear_errors();
         return $dom;

@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         unitSelect.innerHTML = '<option value="">در حال بارگذاری...</option>';
         unitSelect.disabled = true;
 
-        fetch(`/admin/select/ingredient/${ingredientId}/units`)
+        fetch(`/admin_page/select/ingredient/${ingredientId}/units`)
             .then((response) => response.json())
             .then((data) => {
                 unitSelect.innerHTML =
