@@ -26,6 +26,11 @@
                     {{-- IMAGE --}}
                     <x-form.create.image title="عکس رسپی" name="image" id="image" :required="true" accept="image/*"
                         msg="برای نمایش بهتر سایز عکس 1*1 انتخاب کنید" />
+
+                    {{-- APARAT VIDEO EMBED LINK --}}
+                    <x-form.create.input name="aparat_url" id="aparat_url" title="لینک ویدیوی آپارات (اختیاری)"
+                        placeholder="کد script امبد آپارات"
+                        msg="اگه این رسپی ویدیو داره، لینک embed آپارات رو اینجا بذارید (فقط برای نمایش، توی نتایج گوگل نمیاد)" />
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

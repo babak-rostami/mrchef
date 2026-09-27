@@ -1,16 +1,11 @@
-@if ($row->status == 0)
+@if ($row->is_read)
     @include('components.helper.badge', [
-        'title' => 'تایید نشده',
-        'class' => 'danger',
-    ])
-@elseif($row->status == 1)
-    @include('components.helper.badge', [
-        'title' => 'تایید شده',
+        'title' => 'خوانده‌شده',
         'class' => 'success',
     ])
-@elseif($row->status == 2)
+@else
     @include('components.helper.badge', [
-        'title' => 'در انتظار',
-        'class' => 'warning',
+        'title' => 'جدید',
+        'class' => 'danger',
     ])
 @endif

@@ -10,7 +10,7 @@
 @section('content')
 
     <div class="md:mx-8 lg:mx-44 bg-gray-50 px-4 py-8 rounded-2xl">
-        <h3 class="text-center mb-6 font-bold text-2xl">داشبورد مدیریت</h3>
+        <h1 class="text-center mb-6 font-bold text-2xl">داشبورد مدیریت</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
 
@@ -44,6 +44,15 @@
                 'icon' => config('images.ftp_path') . '/files/icon/units-48.png',
                 'title' => 'واحد های اندازه گیری',
                 'desc' => 'مدیریت واحد های اندازه گیری',
+            ])
+
+            <!-- پیام‌های تماس با ما -->
+            @include('admin.dashboard.page-item', [
+                'route' => route('admin.messages.index'),
+                'icon_class' => 'fa fa-envelope',
+                'title' => 'پیام‌های تماس',
+                'desc' => 'مشاهده پیام‌های ارسالی کاربران',
+                'badge' => $unreadMessagesCount > 0 ? $unreadMessagesCount : null,
             ])
 
         </div>

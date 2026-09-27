@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('body');
             $table->string('image')->nullable();
+            $table->string('aparat_url')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('views')->nullable();
             $table->unsignedSmallInteger('time_prepare')->nullable();

@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Support\Schema\ItemListSchema;
+use App\Support\Schema\RecipeSchema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class RecipeController extends Controller
@@ -29,6 +30,10 @@ class RecipeController extends Controller
             $compact_data['recipes'] = Recipe::latest()->active()->get();
         }
 
+        $compact_data['recipesSchema'] = $compact_data['recipes']->isNotEmpty()
+            ? ItemListSchema::buildForRecipes($compact_data['recipes'])
+            : null;
+
         return view('frontend.recipes.index', $compact_data);
     }
 
@@ -36,8 +41,8 @@ class RecipeController extends Controller
     {
         $ingredients = $recipe->ingredientsWithUnit;
         $comments = $recipe->commentsWithUser;
-        
-        return view('frontend.recipes.show', compact('recipe', 'comments', 'ingredients'));
-    }
+        $recipeSchema = RecipeSchema::build($recipe, $ingredients);
 
+        return view('frontend.recipes.show', compact('recipe', 'comments', 'ingredients', 'recipeSchema'));
+    }
 }

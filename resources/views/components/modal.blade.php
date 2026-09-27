@@ -6,7 +6,7 @@
 @props(['id', 'bg' => null, 'width' => null])
 
 <div id="{{ $id }}-overlay"
-    class="fixed inset-0 hidden bg-black/80 z-50 overflow-y-auto pt-20 justify-items-center">
+    class="fixed inset-0 hidden bg-black/80 z-100 overflow-y-auto pt-20 justify-items-center">
 
     <div id="{{ $id }}"
         class="relative bg-white rounded-2xl shadow-lg shadow-gray-900 p-6 {{ $width ? $width : 'w-auto' }} md:min-w-[450px]

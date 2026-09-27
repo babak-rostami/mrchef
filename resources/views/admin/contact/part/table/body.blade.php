@@ -1,0 +1,1 @@
+<span title="{{ $row->body }}">{{ \Illuminate\Support\Str::limit($row->body, 60) }}</span>

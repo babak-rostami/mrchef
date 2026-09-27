@@ -2,18 +2,22 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BFCkeditorController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\IngredientUnitController;
 use App\Http\Controllers\Admin\RecipeController;
 use App\Http\Controllers\Admin\RecipeIngredientController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\CommentReactionController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\RecipeController as FrontendRecipeController;
 use App\Http\Controllers\Frontend\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +37,12 @@ Route::get('/recipe/{recipe:slug}', action: [FrontendRecipeController::class, 's
 // ------------------------------comment routes--------------------------------------
 Route::get('show-comment-replies/{comment}', [CommentController::class, 'showReplies']);
 Route::post('comments/{comment}/reaction', [CommentReactionController::class, 'toggle']);
+
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->name('contact.store')
+    ->middleware('throttle:5,1');
 
 //------------------------------------------------------------------------------------
 //--------------------------------admin routes----------------------------------------
@@ -70,6 +80,9 @@ Route::middleware(['role:admin'])
 
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::post('bf-ckeditor-upload/{page}', [BFCkeditorController::class, 'upload']);
+
+        Route::get('messages', [ContactMessageController::class, 'index'])->name('messages.index');
+        Route::delete('messages/{message}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');
     });
 
 //------------------------------------------------------------------------------------
@@ -99,3 +112,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])
         ->name('password.reset');
 });
+
+Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('sitemap-pages.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
+Route::get('sitemap-recipes-{chunk}.xml', [SitemapController::class, 'recipes'])
+    ->name('sitemap.recipes')
+    ->where('chunk', '[0-9]+');

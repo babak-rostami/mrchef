@@ -31,7 +31,16 @@ class Recipe extends Model
         'has_thumb' => true
     ];
 
-    protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'description', 'body', 'status', 'image', 'time_prepare', 'time_cook', 'servings'];
+    /**
+     * هر چند تا رسپی توی یک فایل سایت‌مپ قرار بگیرن.
+     * این عدد رو عوض نکن! چون شماره‌ی سایت‌مپ هر رسپی از روی id خودش
+     * محاسبه میشه، تغییر این عدد باعث میشه رسپی‌های قدیمی بین فایل‌ها
+     * جابه‌جا بشن — دقیقاً همون چیزی که نباید اتفاق بیفته.
+     * @see \App\Http\Controllers\Frontend\SitemapController
+     */
+    public const SITEMAP_CHUNK_SIZE = 10000;
+
+    protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'description', 'body', 'status', 'image', 'time_prepare', 'time_cook', 'servings', 'aparat_url'];
 
     protected static function elasticsearchProperties(): array
     {
@@ -97,6 +106,12 @@ class Recipe extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // برای اسکیمای Recipe لازم داریم بدونیم نویسنده کیه (author)
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function defaultImage(): string
     {
         return config('images.ftp_path') . '/files/icon/default-recipe.jpg';
@@ -110,5 +125,30 @@ class Recipe extends Model
     public function scopeLatest($query)
     {
         return $query->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * متن ساده‌ی طرز تهیه، بدون تگ‌های HTML — فقط برای اسکیمای Recipe
+     * (recipeInstructions باید متن ساده باشه، نه HTML خام).
+     */
+    public function getPlainBodyAttribute(): string
+    {
+        $withBreaks = str_ireplace(
+            ['</p>', '</div>', '</li>', '<br>', '<br/>', '<br />', '</h1>', '</h2>', '</h3>', '</h4>'],
+            "\n",
+            (string) $this->body
+        );
+
+        return trim(preg_replace("/\n{2,}/", "\n", strip_tags($withBreaks)));
+    }
+
+    /**
+     * شماره‌ی فایل سایت‌مپی که این رسپی توش قرار می‌گیره.
+     * چون فقط به id خود رسپی وابسته‌ست (نه موقعیتش نسبت به بقیه)،
+     * حتی اگه رسپی‌های دیگه حذف بشن، این عدد برای یک رسپی مشخص هیچ‌وقت عوض نمی‌شه.
+     */
+    public function getSitemapChunkAttribute(): int
+    {
+        return intdiv($this->id - 1, self::SITEMAP_CHUNK_SIZE) + 1;
     }
 }

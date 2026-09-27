@@ -1,37 +1,41 @@
-import './action/reply';
-import './action/reaction';
-import './action/show-replies';
-import { isBodyValid } from './validation/body'
-
+import "./action/reply";
+import "./action/reaction";
+import "./action/show-replies";
+import { isBodyValid } from "./validation/body";
+import { requireLoginForForm } from "../../utils/require-login";
 
 function sendComment(form_id, body_id, section) {
-    if (isBodyValid(body_id, section)) {
+    if (!isBodyValid(body_id, section)) return;
 
+    const form = document.getElementById(form_id);
+
+    // اگه کاربر لاگین نباشه، مودال لاگین باز میشه؛ بعد از لاگین یا
+    // ثبت‌نام موفق (که صفحه رفرش میشه)، همین فرم با همین مقادیر
+    // خودش دوباره ثبت میشه — نیازی نیست کاربر دوباره تایپ کنه.
+    requireLoginForForm(form, () => {
         disableSubmitButton(section);
-
         removeErrors(section);
-
-        document.getElementById(form_id).submit();
-    }
+        form.submit();
+    });
 }
 
 function removeErrors() {
-    document.getElementById('bcom-body-error').classList.add('hidden')
-    document.getElementById('bcom-rep-body-error').classList.add('hidden')
+    document.getElementById("bcom-body-error").classList.add("hidden");
+    document.getElementById("bcom-rep-body-error").classList.add("hidden");
 }
 
 function disableSubmitButton(section) {
     let submit_btn;
-    if (section === 'comment') {
-        submit_btn = document.getElementById('bcom-submit');
-    } else if (section === 'reply') {
-        submit_btn = document.getElementById('bcom-reply-submit');
+    if (section === "comment") {
+        submit_btn = document.getElementById("bcom-submit");
+    } else if (section === "reply") {
+        submit_btn = document.getElementById("bcom-reply-submit");
     }
 
     submit_btn.disabled = true;
-    submit_btn.classList.add('opacity-50', 'cursor-not-allowed');
-    submit_btn.innerText = 'منتظر بمانید...';
-    submit_btn.classList.remove('cursor-pointer');
+    submit_btn.classList.add("opacity-50", "cursor-not-allowed");
+    submit_btn.innerText = "منتظر بمانید...";
+    submit_btn.classList.remove("cursor-pointer");
 }
 
 window.sendComment = sendComment;

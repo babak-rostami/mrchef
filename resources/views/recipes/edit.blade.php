@@ -29,6 +29,12 @@
                     {{-- IMAGE --}}
                     <x-form.edit.image title="عکس رسپی" name="image" id="image" accept="image/*"
                         msg="برای نمایش بهتر سایز عکس 1*1 انتخاب کنید" :src="$recipe->image_url" />
+
+                    {{-- APARAT VIDEO EMBED LINK --}}
+                    <x-form.edit.input name="aparat_url" id="aparat_url" title="لینک ویدیوی آپارات (اختیاری)"
+                        placeholder="کد script امبد آپارات"
+                        msg="اگه این رسپی ویدیو داره، لینک embed آپارات رو اینجا بذارید (فقط برای نمایش، توی نتایج گوگل نمیاد)"
+                        :value="$recipe->aparat_url" />
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

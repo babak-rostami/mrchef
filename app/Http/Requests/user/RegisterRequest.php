@@ -48,7 +48,7 @@ class RegisterRequest extends FormRequest
 
             'password.required' => 'رمز عبور الزامی است.',
             'password.min' => 'رمز عبور باید حداقل :min کاراکتر باشد.',
-            'password.confirmed' => 'تأیید رمز عبور مطابقت ندارد.',
+            // 'password.confirmed' => 'تأیید رمز عبور مطابقت ندارد.',
         ];
     }
 }

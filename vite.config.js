@@ -51,7 +51,7 @@ export default defineConfig({
                 //-------------------------------------------------------------
                 "resources/css/page/home.css",
                 "resources/js/page/home.js",
-
+                "resources/js/contact/create.js",
                 //-------------------------recipe------------------------------
                 "resources/css/frontend/recipe/index.css",
                 "resources/js/frontend/recipe/index.js",

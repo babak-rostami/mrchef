@@ -32,6 +32,7 @@ class StoreRequest extends FormRequest
             'time_prepare'   => ['nullable', 'integer'],
             'time_cook'      => ['nullable', 'integer'],
             'servings'       => ['nullable', 'integer'],
+            'aparat_url'     => ['nullable'],
         ];
     }
 

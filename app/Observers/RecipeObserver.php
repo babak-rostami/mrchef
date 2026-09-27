@@ -5,30 +5,24 @@ namespace App\Observers;
 use App\Models\Recipe;
 use App\Services\ckeditor\CkeditorService;
 use App\Services\ImageUploadService;
+use Illuminate\Support\Facades\Cache;
 
 class RecipeObserver
 {
     public function __construct(private CkeditorService $editorService, private ImageUploadService $images) {}
 
-    /**
-     * Handle the Recipe "created" event.
-     */
     public function created(Recipe $recipe): void
     {
         $this->editorService->store(Recipe::EDITOR_KEY, $recipe);
+        $this->forgetSitemapCache($recipe);
     }
 
-    /**
-     * Handle the Recipe "updated" event.
-     */
     public function updated(Recipe $recipe): void
     {
         $this->editorService->update(Recipe::EDITOR_KEY, $recipe);
+        $this->forgetSitemapCache($recipe);
     }
 
-    /**
-     * Handle the Recipe "deleting" event.
-     */
     public function deleting(Recipe $recipe): void
     {
         if ($recipe->image) {
@@ -40,21 +34,28 @@ class RecipeObserver
             $this->images->delete($editorImage->image_path);
             $editorImage->delete();
         }
+
+        $this->forgetSitemapCache($recipe);
     }
 
-    /**
-     * Handle the Recipe "restored" event.
-     */
     public function restored(Recipe $recipe): void
     {
         //
     }
 
-    /**
-     * Handle the Recipe "force deleted" event.
-     */
     public function forceDeleted(Recipe $recipe): void
     {
         //
+    }
+
+    /**
+     * سایت‌مپ رسپی‌ها بر اساس id تکه‌تکه (chunk) شده و هر چانک برای مدت
+     * طولانی کش می‌شه (نگاه کن به SitemapController). با هر تغییر روی یک
+     * رسپی، فقط کش همون یک چانک پاک می‌شه، نه بقیه‌ی چانک‌های قدیمی.
+     */
+    private function forgetSitemapCache(Recipe $recipe): void
+    {
+        Cache::forget("sitemap:recipes:{$recipe->sitemap_chunk}");
+        Cache::forget('sitemap:index');
     }
 }
