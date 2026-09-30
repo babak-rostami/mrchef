@@ -38,7 +38,7 @@ class Recipe extends Model
      * جابه‌جا بشن — دقیقاً همون چیزی که نباید اتفاق بیفته.
      * @see \App\Http\Controllers\Frontend\SitemapController
      */
-    public const SITEMAP_CHUNK_SIZE = 10000;
+    public const SITEMAP_CHUNK_SIZE = 1000;
 
     protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'description', 'body', 'status', 'image', 'time_prepare', 'time_cook', 'servings', 'aparat_url'];
 
@@ -69,16 +69,15 @@ class Recipe extends Model
         return $this->morphMany(CkeditorImage::class, 'editorable');
     }
 
+    /**
+     * کامنت‌های این رسپی (خام، همه‌شون - کامنت اصلی و پاسخ که technically
+     * پاسخ‌ها اصلاً commentable_id ندارن پس اینجا نمیان).
+     * برای گرفتن کامنت‌های اصلیِ صفحه‌بندی‌شده، به‌جای این رابطه از
+     * App\Services\comment\CommentService::getTopLevelComments() استفاده کن.
+     */
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function commentsWithUser(): MorphMany
-    {
-        return $this
-            ->morphMany(Comment::class, 'commentable')
-            ->with(['user:id,name,username,image']);
     }
 
     public function ingredients(): BelongsToMany

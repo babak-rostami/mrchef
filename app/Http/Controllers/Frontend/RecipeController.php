@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Services\comment\CommentService;
 use App\Support\Schema\ItemListSchema;
 use App\Support\Schema\RecipeSchema;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Illuminate\View\View;
 
 class RecipeController extends Controller
 {
+    public function __construct(private CommentService $commentService) {}
+
     public function index($category_slug = null)
     {
         $categories = Cache::remember('categories', 3600, function () {
@@ -40,9 +43,9 @@ class RecipeController extends Controller
     public function show(Request $request, Recipe $recipe): View
     {
         $ingredients = $recipe->ingredientsWithUnit;
-        $comments = $recipe->commentsWithUser;
+        [$comments, $hasMoreComments] = $this->commentService->getTopLevelComments('recipe', $recipe->id);
         $recipeSchema = RecipeSchema::build($recipe, $ingredients);
 
-        return view('frontend.recipes.show', compact('recipe', 'comments', 'ingredients', 'recipeSchema'));
+        return view('frontend.recipes.show', compact('recipe', 'comments', 'hasMoreComments', 'ingredients', 'recipeSchema'));
     }
 }

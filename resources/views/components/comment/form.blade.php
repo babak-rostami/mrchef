@@ -15,11 +15,6 @@
     <!-- نمایش پیام خطا -->
     <div id="bcom-body-error" class="bg-red-100 text-lg mb-2 pr-2 py-2 rounded hidden"></div>
 
-    <!-- نمایش خطا از سمت سرور -->
-    @error('body')
-        <p class="bg-red-100 text-lg mb-2 pr-2 py-2 rounded">{{ $message }}</p>
-    @enderror
-
     <!-- submit button -->
     <button onclick="sendComment('store-bcom-form','bcom-body','comment')" type="button" id="bcom-submit"
         class="w-full bg-blue-500 text-white rounded-2xl py-2 text-2xl cursor-pointer hover:bg-blue-600">

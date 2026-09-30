@@ -37,6 +37,7 @@ Route::get('/recipe/{recipe:slug}', action: [FrontendRecipeController::class, 's
 // ------------------------------comment routes--------------------------------------
 Route::get('show-comment-replies/{comment}', [CommentController::class, 'showReplies']);
 Route::post('comments/{comment}/reaction', [CommentReactionController::class, 'toggle']);
+Route::get('load-more-comments', [CommentController::class, 'loadMore']);
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');

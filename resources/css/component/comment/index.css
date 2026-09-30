@@ -35,3 +35,42 @@
     pointer-events: none;
     opacity: 0.6;
 }
+
+/* =========================================================
+   هایلایت موقت بعد از ثبت یه نظر/پاسخ تازه، تا کاربر متوجه بشه ثبت شد
+   ========================================================= */
+
+.bcomment-item {
+    transition: background-color 2s ease-out;
+}
+
+.bcomment-item.bcomment-highlight {
+    background-color: #fef08a;
+}
+
+/* =========================================================
+   دکمه‌ی «نمایش نظرات بیشتر»: پالس ملایم تا توی چشم بیاد
+   ========================================================= */
+
+@keyframes bcomment-load-more-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+    }
+}
+
+.bcomment-load-more-btn {
+    animation: bcomment-load-more-pulse 2s ease-in-out infinite;
+}
+
+/* موقع لود شدن، پالس متوقف میشه و دکمه کم‌رنگ میشه */
+.bcomment-load-more-btn[data-loading="true"] {
+    animation: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}

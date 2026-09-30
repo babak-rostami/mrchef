@@ -96,7 +96,7 @@
 
         </article>
 
-        <x-comment.section page="recipe" :object="$recipe" :comments="$comments" />
+        <x-comment.section page="recipe" :object="$recipe" :comments="$comments" :has_more_comments="$hasMoreComments" />
 
     </div>
 

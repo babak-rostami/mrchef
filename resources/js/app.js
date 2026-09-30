@@ -8,4 +8,9 @@ import { resumePendingAuthAction } from "./utils/require-login";
 
 // اگه قبل از لاگین یه فرم یا اکشنی (مثل ثبت نظر) معلق مونده بود، الان که
 // کاربر لاگین کرده و صفحه رفرش شده، خودش دوباره اجرا میشه.
-document.addEventListener("DOMContentLoaded", resumePendingAuthAction);
+//
+// از pageshow استفاده می‌کنیم نه فقط DOMContentLoaded، چون pageshow هم
+// موقع لود عادی صفحه fire میشه، هم وقتی مرورگر صفحه رو از حافظه‌ی
+// back/forward (bfcache) برمی‌گردونه — که DOMContentLoaded توی اون
+// حالت اصلاً دوباره اجرا نمیشه.
+window.addEventListener("pageshow", resumePendingAuthAction);
