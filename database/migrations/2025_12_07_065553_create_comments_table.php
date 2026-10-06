@@ -13,12 +13,11 @@ return new class extends Migration {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('commentable_id')->nullable();
-            $table->string('commentable_type')->nullable();
+            $table->nullableMorphs('commentable');
 
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->unsignedBigInteger('reply_id')->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
+            $table->foreignId('reply_id')->nullable()->constrained('comments')->cascadeOnDelete();
 
             $table->text('body');
             $table->text('content')->nullable();
@@ -28,13 +27,6 @@ return new class extends Migration {
             $table->unsignedInteger('dislike_count')->default(0); //0 - 4,294,967,295
 
             $table->timestamps();
-
-            $table->foreign('user_id')->on('users')->references('id')
-                ->onDelete('cascade');
-            $table->foreign('parent_id')->on('comments')->references('id')
-                ->onDelete('cascade');
-            $table->foreign('reply_id')->on('comments')->references('id')
-                ->onDelete('cascade');
         });
     }
 

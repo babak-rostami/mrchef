@@ -56,8 +56,6 @@ services:
     image: redis:8.8
     container_name: cooking-redis
     restart: unless-stopped
-    ports:
-      - "6380:6379"
     volumes:
       - cooking_redis_data:/data
     networks:

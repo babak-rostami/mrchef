@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use App\Observers\CommentObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+#[ObservedBy(CommentObserver::class)]
 class Comment extends Model
 {
     /**
@@ -17,6 +21,22 @@ class Comment extends Model
      */
     public const PER_PAGE = 20;
 
+    /**
+     * برای آپلود عکس داخل CKEditor وقتی ادمین متن نظر رو ویرایش می‌کنه
+     * (نگاه کن به App\Services\ckeditor\CkeditorService و
+     * App\Http\Controllers\Admin\BFCkeditorController).
+     */
+    public const EDITOR_PATH = 'comment/editor';
+    public const EDITOR_KEY = 'comment';
+
+    /**
+     * ستونی که CkeditorService باید توش کار کنه. برخلاف Recipe/Category
+     * که همون body هست، اینجا content هست — چون body متن خامِ خودِ
+     * کاربره و نباید بهش دست زده بشه؛ فقط ویرایش دستیِ ادمین توی
+     * content ذخیره میشه.
+     */
+    public const EDITOR_FIELD = 'content';
+
     protected $fillable = [
         'commentable_id',
         'commentable_type',
@@ -24,6 +44,7 @@ class Comment extends Model
         'parent_id',
         'reply_id',
         'body',
+        'content',
     ];
 
     /**
@@ -97,5 +118,13 @@ class Comment extends Model
     public function reactions(): HasMany
     {
         return $this->hasMany(CommentReaction::class);
+    }
+
+    /**
+     * عکس‌های آپلودشده داخل CKEditor موقع ویرایش ادمین.
+     */
+    public function editorImages(): MorphMany
+    {
+        return $this->morphMany(CkeditorImage::class, 'editorable');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BFCkeditorController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\IngredientUnitController;
@@ -84,6 +85,11 @@ Route::middleware(['role:admin'])
 
         Route::get('messages', [ContactMessageController::class, 'index'])->name('messages.index');
         Route::delete('messages/{message}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');
+
+        Route::get('comments', [AdminCommentController::class, 'index'])->name('comments.index');
+        Route::get('comments/{comment}/edit', [AdminCommentController::class, 'edit'])->name('comments.edit');
+        Route::put('comments/{comment}', [AdminCommentController::class, 'update'])->name('comments.update');
+        Route::delete('comments/{comment}', [AdminCommentController::class, 'destroy'])->name('comments.destroy');
     });
 
 //------------------------------------------------------------------------------------

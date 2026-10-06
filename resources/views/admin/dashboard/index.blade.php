@@ -55,6 +55,14 @@
                 'badge' => $unreadMessagesCount > 0 ? $unreadMessagesCount : null,
             ])
 
+            <!-- نظرات -->
+            @include('admin.dashboard.page-item', [
+                'route' => route('admin.comments.index'),
+                'icon_class' => 'fa fa-comments',
+                'title' => 'نظرات',
+                'desc' => 'ویرایش و حذف نظرات کاربران',
+            ])
+
         </div>
     </div>
 

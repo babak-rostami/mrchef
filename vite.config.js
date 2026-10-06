@@ -43,6 +43,9 @@ export default defineConfig({
                 //---------------------ingredient unit--------------------------
                 "resources/js/ingredient-unit/index.js",
 
+                //----------------------- comment ------------------------------
+                "resources/js/comment/edit.js",
+
                 //-------------------------library------------------------------
                 "resources/css/component/ckeditor/index.css",
 

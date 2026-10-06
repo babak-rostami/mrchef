@@ -55,10 +55,16 @@ class CkeditorService
     ---------------------------------------------------*/
     private function makeEditorImagesLazy($editorable)
     {
-        $editorable->body = preg_replace(
+        $field = $this->editorField($editorable);
+
+        if (! $editorable->{$field}) {
+            return;
+        }
+
+        $editorable->{$field} = preg_replace(
             '/<img(?![^>]*loading=)([^>]*)>/i',
             '<img loading="lazy"$1>',
-            $editorable->body
+            $editorable->{$field}
         );
         $editorable->saveQuietly();
     }
@@ -70,8 +76,14 @@ class CkeditorService
     ---------------------------------------------------*/
     private function addEditorImagesEditorableId($type, $editorable)
     {
+        $field = $this->editorField($editorable);
+
+        if (! $editorable->{$field}) {
+            return collect();
+        }
+
         $processor = EditorProcessorFactory::make($type);
-        $dom = $this->loadDom($editorable->body);
+        $dom = $this->loadDom($editorable->{$field});
         $imageTags = $dom->getElementsByTagName('img');
         $imagePaths = $processor->getImagePathsInEditor($imageTags);
         $imageModelsInEditor = $this->getModelImagesByPaths($imagePaths);
@@ -122,12 +134,28 @@ class CkeditorService
         }
     }
 
+    /**
+     * ستونی که محتوای CKEditor توش ذخیره میشه. پیش‌فرض body هست (همون
+     * چیزی که Recipe و Category همیشه ازش استفاده کردن)، ولی هر مدلی
+     * می‌تونه با تعریف ثابت EDITOR_FIELD خودش این رو عوض کنه — مثل
+     * Comment که محتوای ویرایش‌شده‌ی ادمین توی ستون content ذخیره میشه،
+     * نه body (که متن خامِ خودِ کاربره و نباید بهش دست زده بشه).
+     */
+    private function editorField($editorable): string
+    {
+        $class = get_class($editorable);
+
+        return defined("{$class}::EDITOR_FIELD") ? $editorable::EDITOR_FIELD : 'body';
+    }
+
     private function loadDom(string $html): DOMDocument
     {
         libxml_use_internal_errors(true);
 
         $dom = new DOMDocument();
-        $dom->loadHTML('<?xml encoding="UTF-8">' . $html);
+        $dom->loadHTML(
+            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')
+        );
 
         libxml_clear_errors();
         return $dom;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\CkeditorImage;
 use App\Models\Recipe;
 use App\Services\ImageUploadService;
@@ -75,6 +76,8 @@ class BFCkeditorController extends Controller
             'recipe_edit' => Recipe::EDITOR_PATH,
             'category_create' => Category::EDITOR_PATH,
             'category_edit' => Category::EDITOR_PATH,
+            // نظرات فقط edit دارن؛ ثبت اولیه‌ی نظر از پنل ادمین نیست
+            'comment_edit' => Comment::EDITOR_PATH,
         };
     }
 

@@ -74,3 +74,24 @@
     opacity: 0.7;
     cursor: not-allowed;
 }
+
+/* =========================================================
+   محتوای ویرایش‌شده‌ی ادمین (CKEditor) داخل کامنت — فضای کامنت
+   خیلی کوچیک‌تر از بدنه‌ی رسپیه، پس عکس‌ها رو محدودتر نگه می‌داریم
+   ========================================================= */
+
+.bcomment-content img {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 0.75rem;
+    margin: 0.5rem 0;
+}
+
+.bcomment-content p {
+    margin-bottom: 0.5rem;
+}
+
+.bcomment-content strong,
+.bcomment-content b {
+    font-weight: 700;
+}

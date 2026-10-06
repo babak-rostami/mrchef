@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image');
 
-            $table->unsignedBigInteger('editorable_id')->nullable();
-            $table->string('editorable_type')->nullable();
+            $table->nullableMorphs('editorable');
 
             $table->timestamps();
         });

@@ -16,8 +16,13 @@
         </div>
     @endif
 
-    {{-- متن کامنت --}}
-    <p class="ml-2 mt-4 text-[20px] whitespace-pre-line">{{ $comment->body }}</p>
+    {{-- متن کامنت: اگه ادمین ویرایشش کرده باشه (content)، همون HTML نشون داده میشه؛
+    وگرنه متن خامِ خودِ کاربر (body) --}}
+    @if ($comment->content)
+        <div class="ml-2 mt-4 text-[20px] bcomment-content">{!! $comment->content !!}</div>
+    @else
+        <p class="ml-2 mt-4 text-[20px] whitespace-pre-line">{{ $comment->body }}</p>
+    @endif
 
     {{-- اکشن های کامنت --}}
     <div class="flex gap-2 mt-8 mb-2">

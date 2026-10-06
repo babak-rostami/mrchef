@@ -4,6 +4,7 @@ namespace App\Services\ckeditor\factories;
 
 use App\Services\ckeditor\interfaces\EditorProcessorInterface;
 use App\Services\ckeditor\strategies\CategoryEditorProcessor;
+use App\Services\ckeditor\strategies\CommentEditorProcessor;
 use App\Services\ckeditor\strategies\RecipeEditorProcessor;
 
 class EditorProcessorFactory
@@ -18,6 +19,7 @@ class EditorProcessorFactory
         return match ($type) {
             'recipe' => new RecipeEditorProcessor(),
             'category' => new CategoryEditorProcessor(),
+            'comment' => new CommentEditorProcessor(),
             default  => throw new \Exception("Unknown editor processor type: $type")
         };
     }
