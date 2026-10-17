@@ -1,21 +1,15 @@
-
 import {
     handleForm,
     createCkeditors,
     createImages,
+    ckeditorUploadUrl,
 } from "../component/form/index";
 
 const form_id = "recipes-store-form";
-const page = "recipe_create";
 
-let ck_up_url = "/admin_page/bf-ckeditor-upload/" + page + "?_token=";
-ck_up_url += document
-    .getElementById(form_id)
-    .querySelector('input[name="_token"]').value;
-
-const ckeditors = [{ id: "body", url: ck_up_url }];
-
-createCkeditors(ckeditors);
+createCkeditors([
+    { id: "body", url: ckeditorUploadUrl("recipe", "body", form_id) },
+]);
 createImages(["image"]);
 
 handleForm(form_id, ({ is_error }) => {

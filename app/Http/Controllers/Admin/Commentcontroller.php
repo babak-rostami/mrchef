@@ -24,9 +24,18 @@ class CommentController extends Controller
 
     public function update(UpdateRequest $request, Comment $comment)
     {
-        $comment->update($request->validated());
+        $data = $request->validated();
 
-        return redirect()->route('admin.comments.index')->with('success', 'نظر با موفقیت ویرایش شد');
+        // پاسخ‌ها اصلاً content ندارن (نگاه کن به CommentObserver و
+        // admin/comment/edit.blade.php)؛ حتی اگه یه‌جوری توی درخواست
+        // اومده باشه، برای یه پاسخ نادیده‌ش می‌گیریم.
+        if ($comment->isReply()) {
+            unset($data['content']);
+        }
+
+        $comment->update($data);
+
+        return redirect()->route('admin.comments.index')->with('success', 'با موفقیت ویرایش شد');
     }
 
     public function destroy(Comment $comment)

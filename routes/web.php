@@ -81,7 +81,7 @@ Route::middleware(['role:admin'])
         });
 
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-        Route::post('bf-ckeditor-upload/{page}', [BFCkeditorController::class, 'upload']);
+        Route::post('bf-ckeditor-upload/{model}/{field}', [BFCkeditorController::class, 'upload']);
 
         Route::get('messages', [ContactMessageController::class, 'index'])->name('messages.index');
         Route::delete('messages/{message}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');

@@ -22,8 +22,18 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // خالی بذاری، یعنی نمایش برمی‌گرده به متن خامِ کاربر (body)
+            // متن — هم برای نظر اصلی هم برای پاسخ قابل‌ویرایشه
+            'body' => ['required', 'string'],
+            // فقط برای نظر اصلی معنا داره؛ برای پاسخ اصلاً توی فرم نیست.
+            // خالی بذاری یعنی نمایش برمی‌گرده به همون body
             'content' => ['nullable', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'body.required' => 'نظر نمی‌تواند خالی باشد.',
         ];
     }
 }

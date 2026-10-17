@@ -3,23 +3,23 @@
 namespace App\Observers;
 
 use App\Models\Recipe;
-use App\Services\ckeditor\CkeditorService;
+use App\Services\Editor\EditorService;
 use App\Services\ImageUploadService;
 use Illuminate\Support\Facades\Cache;
 
 class RecipeObserver
 {
-    public function __construct(private CkeditorService $editorService, private ImageUploadService $images) {}
+    public function __construct(private EditorService $editorService, private ImageUploadService $images) {}
 
     public function created(Recipe $recipe): void
     {
-        $this->editorService->store(Recipe::EDITOR_KEY, $recipe);
+        $this->editorService->sync($recipe, 'body');
         $this->forgetSitemapCache($recipe);
     }
 
     public function updated(Recipe $recipe): void
     {
-        $this->editorService->update(Recipe::EDITOR_KEY, $recipe);
+        $this->editorService->sync($recipe, 'body');
         $this->forgetSitemapCache($recipe);
     }
 

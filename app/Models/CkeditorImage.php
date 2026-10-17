@@ -10,7 +10,7 @@ class CkeditorImage extends Model
 {
     use HasFactory, Imageable;
 
-    protected $fillable = ['image', 'editorable_id', 'editorable_type'];
+    protected $fillable = ['image', 'field', 'editorable_id', 'editorable_type'];
 
     public function editorable()
     {

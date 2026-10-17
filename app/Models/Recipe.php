@@ -21,14 +21,22 @@ class Recipe extends Model
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_PENDING = 2;
-    const EDITOR_PATH = 'recipe/editor';
-    const EDITOR_KEY = 'recipe';
     public const IMAGE_DIRECTORY = 'recipe/images';
     public const IMAGE_UPLOAD_OPTIONS = [
         'width'   => 1000,
         'format'  => 'webp',
         'quality' => 90,
         'has_thumb' => true
+    ];
+
+    /**
+     * فیلدهای ادیتوریِ این مدل: اسم فیلد => مسیر آپلود عکس‌هاش.
+     * رسپی فعلاً فقط یه فیلد ادیتوری داره (body)، ولی اگه روزی لازم شد
+     * فیلد دیگه‌ای هم اضافه کنی، فقط یه خط دیگه به همین آرایه اضافه کن.
+     * @see \App\Services\Editor\EditorService
+     */
+    public const EDITOR_FIELDS = [
+        'body' => 'recipe/editor',
     ];
 
     /**
@@ -70,10 +78,9 @@ class Recipe extends Model
     }
 
     /**
-     * کامنت‌های این رسپی (خام، همه‌شون - کامنت اصلی و پاسخ که technically
-     * پاسخ‌ها اصلاً commentable_id ندارن پس اینجا نمیان).
-     * برای گرفتن کامنت‌های اصلیِ صفحه‌بندی‌شده، به‌جای این رابطه از
-     * App\Services\comment\CommentService::getTopLevelComments() استفاده کن.
+     * کامنت‌های این رسپی. برای گرفتن کامنت‌های اصلیِ صفحه‌بندی‌شده، به‌جای
+     * این رابطه از App\Services\comment\CommentService::getTopLevelComments()
+     * استفاده کن.
      */
     public function comments(): MorphMany
     {

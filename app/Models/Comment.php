@@ -22,20 +22,15 @@ class Comment extends Model
     public const PER_PAGE = 20;
 
     /**
-     * برای آپلود عکس داخل CKEditor وقتی ادمین متن نظر رو ویرایش می‌کنه
-     * (نگاه کن به App\Services\ckeditor\CkeditorService و
-     * App\Http\Controllers\Admin\BFCkeditorController).
+     * فیلدهای ادیتوریِ این مدل: اسم فیلد => مسیر آپلود عکس‌هاش.
+     * فقط content داره، چون body متن خامِ خودِ کاربره و دست‌نخورده
+     * می‌مونه؛ فقط ویرایش دستیِ ادمین توی content ذخیره میشه — و فقط
+     * برای کامنت‌های اصلی (نه پاسخ‌ها، نگاه کن به CommentObserver).
+     * @see \App\Services\Editor\EditorService
      */
-    public const EDITOR_PATH = 'comment/editor';
-    public const EDITOR_KEY = 'comment';
-
-    /**
-     * ستونی که CkeditorService باید توش کار کنه. برخلاف Recipe/Category
-     * که همون body هست، اینجا content هست — چون body متن خامِ خودِ
-     * کاربره و نباید بهش دست زده بشه؛ فقط ویرایش دستیِ ادمین توی
-     * content ذخیره میشه.
-     */
-    public const EDITOR_FIELD = 'content';
+    public const EDITOR_FIELDS = [
+        'content' => 'comment/editor',
+    ];
 
     protected $fillable = [
         'commentable_id',

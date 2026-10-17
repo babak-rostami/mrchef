@@ -3,23 +3,23 @@
 namespace App\Observers;
 
 use App\Models\Category;
-use App\Services\ckeditor\CkeditorService;
+use App\Services\Editor\EditorService;
 use App\Services\ImageUploadService;
 use Illuminate\Support\Facades\Cache;
 
 class CategoryObserver
 {
-    public function __construct(private CkeditorService $editorService, private ImageUploadService $images) {}
+    public function __construct(private EditorService $editorService, private ImageUploadService $images) {}
 
     public function created(Category $category): void
     {
-        $this->editorService->store(Category::EDITOR_KEY, $category);
+        $this->editorService->sync($category, 'body');
         $this->forgetCache();
     }
 
     public function updated(Category $category): void
     {
-        $this->editorService->update(Category::EDITOR_KEY, $category);
+        $this->editorService->sync($category, 'body');
         $this->forgetCache();
     }
 

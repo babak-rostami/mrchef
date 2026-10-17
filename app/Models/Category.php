@@ -13,14 +13,20 @@ class Category extends Model
 {
     use Imageable, HasFactory;
 
-    public const EDITOR_PATH = 'category/editor';
-    public const EDITOR_KEY = 'category';
     public const IMAGE_DIRECTORY = 'category/images';
     public const IMAGE_UPLOAD_OPTIONS = [
         'width'   => 300,
         'format'  => 'webp',
         'quality' => 90,
         'has_thumb' => true
+    ];
+
+    /**
+     * فیلدهای ادیتوریِ این مدل: اسم فیلد => مسیر آپلود عکس‌هاش.
+     * @see \App\Services\Editor\EditorService
+     */
+    public const EDITOR_FIELDS = [
+        'body' => 'category/editor',
     ];
 
     protected $fillable = ['name', 'name_en', 'slug', 'description', 'body', 'image', 'parent_id'];

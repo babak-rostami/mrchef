@@ -20,6 +20,23 @@ pest()->extend(TestCase::class)
 
 /*
 |--------------------------------------------------------------------------
+| Unit tests still need the app
+|--------------------------------------------------------------------------
+|
+| تست‌های Unit به container و هلپرهای لاراول (url()، route()، config())
+| نیاز دارن — مثلاً app/Support/Schema/*.php همه‌شون از url()/route()
+| استفاده می‌کنن. برای همین Unit هم به TestCase وصل میشه.
+|
+| عمداً RefreshDatabase نداره: تست‌های این پوشه نباید اصلاً به دیتابیس
+| دست بزنن. اگه یه تست به DB نیاز داشت، جاش توی Feature ئه، نه Unit.
+|
+*/
+
+pest()->extend(TestCase::class)
+    ->in('Unit');
+
+/*
+|--------------------------------------------------------------------------
 | Expectations
 |--------------------------------------------------------------------------
 |
@@ -28,23 +45,3 @@ pest()->extend(TestCase::class)
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
-
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-|
-| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
-| project that you don't want to repeat in every file. Here you can also expose helpers as
-| global functions to help you to reduce the number of lines of code in your test files.
-|
-*/
-
-function something()
-{
-    // ..
-}

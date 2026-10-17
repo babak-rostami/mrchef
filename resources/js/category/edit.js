@@ -1,15 +1,16 @@
-import { handleForm, createCkeditors, createImages } from '../component/form/index';
+import {
+    handleForm,
+    createCkeditors,
+    createImages,
+    ckeditorUploadUrl,
+} from "../component/form/index";
 
-const form_id = 'category-update-form';
-const page = 'category_edit';
+const form_id = "category-update-form";
 
-let ck_up_url = "/admin_page/bf-ckeditor-upload/" + page + '?_token=';
-ck_up_url += document.getElementById(form_id).querySelector('input[name="_token"]').value;
-
-const ckeditors = [{ id: 'body', url: ck_up_url }];
-
-createCkeditors(ckeditors);
-createImages(['image']);
+createCkeditors([
+    { id: "body", url: ckeditorUploadUrl("category", "body", form_id) },
+]);
+createImages(["image"]);
 
 handleForm(form_id, ({ is_error }) => {
     if (!is_error) {

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('image');
 
             $table->nullableMorphs('editorable');
+            // مشخص می‌کنه این عکس برای کدوم فیلدِ ادیتور هستش
+            // (مثلاً 'body'، 'content'، 'description').
+            $table->string('field')->nullable()->after('image');
 
             $table->timestamps();
         });

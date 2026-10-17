@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\CkeditorImage;
+use App\Models\Comment;
 use App\Models\Recipe;
 use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
@@ -22,25 +22,39 @@ class BFCkeditorController extends Controller
         'has_thumb' => false
     ];
 
-    public function upload(Request $request, $page)
+    /**
+     * نگاشت کوتاه‌نویسِ مدل (همونی که توی آدرس آپلود میاد، مثل 'recipe')
+     * به کلاس واقعیش. برای یه مدل جدید، فقط یه خط اینجا اضافه کن — خودِ
+     * مدل باید EDITOR_FIELDS داشته باشه (نگاه کن به docs/EDITOR_SERVICE.md).
+     */
+    private const MODELS = [
+        'recipe' => Recipe::class,
+        'category' => Category::class,
+        'comment' => Comment::class,
+    ];
+
+    /**
+     * آپلود یه عکس برای یه فیلد ادیتوری مشخص.
+     * آدرس: POST /admin_page/bf-ckeditor-upload/{model}/{field}
+     * مثال: .../bf-ckeditor-upload/recipe/body
+     */
+    public function upload(Request $request, string $model, string $field)
     {
         try {
             $this->validateUpload($request);
 
+            $uploadPath = $this->resolveUploadPath($model, $field);
+
             $file = $request->file('upload');
-
             $fileName = $this->generateFileName();
-
-            //مسیر ذخیره عکس با توجه به page
-            $path = $this->uploadPath($page) . '/';
 
             $imagePath = $this->images->upload(
                 $file,
-                $path,
+                $uploadPath . '/',
                 array_merge(self::IMAGE_UPLOAD_OPTIONS, ['filename' => $fileName])
             );
 
-            $editorImage = $this->storeEditorImage($imagePath);
+            $editorImage = $this->storeEditorImage($imagePath, $field);
 
             return response()->json([
                 'filename' => $fileName,
@@ -50,7 +64,7 @@ class BFCkeditorController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => [
-                    'message' => 'خطا در آپلود تصویر'
+                    'message' => 'خطا در آپلود تصویر' . $e->getMessage()
                 ]
             ], 422);
         }
@@ -69,22 +83,30 @@ class BFCkeditorController extends Controller
         return $random . time();
     }
 
-    private function uploadPath($page)
+    /**
+     * مسیر آپلود رو از روی EDITOR_FIELDS همون مدل برمی‌گردونه.
+     */
+    private function resolveUploadPath(string $model, string $field): string
     {
-        return match ($page) {
-            'recipe_create' => Recipe::EDITOR_PATH,
-            'recipe_edit' => Recipe::EDITOR_PATH,
-            'category_create' => Category::EDITOR_PATH,
-            'category_edit' => Category::EDITOR_PATH,
-            // نظرات فقط edit دارن؛ ثبت اولیه‌ی نظر از پنل ادمین نیست
-            'comment_edit' => Comment::EDITOR_PATH,
-        };
+        if (! isset(self::MODELS[$model])) {
+            throw new \InvalidArgumentException("مدل «{$model}» توی BFCkeditorController::MODELS ثبت نشده.");
+        }
+
+        $modelClass = self::MODELS[$model];
+        $fields = $modelClass::EDITOR_FIELDS ?? [];
+
+        if (! isset($fields[$field])) {
+            throw new \InvalidArgumentException("فیلد «{$field}» برای مدل «{$model}» توی EDITOR_FIELDS تعریف نشده.");
+        }
+
+        return $fields[$field];
     }
 
-    private function storeEditorImage($path)
+    private function storeEditorImage(string $path, string $field): CkeditorImage
     {
         return CkeditorImage::create([
             'image' => $path,
+            'field' => $field,
             'editorable_id' => null,
             'editorable_type' => null,
         ]);

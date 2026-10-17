@@ -1,16 +1,17 @@
-import { handleForm, createCkeditors } from "../component/form/index";
+import {
+    handleForm,
+    createCkeditors,
+    ckeditorUploadUrl,
+} from "../component/form/index";
 
 const form_id = "comment-update-form";
-const page = "comment_edit";
 
-let ck_up_url = "/admin_page/bf-ckeditor-upload/" + page + "?_token=";
-ck_up_url += document
-    .getElementById(form_id)
-    .querySelector('input[name="_token"]').value;
-
-const ckeditors = [{ id: "content", url: ck_up_url }];
-
-createCkeditors(ckeditors);
+// اگه این صفحه برای ویرایش یه پاسخ باشه، اصلاً فیلد #content روی صفحه
+// نیست (پاسخ‌ها ادیتور ندارن)؛ createCkeditors در اون حالت فقط هیچ
+// کاری نمی‌کنه — نیازی به شرط گذاشتن اینجا نیست.
+createCkeditors([
+    { id: "content", url: ckeditorUploadUrl("comment", "content", form_id) },
+]);
 
 handleForm(form_id, ({ is_error }) => {
     if (!is_error) {
