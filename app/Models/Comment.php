@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\CommentObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 #[ObservedBy(CommentObserver::class)]
 class Comment extends Model
 {
+    use HasFactory;
     /**
      * چند تا کامنت اصلی (نه پاسخ) در هر بار نمایش داده بشه — هم موقع لود
      * اولیه‌ی صفحه، هم هر بار که دکمه‌ی «نمایش نظرات بیشتر» زده میشه.
@@ -107,7 +109,7 @@ class Comment extends Model
 
     public function isReply(): bool
     {
-        return ! is_null($this->parent_id);
+        return !is_null($this->parent_id);
     }
 
     public function reactions(): HasMany

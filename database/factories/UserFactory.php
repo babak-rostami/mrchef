@@ -31,8 +31,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'status' => $this->faker->randomElement([0, 1]),
             'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
+            'email_verified_at' => now()
         ];
     }
 

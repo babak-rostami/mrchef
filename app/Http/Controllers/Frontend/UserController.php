@@ -55,7 +55,12 @@ class UserController extends Controller
             'password' => $data['password'],
         ];
 
-        if (Auth::attempt($credentials, 1)) {
+        // قبلاً اینجا Auth::attempt($credentials, 1) بود — یعنی remember
+        // token همیشه ساخته می‌شد، صرف‌نظر از اینکه کاربر واقعاً «مرا به
+        // خاطر بسپار» رو زده بود یا نه. حالا مقدار واقعیِ فرم خونده میشه.
+        $remember = (bool) ($data['remember'] ?? false);
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return response()->json([
                 'success' => true
